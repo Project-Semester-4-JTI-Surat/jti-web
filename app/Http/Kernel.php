@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\MahasiswaApiCheck;
+use App\Http\Middleware\RoleCheck;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -61,6 +63,8 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \App\Http\Middleware\ValidateSignature::class,
+        'RoleCheck' => RoleCheck::class,
+        'MahasiswaLoginCheck'=>MahasiswaApiCheck::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];

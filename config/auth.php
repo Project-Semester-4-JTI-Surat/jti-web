@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Admin;
+
 return [
 
     /*
@@ -14,8 +16,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'api',
+        'passwords' => 'mhs',
     ],
 
     /*
@@ -40,6 +42,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin'=>[
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+        'api'=>[
+            'driver'=>'jwt',
+            'provider'=>'mhs'
+        ]
     ],
 
     /*
@@ -64,6 +74,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'admin'=>[
+            'driver'=>'eloquent',
+            'model'=> App\Models\Admin::class,
+        ],
+        'mhs'=>[
+            'driver'=>'eloquent',
+            'model'=> App\Models\Mahasiswa::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -87,8 +105,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'mhs' => [
+            'provider' => 'mhs',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
