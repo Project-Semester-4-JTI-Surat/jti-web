@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Anggota;
 use App\Models\JenisSurat;
+use App\Models\Surat;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
@@ -41,8 +43,26 @@ class SuratController extends Controller
         return response()->json(['message'=>'success']);
     }
 
-    public function getSurat(Request $request, $id)
+    public function getSurat(Request $request)
     {
-        
+        $id = $request->get('status');
+        if ($request->ajax()) {
+            $surat = Surat::with(['dosen','koordinator'])->where('status_id','=',$id)->get();
+            return DataTables::of($surat)
+            ->addIndexColumn()
+            ->addColumn('aksi',function($row){
+                return '<a href="'.route('admin.surat.detail',['id'=>$row->uuid]).'" class="btn btn-primary">Detail</a>';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
+        }
+        return view('admin.surat');
+    }
+
+    public function detail(Request $request, $id)
+    {
+        $surat = Surat::with(['dosen','koordinator'])->where('uuid','=',$id)->first();
+        $anggota = Anggota::with('prodi')->where('surat_id','=',$id)->get();
+        return view('admin.detail-surat',compact('surat','anggota'));
     }
 }

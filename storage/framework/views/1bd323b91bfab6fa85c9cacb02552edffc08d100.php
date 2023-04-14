@@ -103,7 +103,7 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Surat</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item <?php echo e(Route::currentRouteName() == 'admin.surat.index' ? 'active' : ''); ?>">
         <?php
             $status = \App\Models\Status::all();
         ?>
@@ -113,8 +113,8 @@
             </a>
             <ul class="menu-sub">
             <?php $__currentLoopData = $status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <li class="menu-item">
-                    <a href="<?php echo e(route('admin.surat.index',['id'=>$value->id])); ?>" class="menu-link">
+                <li class="menu-item <?php echo e(Request::get('status') == $value->id ? 'active' : ''); ?>">
+                    <a href="<?php echo e(route('admin.surat.index',['status'=>$value->id])); ?>" class="menu-link">
                         <div ><?php echo e($value->keterangan); ?></div>
                     </a>
                 </li>

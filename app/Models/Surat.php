@@ -14,7 +14,19 @@ class Surat extends Model
     protected $guarded = [];
     protected $table = 'surat';
     protected $hidden = [
+        'dosen_id',
+        'kode_koordinator',
         'created_at',
         'updated_at'
     ];
+
+    public function dosen()
+    {
+        return $this->belongsTo(Dosen::class,'dosen_id');
+    }
+
+    public function koordinator()
+    {
+        return $this->belongsTo(Koordinator::class,'kode_koordinator');
+    }
 }

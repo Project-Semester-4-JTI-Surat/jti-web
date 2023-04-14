@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <title><?php echo e(config('app.name')); ?> - Login</title>
-    <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/css/pages/page-auth.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/css/pages/page-auth.css')); ?>" />
     <?php echo $__env->make('layouts.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </head>
 
@@ -43,7 +43,7 @@
                                     <span class="input-group-text cursor-pointer" id="eye"><i class="bx bx-hide"></i></span>
                                  -->
                                 <div class="input-group">
-                                    <span class="input-group-text cursor-pointer" id="eye"><i class="bx bx-hide"></i></span>
+                                    <span class="input-group-text cursor-pointer" id="eye password"><i class="bx bx-hide"></i></span>
                                     <input type="password" id="password" required class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
 
                                 </div>

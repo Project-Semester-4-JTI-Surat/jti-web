@@ -25,4 +25,9 @@ class Koordinator extends Model
     {
         return $this->belongsTo(Prodi::class);
     }
+
+    public function surat()
+    {
+        return $this->hasOne(Surat::class);
+    }
 }

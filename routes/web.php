@@ -51,7 +51,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     });
 
     Route::group(['prefix'=>'surat','as'=>'surat.'],function(){
-       Route::get('/{id}',[SuratController::class, 'getSurat'])->name('index'); 
+       Route::get('/',[SuratController::class, 'getSurat'])->name('index');
+       Route::get('/detail/{id}',[SuratController::class, 'detail'])->name('detail'); 
     });
     
     Route::group(['prefix' => 'prodi', 'as' => 'prodi.'], function () {
@@ -80,6 +81,4 @@ Route::get('home', function () {
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['prefix'=>'data','middleware'=>MahasiswaApiCheck::class],function(){
-    Route::get('dosen',[DataController::class, 'dosen']);
-});
+// Route::curr

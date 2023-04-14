@@ -103,7 +103,7 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Surat</span>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ Route::currentRouteName() == 'admin.surat.index' ? 'active' : ''}}">
         @php
             $status = \App\Models\Status::all();
         @endphp
@@ -113,8 +113,8 @@
             </a>
             <ul class="menu-sub">
             @foreach($status as $key => $value)
-                <li class="menu-item">
-                    <a href="{{ route('admin.surat.index',['id'=>$value->id]) }}" class="menu-link">
+                <li class="menu-item {{ Request::get('status') == $value->id ? 'active' : ''}}">
+                    <a href="{{ route('admin.surat.index',['status'=>$value->id]) }}" class="menu-link">
                         <div >{{ $value->keterangan }}</div>
                     </a>
                 </li>
