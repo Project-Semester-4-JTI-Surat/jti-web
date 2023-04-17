@@ -82,16 +82,31 @@
                             </div>
                         </div> --}}
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-message">Message</label>
+                                <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                                 <div class="col-sm-10">
-                                    <textarea id="basic-default-message" class="form-control" readonly aria-describedby="basic-icon-default-message2">{{ $surat->keterangan }}</textarea>
+                                    <textarea id="keterangan" class="form-control" readonly aria-describedby="basic-icon-default-message2">{{ $surat->keterangan }}</textarea>
                                 </div>
                             </div>
-                            <div class="row justify-content-end">
-                                <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Send</button>
+                            @if ($surat->status_id == 2)
+                                <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                        <a href="{{ route('admin.surat.proses_surat', ['id' => $surat->uuid]) }}"
+                                            class="btn btn-primary">Proses Surat</a>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
+
+                            @if ($surat->status_id == 3 || $surat->status_id == 4)
+                                <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                        <a href="{{ route('admin.surat.dapat_diambil', ['id' => $surat->uuid]) }}"
+                                            class="btn btn-primary">Dapat diambil </a>
+                                        <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi
+                                            status dapat diambil
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </form>
                     </div>
                 </div>
@@ -110,7 +125,7 @@
                                 @endphp
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">Nama Anggota
-                                        {{ $key+1 }}</label>
+                                        {{ $key + 1 }}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="nama" readonly
                                             value="{{ $value->nama }}">
@@ -118,7 +133,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">Nim Anggota
-                                        {{ $key+1 }}</label>
+                                        {{ $key + 1 }}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="nim" readonly
                                             value="{{ $value->nim }}">
@@ -126,16 +141,16 @@
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">Prodi
-                                        {{ $key+1 }}</label>
-                                   <div class="col-sm-10">
+                                        {{ $key + 1 }}</label>
+                                    <div class="col-sm-10">
                                         <input type="text" class="form-control" id="prodi_id" readonly
                                             value="{{ $value->prodi->keterangan }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">No.Hp Anggota
-                                        {{ $key+1 }}</label>
-                                   <div class="col-sm-10">
+                                        {{ $key + 1 }}</label>
+                                    <div class="col-sm-10">
                                         <input type="text" class="form-control" id="no_hp" readonly
                                             value="{{ $value->no_hp }}">
                                     </div>
@@ -143,18 +158,154 @@
                                 <hr class="hr" />
                             @endforeach
 
-                            <div class="row justify-content-end">
-                                <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Send</button>
-                                </div>
-                            </div>
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        @if ($surat->status_id == 3 || $surat->status_id == 4)
+            <div class="card mb-4">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Upload softfile</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post"
+                        action="{{ route('admin.surat.softfile_save', ['id' => $surat->uuid]) }}">
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="softfile">File <span
+                                    class='text-danger'>*</span></label>
+                            <div class="col-sm-10">
+                                {{ csrf_field() }}
+                                <input name="softfile" id="softfile" type="file">
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                {{-- <div class="form-text">Dengan menekan tombol diatas, surat akan masuk ke bagian surat
+                                    ditolak
+                                </div> --}}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endif
+        @if ($surat->status_id == 2)
+            <div class="card mb-4">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Tolak Pengajuan</h5>
+                </div>
+                <div class="card-body">
+                    <form id="tolakSurat" method="post"
+                        action="{{ route('admin.surat.tolak_surat', ['id' => $surat->uuid]) }}">
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="keterangan">Keterangan <span
+                                    class='text-danger'>*</span></label>
+                            <div class="col-sm-10">
+                                {{ csrf_field() }}
+                                <textarea id="alasan_penolakan" required class="form-control" name="alasan_penolakan"></textarea>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-danger">
+                                    Surat</button>
+                                <div class="form-text">Dengan menekan tombol diatas, surat akan masuk ke bagian surat
+                                    ditolak
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endif
 
 
         <!--/ Card layout -->
     </div>
+@endsection
+@section('script')
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+            });
+            FilePond.registerPlugin(
+                FilePondPluginFileValidateType,
+            );
+            $('#softfile').filepond({
+                acceptedFileTypes: ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword'],
+                credits: false,
+                fileValidateTypeDetectType: [],
+                fileValidateTypeLabelExpectedTypes: 'File harus berekstensi .pdf/.doc atau .docx',
+                labelFileProcessingComplete: `Upload Berhasil`,
+                labelTapToUndo: `ketuk untuk membatalkan`,
+                labelTapToCancel: `ketuk untuk membatalkan`,
+                labelFileProcessingError: `Gagal Memproses`,
+                labelTapToRetry: `ketuk untuk coba lagi`,
+                labelFileProcessing: `Sedang memproses`,
+                labelIdle: `Seret dan tempel atau <span class="filepond--label-action">Pilih dokumen</span>`,
+                server: {
+                    url: "{{ env('APP_URL') }}",
+                    process: "/temp/file/upload",
+                    revert: {
+                        url: "/temp/file/delete/",
+                        method: 'GET',
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    }
+                }
+            }, );
+        })
+
+        function tolakSurat(id) {
+            if ($('#alasan_penolakan').val() == '') {
+                console.log($('#alasan_penolakan').val());
+                $('#alasan_penolakan').addClass('is-invalid')
+                $('#alasan_penolakan').after(
+                    '<span id="nama-error" class="error invalid-feedback">Kolom harus diisi</span>')
+            } else {
+                swal({
+                    title: "Anda yakin?",
+                    text: "Anda yakin untuk menolak pengajuan surat? (Proses ini tidak bisa dibatalkan)",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((willDelete) => {
+                    // console.log(willDelete);
+                    if (willDelete) {
+
+                    }
+                })
+            }
+        }
+        $('#tolakSurat').submit(function(e) {
+            var form = this;
+            e.preventDefault();
+            if ($('#alasan_penolakan').val() == '') {
+                console.log($('#alasan_penolakan').val());
+                $('#alasan_penolakan').addClass('is-invalid')
+                $('#alasan_penolakan').after(
+                    '<span id="nama-error" class="error invalid-feedback">Kolom harus diisi</span>')
+            } else {
+                swal({
+                    title: "Anda yakin?",
+                    text: "Anda yakin untuk menolak pengajuan surat? (Proses ini tidak bisa dibatalkan)",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((willDelete) => {
+                    // console.log(willDelete);
+                    if (willDelete) {
+                        form.submit();
+                    }
+                })
+            }
+        })
+    </script>
 @endsection

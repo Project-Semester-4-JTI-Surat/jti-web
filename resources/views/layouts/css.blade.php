@@ -11,6 +11,7 @@
 <!-- Icons. Uncomment required icon fonts -->
 <link rel="stylesheet" href="{{ asset('vendor/fonts/boxicons.css') }}" />
 
+{{-- <link rel="stylesheet" href="{{ asset('assets/vendor/css/bootstrap.css') }}" /> --}}
 <!-- Core CSS -->
 <link rel="stylesheet" href="{{ asset('vendor/css/core.css') }}" class="template-customizer-core-css" />
 <link rel="stylesheet" href="{{ asset('vendor/css/theme-default.css') }}"
@@ -19,6 +20,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/libs/datatable/datatables/dataTables.bootstrap5.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('vendor/libs/select2/select2.css') }}" />
 <link rel="stylesheet" href="{{ asset('vendor/libs/sweet-alert/sweetalert2.css') }}" />
+<link rel="stylesheet" href="{{ asset('vendor/libs/filepond/filepond.min.css') }}" />
 <!-- Vendors CSS -->
 <link rel="stylesheet" href="{{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 

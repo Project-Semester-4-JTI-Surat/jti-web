@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\KoordinatorController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\SuratController;
+use App\Http\Controllers\FileUploadTempController;
 use App\Http\Controllers\ManagementUserController;
 use App\Mail\Verification;
 use Illuminate\Http\JsonResponse;
@@ -53,6 +54,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     Route::group(['prefix'=>'surat','as'=>'surat.'],function(){
        Route::get('/',[SuratController::class, 'getSurat'])->name('index');
        Route::get('/detail/{id}',[SuratController::class, 'detail'])->name('detail'); 
+       Route::get('proses_surat/{id}',[SuratController::class, 'proses_surat'])->name('proses_surat');
+       Route::get('dapat_diambil/{id}',[SuratController::class, 'dapat_diambil'])->name('dapat_diambil');
+       Route::post('softfile/save/{id}',[SuratController::class,'softfile_save'])->name('softfile_save');
+       Route::post('tolak/{id}',[SuratController::class, 'tolak_surat'])->name('tolak_surat');
     });
     
     Route::group(['prefix' => 'prodi', 'as' => 'prodi.'], function () {
@@ -81,4 +86,6 @@ Route::get('home', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('temp/file/upload',[FileUploadTempController::class,'temp_upload'])->name('temp-upload');
+Route::get('temp/file/delete/{filename?}',[FileUploadTempController::class,'temp_delete'])->name('temp_delete');
 // Route::curr

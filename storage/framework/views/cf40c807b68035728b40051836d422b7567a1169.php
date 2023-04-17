@@ -95,6 +95,8 @@
                                 <th>Tanggal Selesai</th>
                                 <th>Judul Ta</th>
                                 <th>Kebutuhan</th>
+                                <th>Alasan Penolakan</th>
+                                <th>Softfile</th>
                                 <th>Keterangan</th>
                                 <th>Aksi</th>
                             </tr>
@@ -152,8 +154,8 @@
                         name: 'kode_surat',
                     },
                     {
-                        data: 'status_id',
-                        name: 'status_id',
+                        data: 'status',
+                        name: 'status',
                     },
                     {
                         data: 'dosen.nama',
@@ -190,6 +192,18 @@
                     {
                         data: 'kebutuhan',
                         name: 'kebutuhan',
+                    },
+                    {
+                        data: 'alasan_penolakan',
+                        name: 'alasan_penolakan',
+                        visible: <?php echo e(Request::get('status') == 5 ? 'true' : 'false'); ?>
+
+                    },
+                    {
+                        data: 'softfile',
+                        name: 'softfile',
+                        visible: <?php echo e(Request::get('status') == 4 ? 'true' : 'false'); ?>
+
                     },
                     {
                         data: 'keterangan',

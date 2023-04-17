@@ -11,6 +11,7 @@
 <!-- Icons. Uncomment required icon fonts -->
 <link rel="stylesheet" href="<?php echo e(asset('vendor/fonts/boxicons.css')); ?>" />
 
+
 <!-- Core CSS -->
 <link rel="stylesheet" href="<?php echo e(asset('vendor/css/core.css')); ?>" class="template-customizer-core-css" />
 <link rel="stylesheet" href="<?php echo e(asset('vendor/css/theme-default.css')); ?>"
@@ -19,6 +20,7 @@
 <link rel="stylesheet" href="<?php echo e(asset('vendor/libs/datatable/datatables/dataTables.bootstrap5.min.css')); ?>" />
 <link rel="stylesheet" href="<?php echo e(asset('vendor/libs/select2/select2.css')); ?>" />
 <link rel="stylesheet" href="<?php echo e(asset('vendor/libs/sweet-alert/sweetalert2.css')); ?>" />
+<link rel="stylesheet" href="<?php echo e(asset('vendor/libs/filepond/filepond.min.css')); ?>" />
 <!-- Vendors CSS -->
 <link rel="stylesheet" href="<?php echo e(asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css')); ?>" />
 

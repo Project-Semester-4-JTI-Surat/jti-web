@@ -21,7 +21,7 @@
           <li class="nav-item navbar-dropdown dropdown pr-2">
                 <a class="nav-link nav-icon iconClass dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <i class="bx bx-bell bx-sm"></i>
-                    <span data-count="0" id="notification-count" class="badge bg-primary badge-number">2</span>
+                    <span data-count="0" id="notification-count" class="badge bg-primary badge-number">0</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                    

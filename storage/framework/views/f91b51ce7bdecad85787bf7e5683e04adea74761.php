@@ -71,16 +71,31 @@
 
                             
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-message">Message</label>
+                                <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                                 <div class="col-sm-10">
-                                    <textarea id="basic-default-message" class="form-control" readonly aria-describedby="basic-icon-default-message2"><?php echo e($surat->keterangan); ?></textarea>
+                                    <textarea id="keterangan" class="form-control" readonly aria-describedby="basic-icon-default-message2"><?php echo e($surat->keterangan); ?></textarea>
                                 </div>
                             </div>
-                            <div class="row justify-content-end">
-                                <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Send</button>
+                            <?php if($surat->status_id == 2): ?>
+                                <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                        <a href="<?php echo e(route('admin.surat.proses_surat', ['id' => $surat->uuid])); ?>"
+                                            class="btn btn-primary">Proses Surat</a>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
+
+                            <?php if($surat->status_id == 3 || $surat->status_id == 4): ?>
+                                <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                        <a href="<?php echo e(route('admin.surat.dapat_diambil', ['id' => $surat->uuid])); ?>"
+                                            class="btn btn-primary">Dapat diambil </a>
+                                        <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi
+                                            status dapat diambil
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </form>
                     </div>
                 </div>
@@ -99,7 +114,7 @@
                                 ?>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">Nama Anggota
-                                        <?php echo e($key+1); ?></label>
+                                        <?php echo e($key + 1); ?></label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="nama" readonly
                                             value="<?php echo e($value->nama); ?>">
@@ -107,7 +122,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">Nim Anggota
-                                        <?php echo e($key+1); ?></label>
+                                        <?php echo e($key + 1); ?></label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="nim" readonly
                                             value="<?php echo e($value->nim); ?>">
@@ -115,16 +130,16 @@
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">Prodi
-                                        <?php echo e($key+1); ?></label>
-                                   <div class="col-sm-10">
+                                        <?php echo e($key + 1); ?></label>
+                                    <div class="col-sm-10">
                                         <input type="text" class="form-control" id="prodi_id" readonly
                                             value="<?php echo e($value->prodi->keterangan); ?>">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">No.Hp Anggota
-                                        <?php echo e($key+1); ?></label>
-                                   <div class="col-sm-10">
+                                        <?php echo e($key + 1); ?></label>
+                                    <div class="col-sm-10">
                                         <input type="text" class="form-control" id="no_hp" readonly
                                             value="<?php echo e($value->no_hp); ?>">
                                     </div>
@@ -132,20 +147,156 @@
                                 <hr class="hr" />
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                            <div class="row justify-content-end">
-                                <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Send</button>
-                                </div>
-                            </div>
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        <?php if($surat->status_id == 3 || $surat->status_id == 4): ?>
+            <div class="card mb-4">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Upload softfile</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post"
+                        action="<?php echo e(route('admin.surat.softfile_save', ['id' => $surat->uuid])); ?>">
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="softfile">File <span
+                                    class='text-danger'>*</span></label>
+                            <div class="col-sm-10">
+                                <?php echo e(csrf_field()); ?>
+
+                                <input name="softfile" id="softfile" type="file">
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if($surat->status_id == 2): ?>
+            <div class="card mb-4">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Tolak Pengajuan</h5>
+                </div>
+                <div class="card-body">
+                    <form id="tolakSurat" method="post"
+                        action="<?php echo e(route('admin.surat.tolak_surat', ['id' => $surat->uuid])); ?>">
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="keterangan">Keterangan <span
+                                    class='text-danger'>*</span></label>
+                            <div class="col-sm-10">
+                                <?php echo e(csrf_field()); ?>
+
+                                <textarea id="alasan_penolakan" required class="form-control" name="alasan_penolakan"></textarea>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-danger">
+                                    Surat</button>
+                                <div class="form-text">Dengan menekan tombol diatas, surat akan masuk ke bagian surat
+                                    ditolak
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <?php endif; ?>
 
 
         <!--/ Card layout -->
     </div>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+            });
+            FilePond.registerPlugin(
+                FilePondPluginFileValidateType,
+            );
+            $('#softfile').filepond({
+                acceptedFileTypes: ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword'],
+                credits: false,
+                fileValidateTypeDetectType: [],
+                fileValidateTypeLabelExpectedTypes: 'File harus berekstensi .pdf/.doc atau .docx',
+                labelFileProcessingComplete: `Upload Berhasil`,
+                labelTapToUndo: `ketuk untuk membatalkan`,
+                labelTapToCancel: `ketuk untuk membatalkan`,
+                labelFileProcessingError: `Gagal Memproses`,
+                labelTapToRetry: `ketuk untuk coba lagi`,
+                labelFileProcessing: `Sedang memproses`,
+                labelIdle: `Seret dan tempel atau <span class="filepond--label-action">Pilih dokumen</span>`,
+                server: {
+                    url: "<?php echo e(env('APP_URL')); ?>",
+                    process: "/temp/file/upload",
+                    revert: {
+                        url: "/temp/file/delete/",
+                        method: 'GET',
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
+                    }
+                }
+            }, );
+        })
+
+        function tolakSurat(id) {
+            if ($('#alasan_penolakan').val() == '') {
+                console.log($('#alasan_penolakan').val());
+                $('#alasan_penolakan').addClass('is-invalid')
+                $('#alasan_penolakan').after(
+                    '<span id="nama-error" class="error invalid-feedback">Kolom harus diisi</span>')
+            } else {
+                swal({
+                    title: "Anda yakin?",
+                    text: "Anda yakin untuk menolak pengajuan surat? (Proses ini tidak bisa dibatalkan)",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((willDelete) => {
+                    // console.log(willDelete);
+                    if (willDelete) {
+
+                    }
+                })
+            }
+        }
+        $('#tolakSurat').submit(function(e) {
+            var form = this;
+            e.preventDefault();
+            if ($('#alasan_penolakan').val() == '') {
+                console.log($('#alasan_penolakan').val());
+                $('#alasan_penolakan').addClass('is-invalid')
+                $('#alasan_penolakan').after(
+                    '<span id="nama-error" class="error invalid-feedback">Kolom harus diisi</span>')
+            } else {
+                swal({
+                    title: "Anda yakin?",
+                    text: "Anda yakin untuk menolak pengajuan surat? (Proses ini tidak bisa dibatalkan)",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((willDelete) => {
+                    // console.log(willDelete);
+                    if (willDelete) {
+                        form.submit();
+                    }
+                })
+            }
+        })
+    </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\jti-surat\resources\views/admin/detail-surat.blade.php ENDPATH**/ ?>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SuratBroadcast;
 use App\Http\Requests\SuratInsertRequest;
 use App\Models\Anggota;
 use App\Models\Surat;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Pusher\Pusher;
 
 class SuratController extends Controller
 {
@@ -33,13 +35,48 @@ class SuratController extends Controller
             Anggota::create(
                 [
                     'surat_id' => $id->uuid,
-                    'nama' => $request->get('nama_anggota')[$i],
+                    'nama' => $request->get('nama_anggota')[$i],  
                     'nim' => $request->get('nim_anggota')[$i],
                     'no_hp' => $request->get('nohp_anggota')[$i],
                     'prodi_id' => $request->get('prodi_id_anggota')[$i],
                 ]
             );
         }
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            array('cluster' => env('PUSHER_APP_CLUSTER'))
+        );
+        $data = array(
+            'kode_surat'=>$request->get('kode_surat'),
+            'nama_mhs'=>$request->get('nama_anggota')[0],
+            'nim_mhs'=>$request->get('nim_anggota')[0],
+        );
+        $pusher->trigger(
+            'my-channel',
+            'my-event',
+            $data
+        );
+        // event(new SuratBroadcast($request->get('kode_surat'),$request->get('nama_anggota')[0],$request->get('nim_anggota')[0]));
         return $this->successResponse('Surat berhasil diajukan');
+        // return $this->successResponseData('data',$input);
     }
+   
 }
+/**
+ * $array = ['nim_anggota][i]
+ * 
+ * $array = [
+ * 
+ *  ]
+ */
+
+//  $array = [
+//     'identitas'=>'1',
+//     'sub'=>[
+//         'sub1' => 1,
+//     ],
+// ];
+// echo $array['identitas'];
+
