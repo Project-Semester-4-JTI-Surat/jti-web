@@ -25,7 +25,8 @@ class MahasiswaLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'required|email', 
+            // 'email'=>'required|email',
+            'nim'=>'required', 
             'password'=>'required'
         ];
     }

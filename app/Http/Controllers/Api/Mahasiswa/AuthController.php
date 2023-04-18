@@ -34,7 +34,7 @@ class AuthController extends Controller
 
     public function login(MahasiswaLoginRequest $request)
     {
-        $input = $request->only(['email', 'password']);
+        $input = $request->only(['nim', 'password']);
         try {
             if (!$token = JWTAuth::attempt($input)) {
                 return $this->internalErrorResponse("Cek kembali password atau email anda",);
