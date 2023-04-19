@@ -24,19 +24,19 @@
     $(function() {
         console.log('%c Hayooo mau ngapain.. wkwkwk, mau ngutek-ngutek ya. Gaboleh loh',
             'color: white; background-color: red');
-             const notifications = localStorage.getItem('notifications')
-             if(!notifications){
-                localStorage.setItem('notifications',0)
-             }
-          if (notifications != 0) {
-              $('#notification-count').text(notifications);
-          }
+        const notifications = localStorage.getItem('notifications')
+        if (!notifications) {
+            localStorage.setItem('notifications', 0)
+        }
+        if (notifications != 0) {
+            $('#notification-count').text(notifications);
+        }
     })
-     var notificationsWrapper = $('#notification-count');
-      var notificationsToggle = notificationsWrapper.find('a[data-toggle]');
-      var notificationsCountElem = notificationsToggle.find('i[data-count]');
-      var notificationsCount = parseInt($('#notification-count').data('count'));
-      console.log($('#notification-count').data('count'));
+    var notificationsWrapper = $('#notification-count');
+    var notificationsToggle = notificationsWrapper.find('a[data-toggle]');
+    var notificationsCountElem = notificationsToggle.find('i[data-count]');
+    var notificationsCount = parseInt($('#notification-count').data('count'));
+    console.log($('#notification-count').data('count'));
 </script>
 
 <!-- Vendors JS -->
@@ -48,17 +48,57 @@
 <script>
     Pusher.logToConsole = true;
 
+    $('#notif-icon').click(function() {
+        localStorage.setItem('notifications', 0)
+        const notifications = localStorage.getItem('notifications')
+        $('#notification-count').text('');
+    })
     var pusher = new Pusher('3517bb3b91fb20ab176c', {
         cluster: 'ap1'
     });
 
     var channel = pusher.subscribe('my-channel');
-    channel.bind("App\\Events\\SuratBroadcast", function(data) {});
+    channel.bind("App\\Events\\SuratBroadcast", function(data) {
+        console.log('id: '+data.id)
+        var existingNotif = $('#notification-wrapper').html();
+        var newNotif = ` <li class="p-2 border-bottom">
+                        <a href="surat/detail/`+data.id+`" class="d-flex justify-content-between">
+                            <div class="d-flex flex-row">
+                                <div class="pt-1">
+                                    <p class="fw-bold mb-0">` + data.nim_mhs + `</p>
+                                </div>
+                            </div>
+                            <div class="pt-1">
+                                <p class="small text-muted mb-1">` + data.kode_surat + `</p>
+                            </div>
+                        </a>
+                    </li>`;
+        $('#notification-wrapper').html(existingNotif + newNotif);
+    });
     channel.bind('pusher:subscription_succeeded', function(data) {});
 
 
     channel.bind('my-event', function(data) {
-         $('#liveToast').toast('show');
+        console.log('id: '+data.id)
+        var existingNotif = $('#notification-wrapper').html();
+        var newNotif = ` <li class="p-2 border-bottom">
+                        <a href="surat/detail/`+data.id+`" class="d-flex justify-content-between">
+                            <div class="d-flex flex-row">
+                                <div class="pt-1">
+                                    <p class="fw-bold mb-0">` + data.nim_mhs + `</p>
+                                </div>
+                            </div>
+                            <div class="pt-1">
+                                <p class="small text-muted mb-1">` + data.kode_surat + `</p>
+                            </div>
+                        </a>
+                    </li>`;
+        $('#notification-wrapper').html(existingNotif + newNotif);
+
+
+        //toast
+        $('#liveToast').toast('show');
+
         notifications = parseInt(localStorage.getItem('notifications'));
         notifications += 1;
         console.log(localStorage.getItem('notifications'))

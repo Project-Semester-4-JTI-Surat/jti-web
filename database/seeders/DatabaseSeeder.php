@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
         //     );
         // Prodi::create(
         //     [
-        //         'keterangan' => 'All'
+        //         'keterangan' => 'MIF Inter'
         //     ]
         //     );
         // Mahasiswa::create(
@@ -94,11 +94,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        Status::create(
-            [
-                'info' => 'gagal',
-                'keterangan'=>'Ditolak'
-            ]
-        );
+        // Status::create(
+        //     [
+        //         'info' => 'gagal',
+        //         'keterangan'=>'Ditolak'
+        //     ]
+        // );
     }
 }

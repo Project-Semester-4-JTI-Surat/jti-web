@@ -69,10 +69,7 @@
         <div class="card">
             <h5 class="card-header">Data Surat</h5>
             <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
-                <button class="btn btn-primary" {{ Auth::guard('admin')->user()->role_id != 2 ? 'disabled' : '' }}
-                    data-bs-toggle="modal" data-bs-target="#tambahData">
-                    Tambah Data
-                </button>
+              
             </div>
             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                 <div class="table-responsive text-nowrap">

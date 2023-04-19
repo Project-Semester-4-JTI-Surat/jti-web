@@ -101,9 +101,12 @@
         <div class="card">
             <h5 class="card-header">Data Koordinator</h5>
              <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
-                <button class="btn btn-primary" {{ Auth::guard('admin')->user()->role_id != 2 ? 'disabled' : ''  }} data-bs-toggle="modal" data-bs-target="#tambahData">
+             @if(Auth::guard('admin')->user()->role_id == 1)
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahData">
                     Tambah Data
                 </button>
+             @endif
+                
             </div>
             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                 <div class="table-responsive text-nowrap">

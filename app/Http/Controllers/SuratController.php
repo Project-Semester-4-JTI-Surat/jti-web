@@ -49,6 +49,7 @@ class SuratController extends Controller
             array('cluster' => env('PUSHER_APP_CLUSTER'))
         );
         $data = array(
+            'id'=>$id->uuid,
             'kode_surat'=>$request->get('kode_surat'),
             'nama_mhs'=>$request->get('nama_anggota')[0],
             'nim_mhs'=>$request->get('nim_anggota')[0],

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Mahasiswa\AuthController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\FAQController;
 use App\Http\Controllers\SuratController;
 use App\Http\Middleware\MahasiswaApiCheck;
 use App\Mail\Verification;
@@ -48,5 +49,6 @@ Route::group(['prefix'=>'data'],function(){
     Route::get('koordinator',[DataController::class, 'koordinator']);
     Route::get('prodi',[DataController::class, 'prodi']);
     Route::get('jenis_surat',[DataController::class, 'JenisSurat']);
-
 });
+
+Route::get('faq/',[FAQController::class, 'index_api']);

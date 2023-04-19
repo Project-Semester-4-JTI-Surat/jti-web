@@ -138,4 +138,21 @@ trait ApiResponse
             422
         );
     }
+
+    /**
+     * @param mixed $message
+     * @param Collection $collection
+     * 
+     * @return JsonResponse
+     */
+    public function responseCollection($message, Collection $collection) : JsonResponse
+    {
+        return response()->json(
+            [
+                "success" => true,
+                "message" => $message,
+                "data" => $collection
+            ],
+        );
+    }
 }
