@@ -11,7 +11,13 @@ class Status extends Model
     protected $table = "status";
     protected $guarded = [];
     protected $hidden = [
+        'id','info',
         'created_at',
         'updated_at'
     ];
+
+    public function surat()
+    {
+        return $this->hasOne(Surat::class);
+    }
 }

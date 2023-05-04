@@ -205,6 +205,7 @@
                     {
                         data: 'aksi',
                         name: 'aksi',
+                        visible: {{ Auth::guard('admin')->user()->role_id == '1' ? 'true' : 'false'  }}
                         // render: function(data, type, row) {
                         //   return '<button onclick="edit(' + row.id + ')" class="btn btn-icon me-2 btn-primary"><span class="tf-icons bx bx-pencil"></span></button>';
                         //}

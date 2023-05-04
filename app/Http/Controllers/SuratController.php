@@ -8,11 +8,20 @@ use App\Models\Anggota;
 use App\Models\Surat;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Pusher\Pusher;
 
 class SuratController extends Controller
 {
     use ApiResponse;
+
+    public function index()
+    {
+        $auth = Auth::user();
+        $get_anggota = Anggota::join('surat','surat_id','surat.uuid')->join('status','status_id','status.id')->where('anggota.nama','=',$auth->nama)->get(['surat.uuid','surat.kode_surat','status.keterangan']);
+        // $surat = Surat::where()->with(['status'])->get();
+        return $this->responseCollection('Surat Saya',$get_anggota);
+    }
     public function insert(Request $request)
     {
         // $input = $request->all();
