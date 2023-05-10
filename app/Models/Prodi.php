@@ -38,4 +38,14 @@ class Prodi extends Model
     {
         return $this->hasOne(Koordinator::class);
     }
+
+    public function surat()
+    {
+        return $this->hasOne(Surat::class);
+    }
+
+    public function admin_prodi()
+    {
+        return $this->hasMany(AdminProdi::class);
+    }
 }

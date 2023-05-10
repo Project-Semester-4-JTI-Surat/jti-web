@@ -80,6 +80,7 @@
                                 <th>NO</th>
                                 <th>uuid</th>
                                 <th>Kode Surat</th>
+                                <th>Prodi</th>
                                 <th>Status</th>
                                 <th>Dosen</th>
                                 <th>Koordinator</th>
@@ -94,6 +95,7 @@
                                 <th>Softfile</th>
                                 <th>Keterangan</th>
                                 <th>Aksi</th>
+                                <th>Print</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -147,6 +149,10 @@
                     {
                         data: 'kode_surat',
                         name: 'kode_surat',
+                    },
+                    {
+                        data: 'prodi.keterangan',
+                        name: 'prodi.keterangan',
                     },
                     {
                         data: 'status',
@@ -209,7 +215,12 @@
                         // render: function(data, type, row) {
                         //   return '<button onclick="edit(' + row.id + ')" class="btn btn-icon me-2 btn-primary"><span class="tf-icons bx bx-pencil"></span></button>';
                         //}
-                    }
+                    },
+                    {
+                        data: 'print',
+                        name: 'print',
+                        visible: {{ Request::get('status') == 4 ? 'true' : 'false'  }}
+                    },
                 ],
             });
         }

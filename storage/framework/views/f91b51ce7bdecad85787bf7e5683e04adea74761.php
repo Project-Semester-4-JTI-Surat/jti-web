@@ -113,6 +113,9 @@
                                     $count = 0;
                                 ?>
                                 <div class="row mb-3">
+                                <?php if($value->ketua == 'true'): ?>
+                                     <div class="alert alert-primary" role="alert">Ketua Kelompok</div>
+                                <?php endif; ?>
                                     <label class="col-sm-2 col-form-label" for="">Nama Anggota
                                         <?php echo e($key + 1); ?></label>
                                     <div class="col-sm-10">
@@ -153,7 +156,7 @@
                 </div>
             </div>
         </div>
-        <?php if($surat->status_id == 3 || $surat->status_id == 4): ?>
+        <?php if($surat->status_id == 4): ?>
             <div class="card mb-4">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">Upload softfile</h5>

@@ -35,4 +35,14 @@ class Surat extends Model
     {
         return $this->belongsTo(Status::class);
     }
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class);
+    }
+
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class,'surat_id');
+    }
 }

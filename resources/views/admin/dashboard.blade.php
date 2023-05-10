@@ -2,14 +2,15 @@
 @section('title', 'Dashboard')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Dashboard </span> / </h4>
         <div class="row">
-          @if(Auth::guard('admin')->user()->change_password == 'false')
-              <div class="alert alert-warning alert-dismissible" role="alert">
-               Sepertinya anda belum mengubah password bawaan anda, Pastikan anda mengubah password anda di bagian pengaturan akun
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          @endif
+            @if (Auth::guard('admin')->user()->change_password == 'false')
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                {{-- {{ Auth::guard('admin')->user()->admin_prodi-> }} --}}
+                    Sepertinya anda belum mengubah password bawaan anda, Pastikan anda mengubah password anda di bagian
+                    pengaturan akun
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="col-lg-8 mb-4 order-0">
                 <div class="card">
                     <div class="d-flex align-items-end row">
@@ -17,13 +18,11 @@
                             <div class="card-body">
                                 <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
                                 <p class="mb-4">
-                                    You have done <span class="fw-bold">72%</span> more sales today.
-                                    Check your new badge in
+                                    You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
                                     your profile.
                                 </p>
 
-                                <a href="javascript:;" class="btn btn-sm btn-outline-primary">View
-                                    Badges</a>
+                                <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
                             </div>
                         </div>
                         <div class="col-sm-5 text-center text-sm-left">
@@ -52,8 +51,7 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                            <a class="dropdown-item" href="javascript:void(0);">View
-                                                More</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                             <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                                         </div>
                                     </div>
@@ -78,8 +76,7 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                            <a class="dropdown-item" href="javascript:void(0);">View
-                                                More</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                             <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                                         </div>
                                     </div>
@@ -96,11 +93,53 @@
             <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
                 <div class="card">
                     <div class="row row-bordered g-0">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-                           <div id="orderStatisticsChart" class="px-2"></div>
+                            <div id="totalRevenueChart" class="px-2"></div>
                         </div>
-                        
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button"
+                                            id="growthReportId" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            2022
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
+                                            <a class="dropdown-item" href="javascript:void(0);">2021</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">2020</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">2019</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="growthChart"></div>
+                            <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
+
+                            <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
+                                <div class="d-flex">
+                                    <div class="me-2">
+                                        <span class="badge bg-label-primary p-2"><i
+                                                class="bx bx-dollar text-primary"></i></span>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <small>2022</small>
+                                        <h6 class="mb-0">$32.5k</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="me-2">
+                                        <span class="badge bg-label-info p-2"><i
+                                                class="bx bx-wallet text-info"></i></span>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <small>2021</small>
+                                        <h6 class="mb-0">$41.2k</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,8 +160,7 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                            <a class="dropdown-item" href="javascript:void(0);">View
-                                                More</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                             <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                                         </div>
                                     </div>
@@ -148,8 +186,7 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                            <a class="dropdown-item" href="javascript:void(0);">View
-                                                More</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                             <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                                         </div>
                                     </div>
@@ -161,7 +198,7 @@
                         </div>
                     </div>
                     <!-- </div>
-    <div class="row"> -->
+        <div class="row"> -->
                     <div class="col-12 mb-4">
                         <div class="card">
                             <div class="card-body">
@@ -169,8 +206,7 @@
                                     <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                         <div class="card-title">
                                             <h5 class="text-nowrap mb-2">Profile Report</h5>
-                                            <span class="badge bg-label-warning rounded-pill">Year
-                                                2021</span>
+                                            <span class="badge bg-label-warning rounded-pill">Year 2021</span>
                                         </div>
                                         <div class="mt-sm-auto">
                                             <small class="text-success text-nowrap fw-semibold"><i
@@ -192,8 +228,8 @@
                 <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between pb-0">
                         <div class="card-title mb-0">
-                            <h5 class="m-0 me-2">Order Statistics</h5>
-                            <small class="text-muted">42.82k Total Sales</small>
+                            <h5 class="m-0 me-2">Statistik Pengajuan</h5>
+                            <small class="text-muted">Statistik per-Bulan</small>
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown"
@@ -341,25 +377,13 @@
             <div class="col-md-6 col-lg-4 order-2 mb-4">
                 <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title m-0 me-2">Transactions</h5>
-                        <div class="dropdown">
-                            <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                                <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                            </div>
-                        </div>
+                        <h5 class="card-title m-0 me-2">Pengajuan per-bulan</h5>
+                        
                     </div>
                     <div class="card-body">
                         <ul class="p-0 m-0">
                             <li class="d-flex mb-4 pb-1">
-                                <div class="avatar flex-shrink-0 me-3">
-                                    <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
-                                </div>
+                                
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Paypal</small>
@@ -372,9 +396,7 @@
                                 </div>
                             </li>
                             <li class="d-flex mb-4 pb-1">
-                                <div class="avatar flex-shrink-0 me-3">
-                                    <img src="../assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
-                                </div>
+                               
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Wallet</small>
@@ -387,9 +409,7 @@
                                 </div>
                             </li>
                             <li class="d-flex mb-4 pb-1">
-                                <div class="avatar flex-shrink-0 me-3">
-                                    <img src="../assets/img/icons/unicons/chart.png" alt="User" class="rounded" />
-                                </div>
+                                
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Transfer</small>
@@ -402,10 +422,7 @@
                                 </div>
                             </li>
                             <li class="d-flex mb-4 pb-1">
-                                <div class="avatar flex-shrink-0 me-3">
-                                    <img src="../assets/img/icons/unicons/cc-success.png" alt="User"
-                                        class="rounded" />
-                                </div>
+                                
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Credit Card</small>
@@ -418,9 +435,7 @@
                                 </div>
                             </li>
                             <li class="d-flex mb-4 pb-1">
-                                <div class="avatar flex-shrink-0 me-3">
-                                    <img src="../assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
-                                </div>
+                                
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Wallet</small>
@@ -433,10 +448,7 @@
                                 </div>
                             </li>
                             <li class="d-flex">
-                                <div class="avatar flex-shrink-0 me-3">
-                                    <img src="../assets/img/icons/unicons/cc-warning.png" alt="User"
-                                        class="rounded" />
-                                </div>
+                               
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Mastercard</small>
@@ -456,3 +468,9 @@
         </div>
     </div>
 @endsection
+
+@php
+use App\Models\Prodi;
+
+    $ambilProdi =  $prodi = Prodi::where('id','!=','2')->get();
+@endphp

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Models\AdminProdi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +36,7 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-        // dd(Auth::guard('admin')->user());
+        // dd(Auth::guard('admin')->user()->admin_prod);
         return view('admin.dashboard');
     }
 

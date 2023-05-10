@@ -31,6 +31,11 @@ class Admin extends Authenticatable
         return $this->belongsTo(Prodi::class);
     }
 
+    public function admin_prodi()
+    {
+        return $this->hasMany(AdminProdi::class,'admin_id');
+    }
+
     //Otomatis enkripsi password sebelum disimpan di database
     protected function password(): Attribute
     {
