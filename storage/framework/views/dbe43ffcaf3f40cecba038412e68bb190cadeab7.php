@@ -5,7 +5,7 @@
         <div class="row">
             <?php if(Auth::guard('admin')->user()->change_password == 'false'): ?>
                 <div class="alert alert-warning alert-dismissible" role="alert">
-                
+                    
                     Sepertinya anda belum mengubah password bawaan anda, Pastikan anda mengubah password anda di bagian
                     pengaturan akun
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -198,7 +198,7 @@
                         </div>
                     </div>
                     <!-- </div>
-        <div class="row"> -->
+                    <div class="row"> -->
                     <div class="col-12 mb-4">
                         <div class="card">
                             <div class="card-body">
@@ -378,12 +378,12 @@
                 <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5 class="card-title m-0 me-2">Pengajuan per-bulan</h5>
-                        
+
                     </div>
                     <div class="card-body">
                         <ul class="p-0 m-0">
                             <li class="d-flex mb-4 pb-1">
-                                
+
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Paypal</small>
@@ -396,7 +396,7 @@
                                 </div>
                             </li>
                             <li class="d-flex mb-4 pb-1">
-                               
+
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Wallet</small>
@@ -409,7 +409,7 @@
                                 </div>
                             </li>
                             <li class="d-flex mb-4 pb-1">
-                                
+
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Transfer</small>
@@ -422,7 +422,7 @@
                                 </div>
                             </li>
                             <li class="d-flex mb-4 pb-1">
-                                
+
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Credit Card</small>
@@ -435,7 +435,7 @@
                                 </div>
                             </li>
                             <li class="d-flex mb-4 pb-1">
-                                
+
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Wallet</small>
@@ -448,7 +448,7 @@
                                 </div>
                             </li>
                             <li class="d-flex">
-                               
+
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
                                         <small class="text-muted d-block mb-1">Mastercard</small>
@@ -466,13 +466,47 @@
             </div>
             <!--/ Transactions -->
         </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="d-flex align-items-end row">
+
+                    <div class="card-body">
+                        <div style="padding-left: 1rem;">
+                            <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                        </div>
+                        <div class="table-responsive text-nowrap">
+
+                            <table class="table" id="tableAdmin">
+                                <thead>
+                                    <tr>
+                                        <th>Prodi</th>
+                                        <th>Jumlah Pengajuan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $__currentLoopData = $statistik_pengajuan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <tr>
+                                        <td><?php echo e($value->keterangan); ?></td>
+                                        <td><?php echo e($value->count_prodi); ?></td>
+                                    </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 <?php $__env->stopSection(); ?>
 
 <?php
-use App\Models\Prodi;
-
-    $ambilProdi =  $prodi = Prodi::where('id','!=','2')->get();
+    use App\Models\Prodi;
+    
+    $ambilProdi = $prodi = Prodi::where('id', '!=', '2')->get();
 ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\jti-surat\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>

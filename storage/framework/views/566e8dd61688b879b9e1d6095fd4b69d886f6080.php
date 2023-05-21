@@ -77,6 +77,9 @@
                         required: true,
                         email: true
                     },
+                    username: {
+                        required: true,
+                    }
                 },
                 errorElement: "span",
                 errorPlacement: function(error, element) {

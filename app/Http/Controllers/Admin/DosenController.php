@@ -14,7 +14,7 @@ class DosenController extends Controller
     {
         $prodi = Prodi::where('id','!=','2')->get();
         if ($request->ajax()) {
-            $mhs = Dosen::with(['prodi'])->get();
+            $mhs = Dosen::with(['prodi'])->where('nama','!=','-')->get();
             return DataTables::of($mhs)
             ->addIndexColumn()
             ->addColumn('aksi',function($row){

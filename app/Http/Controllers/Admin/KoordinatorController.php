@@ -16,7 +16,7 @@ class KoordinatorController extends Controller
         $prodi = Prodi::where('id','!=','2')->get();
         $jsurat = JenisSurat::all();
         if ($request->ajax()) {
-            $koordinator = Koordinator::with(['jenis_surat','prodi'])->get();
+            $koordinator = Koordinator::with(['jenis_surat','prodi'])->where('nama','!=','-')->get();
             return DataTables::of($koordinator)
             ->addIndexColumn()
             ->addColumn('aksi',function($row){

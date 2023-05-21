@@ -16,7 +16,7 @@ class MahasiswaController extends Controller
             return DataTables::of($mhs)
             ->addIndexColumn()
             ->addColumn('aksi',function($row){
-                return '<button onclick="edit(`'.$row->uuid.'`)" class="btn btn-icon me-2 btn-primary"><span class="tf-icons bx bx-pencil"></span></button>';
+                return '<button disabled onclick="edit(`'.$row->uuid.'`)" class="btn btn-icon me-2 btn-primary"><span class="tf-icons bx bx-pencil"></span></button>';
             })
             ->rawColumns(['aksi'])
             ->make(true);

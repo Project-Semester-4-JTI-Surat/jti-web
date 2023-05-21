@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\MahasiswaCheck;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
@@ -26,8 +27,8 @@ class MahasiswaLoginRequest extends FormRequest
     {
         return [
             // 'email'=>'required|email',
-            'nim'=>'required', 
-            'password'=>'required'
+            'nim'=>['required',new MahasiswaCheck(),'max:9','regex:/^E\d{8}/'], 
+            'password'=>'required|min:8'
         ];
     }
 }

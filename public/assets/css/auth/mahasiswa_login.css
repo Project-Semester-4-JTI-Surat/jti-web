@@ -1,0 +1,220 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    /* margin: 0;
+    padding: 0; */
+    /* border: 2px solid rgba(255, 255, 255, 5); */
+    
+}
+
+body{
+    background-image: url("../../img/backgrounds/atas.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    
+}
+
+.container{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px 0 15px;
+    border: 2px solid rgba(255, 255, 255, 0.466);
+    background-color: rgba(250, 235, 215, 0.336);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+}
+
+header{
+    color: rgb(3, 19, 18);
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+    font-weight: bold;
+}
+
+.input-field{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0 0 0;
+}
+
+/* label{
+    color:rgba(8, 31, 30, 0.527);
+    font-size: 15px;
+    padding-left: 10px;
+    font-weight: 400;
+} */
+
+span{
+    color:rgb(2, 17, 16);
+    font-size: 15px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+
+.input{
+    height: 45px;
+    width: 87%;
+    border: none;
+    outline: 1px;
+    border-radius: 10px;
+    color: black;
+    padding: 0 20px 0 20px;
+    background: rgba(255, 255, 255, 0.342);
+}
+.error{
+    
+    border: 0.2rem solid rgb(179, 4, 4);
+    border-radius: 10px;
+    /* height: 45px;
+    width: 87%;
+    outline: 1px;
+    border-radius: 10px;
+    color: black;
+    padding: 0 20px 0 20px;
+    background: rgba(255, 255, 255, 0.342); */
+}
+
+.text-error{
+    font-size: 15px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    color: rgb(179, 4, 4);
+}
+
+::-webkit-input-placeholder{
+    color: rgba(52, 102, 146, 0.466);
+}
+
+.submit{
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    height: 45px;
+    outline: none;
+    width: 100%;
+    background: rgba(141, 228, 224, 0.678);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.submit:hover{
+    box-shadow: 1px 5px 7px 1px rgba(59, 67, 177, 0.541);
+}
+
+/* .bottom{
+    display: flex;
+    flex-direction: space-between;
+    font-size:small;
+    color: rgb(52, 102, 146);
+    margin-top: 10px;
+    padding: 10px 100px 20px 10px;
+} */
+
+.left{
+    display: flex;
+}
+
+.right{
+    display: flex;
+    padding: 10px 0 0 0;
+    
+}
+
+label a{
+    color: rgb(52, 102, 146);
+    text-decoration: none;
+    padding: 0 0 0 220px;
+    font-size: 15px;
+}
+
+a{
+    color: rgb(33, 74, 112); 
+    font-size: 15px;
+    text-align: center;
+}
+p{
+    color: rgb(12, 26, 39); 
+    font-size: 15px;
+    margin-left: 80px; 
+}
+
+.uil{
+    position: absolute;
+    right: 40px;
+    transform: translate(0, -15%);
+    top: -13%;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 61px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* @import url('https://unpkg.com/css.gg@2.0.0/icons/css/eye.css');
+.gg-eye {
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 24px;
+    height: 18px;
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+    overflow: hidden;
+    box-sizing: border-box
+}
+.gg-eye::after,
+.gg-eye::before {
+    content: "";
+    display: block;
+    border-radius: 100px;
+    position: absolute;
+    box-sizing: border-box
+}
+.gg-eye::after {
+    top: 2px;
+    box-shadow:
+        inset 0 -8px 0 2px,
+        inset 0 0 0 2px;
+    width: 24px;
+    height: 24px
+}
+.gg-eye::before {
+    width: 8px;
+    height: 8px;
+    border: 2px solid;
+    bottom: 4px;
+    left: 8px
+} */

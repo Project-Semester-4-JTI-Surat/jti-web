@@ -25,6 +25,10 @@ class Surat extends Model
     {
         return $this->belongsTo(Dosen::class,'dosen_id');
     }
+    public function jenis_surat()
+    {
+        return $this->belongsTo(JenisSurat::class,'kode_surat');
+    }
 
     public function koordinator()
     {

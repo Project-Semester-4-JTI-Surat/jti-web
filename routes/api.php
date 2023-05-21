@@ -34,7 +34,8 @@ Route::group(['prefix' => 'mahasiswa'], function () {
     Route::post('reset_password', [AuthController::class, 'reset_password']);
     Route::post('save_password/{id}',[AuthController::class, 'save_password'])->name('save_password');
     Route::get('logout',[AuthController::class,'logout'])->middleware(MahasiswaApiCheck::class);
-
+    Route::post('update_akun',[AuthController::class,'update_account'])->middleware(MahasiswaApiCheck::class);
+    
     Route::group(['middleware'=>MahasiswaApiCheck::class], function () {
         Route::get('/',[AuthController::class,'check']);
         Route::post('surat/insert',[SuratController::class,'insert']);

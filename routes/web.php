@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Api\Mahasiswa\AuthController as MahasiswaAuth;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DosenController;
 use App\Http\Controllers\Admin\KoordinatorController;
@@ -9,7 +8,10 @@ use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\Admin\SuratController;
 use App\Http\Controllers\FileUploadTempController;
+use App\Http\Controllers\MahasiswaAuthController;
 use App\Http\Controllers\ManagementUserController;
+use App\Http\Controllers\SuratController as MahasiswaSuratController;
+use App\Http\Middleware\MahasiswaAuth;
 use App\Mail\Verification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -75,17 +77,35 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
 
     Route::group(['prefix' => 'data-admin', 'as' => 'data-admin.'], function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::post('update/{id}',[AdminController::class, 'update'])->name('update');
+        Route::get('/edit/{id}',[AdminController::class, 'edit'])->name('edit');
         Route::post('insert', [AdminController::class, 'insert'])->middleware('RoleCheck:Super Admin')->name('insert');
     });
 });
 
-Route::resource('user', ManagementUserController::class); //otomatis mengambil nama function dan menyesuaikan http requestnya
+Route::group(['prefix'=>'mahasiswa','as'=>'mahasiswa.'],function(){
+    Route::get('login',[MahasiswaAuthController::class, 'index'])->name('login');
+    Route::get('register',[MahasiswaAuthController::class, 'register'])->name('register');
+    Route::post('register_process',[MahasiswaAuthController::class, 'register_process'])->name('register_process');
+    Route::post('login_process',[MahasiswaAuthController::class, 'login_process'])->name('login_process');
+
+    Route::group(['middleware'=>MahasiswaAuth::class],function(){
+        Route::get('dashboard/',[MahasiswaAuthController::class, 'dashboard'])->name('dashboard');
+        Route::get('profile/',[MahasiswaAuthController::class, 'profile'])->name('profile');
+        Route::get('logout',[MahasiswaAuthController::class, 'logout'])->name('logout');
+        Route::get('pengajuan_surat',[MahasiswaSuratController::class, 'pengajuan_surat'])->name('pengajuan_surat');
+        Route::get('surat/detail/{id}',[MahasiswaSuratController::class, 'detail_surat'])->name('detail_surat');
+        Route::post('surat/pengajuan',[MahasiswaSuratController::class, 'insert'])->name('surat_insert');
+    });
+});
+
+// Route::resource('user', ManagementUserController::class); //otomatis mengambil nama function dan menyesuaikan http requestnya
 Route::get('home', function () {
     return view('admin.dashboard');
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('mahasiswa.index');
 });
 Route::post('temp/file/upload',[FileUploadTempController::class,'temp_upload'])->name('temp-upload');
 Route::get('temp/file/delete/{filename?}',[FileUploadTempController::class,'temp_delete'])->name('temp_delete');

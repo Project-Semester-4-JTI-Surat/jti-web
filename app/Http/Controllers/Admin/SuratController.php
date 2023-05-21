@@ -22,7 +22,7 @@ class SuratController extends Controller
     public function getJenisSurat(Request $request)
     {
         if ($request->ajax()) {
-            $jsurat = JenisSurat::all();
+            $jsurat = JenisSurat::where('kode','!=','DASH')->get();
             return DataTables::of($jsurat)
                 ->addIndexColumn()
                 ->addColumn('aksi', function ($row) {
@@ -56,41 +56,29 @@ class SuratController extends Controller
         $id = $request->get('status');
         //id =  2 
         //ambil surat sesuai dengan admin prodi..
-        $count_prodi = count(Auth::guard('admin')->user()->admin_prodi);
-        $surat =  Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id);
+        $user = Auth::guard('admin')->user();
+        $surat =  '';
         /**
          * Experimental Features
          * Masih ada bug yg belum terselesaikan.. 
          */
         //Cek Jika role Admin adalah super admin
-        if (Auth::guard('admin')->user()->role == '2') {
-            $surat = $surat->get();
+        // dd($user->role_id);
+        if ($user->role_id == '2') {
+            $surat = Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id)->get();
+        // dd($surat);
+
         } else {
             //Cek jika admin prodi mengampu 2 prodi
-            if ($count_prodi == 1) {
-                $surat =  $surat->where('prodi_id', '=', Auth::guard('admin')->user()->admin_prodi[0]->prodi->id)->get();
-            } else {
-                $surat =  $surat->where('prodi_id', '=', Auth::guard('admin')->user()->admin_prodi[0]->prodi->id)->orWhere('prodi_id', '=', Auth::guard('admin')->user()->admin_prodi[1]->prodi->id)->get();
-            }
+            $surat =  Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id)->where('prodi_id', '=', $user->prodi_id)->get();
         }
-        /**
-         * k1 = false
-         * k2 = false
-         * k3 = true
-         *  true
-         * 
-         * k1 = true
-         * k2 = false
-         * false and or
-         * 
-         */
-        // dd($id);
         if ($request->ajax()) {
             // $surat = $surat->get();
             return DataTables::of($surat)
                 ->addIndexColumn()
                 ->addColumn('softfile', function ($row) {
-                    return '<a href="' . env('APP_URL') . '/assets/softfile/' . $row->softfile_scan . '"> File Scan </a>';
+                    return $row->softfile_scan == 'null' ? '<a href="' . env('APP_URL') . '/assets/softfile/' . $row->softfile_scan . '"> File Scan </a>' : '-';
+                    // return '<a href="' . env('APP_URL') . '/assets/softfile/' . $row->softfile_scan . '"> File Scan </a>';
                 })
                 ->addColumn('status', function ($row) {
                     switch ($row->status_id) {

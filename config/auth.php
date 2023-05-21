@@ -42,6 +42,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'mahasiswa'=>[
+            'driver'=>'session',
+            'provider'=>'mhs'
+        ],
         'admin'=>[
             'driver' => 'session',
             'provider' => 'admin',

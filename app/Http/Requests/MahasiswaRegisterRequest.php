@@ -26,13 +26,14 @@ class MahasiswaRegisterRequest extends FormRequest
     {
         return [
             'nim' => 'required|max:9|unique:\App\Models\Mahasiswa,nim', 
-            'nama' => 'required|regex:/^[\pL\s]+$/u', 
+            'nama' => 'required|regex:/^[\pL\s]+$/u',
             'email'=>'required|email', 
             'prodi_id'=>'required|numeric', 
             'alamat'=>'required', 
-            'no_hp'=>'required|numeric|digits_between:10,13', 
+            'no_hp'=>'required', 
             'tanggal_lahir'=>'required|date', 
-            'password'=>['required',Password::min(8)->mixedCase()->letters()]
+            'password'=>['required',Password::min(8)->letters()->numbers()],
+            // 'password_confirmed'=>'same:password',
         ];
     }
 }

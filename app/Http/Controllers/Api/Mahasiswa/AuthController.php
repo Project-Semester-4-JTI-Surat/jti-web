@@ -36,9 +36,7 @@ class AuthController extends Controller
     {
         $input = $request->only(['nim', 'password']);
         try {
-            if (!$token = JWTAuth::attempt($input)) {
-                return $this->internalErrorResponse("Cek kembali password atau email anda",);
-            }
+            if (!$token = JWTAuth::attempt($input)) return $this->internalErrorResponse("Cek kembali password atau email anda",);
         } catch (JWTException $e) {
             return $this->internalErrorResponse("Ada yang salah :(");
         }
@@ -79,6 +77,7 @@ class AuthController extends Controller
         Mail::to($request->email)->send(new ResetPassword($request->email, $token));
         return $this->successResponse('Permintaan reset password telah berhasil, mohon cek email anda.');
     }
+
     public function save_password(SaveNewPasswordRequest $request, $token)
     {
 
@@ -89,12 +88,9 @@ class AuthController extends Controller
             ])
             ->first();
         $resetTime = Carbon::createFromTimeString($updatePassword->created_at);
-        if (!$updatePassword) {
-            return $this->internalErrorResponse('Oopss token tidak valid');
-        }
-        if ($resetTime->addHour() >= Carbon::now() ) {
-            return $this->internalErrorResponse('Oopss token telah expired');
-        }
+        
+        if (!$updatePassword) return $this->internalErrorResponse('Oopss token tidak valid');
+        if ($resetTime->addHour() >= Carbon::now() ) return $this->internalErrorResponse('Oopss token telah expired');
 
         $user = Mahasiswa::where('email', $request->email)
             ->update(['password' => bcrypt($request->password)]);
@@ -102,5 +98,14 @@ class AuthController extends Controller
         DB::table('password_resets')->where(['email' => $request->email])->delete();
 
         return $this->successResponse('Password berhasil direset');
+    }
+
+    public function update_account(Request $request)
+    {
+        $input = $request->only(['nim','nama','password','alamat','no_hp']);
+        if($request->has('password')) $input = $request->only(['nim','nama','password','alamat','no_hp']); 
+        $auth = Auth::user();
+        Mahasiswa::find($auth->uuid)->update($input);
+        return $this->successResponse('Data Akun berhasil diubah');
     }
 }

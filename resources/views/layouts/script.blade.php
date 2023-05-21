@@ -22,8 +22,7 @@
 <!-- endbuild -->
 <script>
     $(function() {
-        console.log('%c Hayooo mau ngapain.. wkwkwk, mau ngutek-ngutek ya. Gaboleh loh',
-            'color: white; background-color: red');
+       
         const notifications = localStorage.getItem('notifications')
         if (!notifications) {
             localStorage.setItem('notifications', 0)
