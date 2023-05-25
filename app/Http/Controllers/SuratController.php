@@ -52,10 +52,10 @@ class SuratController extends Controller
                 "tanggal_selesai" => $input['tanggal_selesai'],
                 "kebutuhan" => $input['kebutuhan'],
                 "keterangan" => $input['keterangan'],
-                "judul_ta" => $input['judul_ta']
         );
         if ( $request->has('koordinator_id')) $arr += array("kode_koordinator" => $input['koordinator_id'],);
-        if ( $request->has('dosen_id')) $arr += array("dosen_id" => $input['dosen_id'],);
+        if ( $request->has('dosen_id')) $arr += array("dosen_id" => $input['dosen_id']);
+        if ( $request->has('judul_ta')) $arr += array("judul_ta" => $input['judul_ta']);
       
         // dd($arr);
         $id = Surat::create($arr);

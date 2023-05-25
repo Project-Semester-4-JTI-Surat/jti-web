@@ -58,7 +58,7 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
 
-                 <div class="form-label">
+                <div class="form-label">
                     <label for="">Kebutuhan</label>
                 </div>
                 <select name="kebutuhan" placeholder="Kebutuhan" id="Kebutuhan">
@@ -121,10 +121,10 @@
                     </div>
                 </div>
                 <div id="kolom-dataAnggota">
-                
+
                 </div>
-               
-                
+
+
                 <button type="button" name="previous" class="previous action-button">Previous</button>
                 <button type="submit" class="action-button">Submit</button>
             </fieldset>
@@ -139,25 +139,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <script>
     $(document).ready(function() {
-        let template = `<div id="list" style="border-style: solid; border-color: #e1e1e1; padding: 1rem 1rem 1rem 1rem; margin-bottom: 1.5rem;">
-          <input type="text" name="nama_anggota[]" placeholder="Nama Mahasiswa" />
-          <input type="text" name="nim_anggota[]" placeholder="NIM Mahasiswa" />
-          <input type="text" class="ibacor_fi" id="no_hp" onkeyup="setPrefix(this)" onblur="setPrefix(this)" data-prefix="+62" name="nohp_anggota[]" placeholder="No. HP Mahasiswa" />
-             <select name="prodi_id_anggota[]"  id="prodi_id_anggota">
-                                <option value=""> --Pilih Prodi--</option>
-                                <?php $__currentLoopData = $prodi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($value->id); ?>"> <?php echo e($value->keterangan); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-          <button type="button" id="hapusField" class="action-button">x</button>
-         </div>`;
 
-        $("#tambahAnggota").on("click", () => {
-            $("#parent-list").append(template);
-        })
-        $("body").on("click", "#hapusField", (e) => {
-            $(e.target).parent("div").remove();
-        })
     });
     var current_fs, next_fs, previous_fs;
     var left, opacity, scale;
@@ -261,16 +243,16 @@
                     <div id="parent-list">
                         <div id="list"
                             style="border-style: solid; border-color: #e1e1e1; padding: 1rem 1rem 1rem 1rem; margin-bottom: 1.5rem;">
-                            <input type="text" name="nama_anggota[]" placeholder="Nama Mahasiswa" />
-                            <input type="text" name="nim_anggota[]" placeholder="NIM Mahasiswa" />
-                            <input type="text" name="nohp_anggota[]" data-form="no_hp"
-                                placeholder="No. HP Mahasiswa" />
-                            <select name="prodi_id_anggota[]" id="prodi_id_anggota">
-                                <option value=""> --Pilih Prodi--</option>
-                                <?php $__currentLoopData = $prodi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($value->id); ?>"> <?php echo e($value->keterangan); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
+                             <input type="text" name="nama_anggota[]" value="<?php echo e(Auth::guard('mahasiswa')->user()->nama); ?>"
+                        readonly />
+                    <input type="text" name="nim_anggota[]" value="<?php echo e(Auth::guard('mahasiswa')->user()->nim); ?>"
+                        readonly />
+                    <input type="text" name="nohp_anggota[]"
+                        value="<?php echo e(Auth::guard('mahasiswa')->user()->no_hp); ?>" readonly />
+                    <input type="text" name=""
+                        value="<?php echo e(Auth::guard('mahasiswa')->user()->prodi->keterangan); ?>" readonly />
+                    <input type="hidden" name="prodi_id_anggota[]"
+                        value="<?php echo e(Auth::guard('mahasiswa')->user()->prodi->id); ?>"  />
                         </div>
                     </div>
                 </div>`;
@@ -279,7 +261,27 @@
         });
         $('#form-individu').remove();
         $('#kolom-dataAnggota').append(kelompok);
-        $('#form-kelompok').toggle(this.checked)
+        $('#form-kelompok').toggle(this.checked);
+
+        let template = `<div id="list" style="border-style: solid; border-color: #e1e1e1; padding: 1rem 1rem 1rem 1rem; margin-bottom: 1.5rem;">
+          <input type="text" name="nama_anggota[]" placeholder="Nama Mahasiswa" />
+          <input type="text" name="nim_anggota[]" placeholder="NIM Mahasiswa" />
+          <input type="text" class="ibacor_fi" id="no_hp" onkeyup="setPrefix(this)" onblur="setPrefix(this)" data-prefix="+62" name="nohp_anggota[]" placeholder="No. HP Mahasiswa" />
+             <select name="prodi_id_anggota[]"  id="prodi_id_anggota">
+                                <option value=""> --Pilih Prodi--</option>
+                                <?php $__currentLoopData = $prodi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($value->id); ?>"> <?php echo e($value->keterangan); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+          <button type="button" id="hapusField" class="action-button">x</button>
+         </div>`;
+
+        $("#tambahAnggota").on("click", () => {
+            $("#parent-list").append(template);
+        })
+        $("body").on("click", "#hapusField", (e) => {
+            $(e.target).parent("div").remove();
+        })
     });
 
     $('#jenis_surat').on('change', function() {

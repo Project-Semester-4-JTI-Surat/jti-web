@@ -93,6 +93,7 @@ Route::group(['prefix'=>'mahasiswa','as'=>'mahasiswa.'],function(){
         Route::get('dashboard/',[MahasiswaAuthController::class, 'dashboard'])->name('dashboard');
         Route::get('profile/',[MahasiswaAuthController::class, 'profile'])->name('profile');
         Route::get('logout',[MahasiswaAuthController::class, 'logout'])->name('logout');
+        Route::post('profile/update',[MahasiswaAuthController::class, 'update_profile'])->name('update_profile');
         Route::get('pengajuan_surat',[MahasiswaSuratController::class, 'pengajuan_surat'])->name('pengajuan_surat');
         Route::get('surat/detail/{id}',[MahasiswaSuratController::class, 'detail_surat'])->name('detail_surat');
         Route::post('surat/pengajuan',[MahasiswaSuratController::class, 'insert'])->name('surat_insert');

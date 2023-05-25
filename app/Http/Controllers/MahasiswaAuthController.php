@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MahasiswaLoginRequest;
 use App\Http\Requests\MahasiswaRegisterRequest;
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Anggota;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
@@ -67,5 +68,13 @@ class MahasiswaAuthController extends Controller
     {
         $auth = Auth::guard('mahasiswa')->user();
         return view('mahasiswa.profile',compact('auth'));
+    }
+
+    public function update_profile(ProfileUpdateRequest $request)
+    {
+        $auth = Auth::guard('mahasiswa')->user();
+        // dd($auth->uuid);
+        Mahasiswa::find($auth->uuid)->update($request->validated());
+        return redirect()->route('mahasiswa.login');
     }
 }
