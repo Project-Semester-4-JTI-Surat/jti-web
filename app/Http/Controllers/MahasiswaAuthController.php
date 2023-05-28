@@ -51,10 +51,21 @@ class MahasiswaAuthController extends Controller
         return redirect()->route('mahasiswa.login');
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
+        $status = $request->get('status');
         $auth = Auth::guard('mahasiswa')->user();
-        $get_anggota = Anggota::join('surat', 'surat_id', 'surat.uuid')->join('status', 'status_id', 'status.id')->where('anggota.nama', '=', $auth->nama)->get(['surat.uuid','surat.judul_ta','surat.kebutuhan','surat.keterangan as keterangan_surat', 'surat.kode_surat', 'status.keterangan']);
+        if ($status == '*' || $status == '') {
+            $get_anggota = Anggota::join('surat', 'surat_id', 'surat.uuid')->join('status', 'status_id', 'status.id')
+            ->where('anggota.nama', '=', $auth->nama)
+            ->get(['surat.uuid','surat.judul_ta','surat.kebutuhan','surat.keterangan as keterangan_surat', 'surat.kode_surat', 'status.keterangan']);
+        }else{
+            $get_anggota = Anggota::join('surat', 'surat_id', 'surat.uuid')->join('status', 'status_id', 'status.id')
+            ->where('status_id','=',$status)
+            ->where('anggota.nama', '=', $auth->nama)
+            ->get(['surat.uuid','surat.judul_ta','surat.kebutuhan','surat.keterangan as keterangan_surat', 'surat.kode_surat', 'status.keterangan']);
+        }
+        // dd($get_anggota);
         return view('mahasiswa.dashboard',compact('get_anggota'));
     }
 

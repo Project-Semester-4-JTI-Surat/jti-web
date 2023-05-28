@@ -10,7 +10,6 @@ class DetailSurat extends Controller
 {
     public function index($id)
     {
-        Surat::find($id);
-        retur
+        
     }
 }

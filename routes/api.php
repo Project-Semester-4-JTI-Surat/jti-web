@@ -47,7 +47,7 @@ Route::group(['prefix' => 'mahasiswa'], function () {
 
     
 });
-Route::group(['prefix'=>'data'],function(){
+Route::group(['prefix'=>'data', 'middleware'=>MahasiswaApiCheck::class],function(){
     Route::get('dosen',[DataController::class, 'dosen']);
     Route::get('koordinator',[DataController::class, 'koordinator']);
     Route::get('prodi',[DataController::class, 'prodi']);

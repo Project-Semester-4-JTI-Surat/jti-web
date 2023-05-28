@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('img/favicon/logo.svg')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('css/mahasiswa/style.css')); ?>">
     <title><?php echo e(env('APP_NAME')); ?> - Dashboard Mahasiswa</title>
 </head>
@@ -86,15 +87,19 @@
     <main class="px-2 mt-14">
         <div class="py-10 pl-9 flex ">
             <h1 class="text-3xl font-bold dark:text-white pr-8">Surat Saya</h1>
-            <select id="small"
-                class=" block w-1/6 p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected>Semua</option>
-                <option value="">Menunggu</option>
-                <option value="">Diproses</option>
-                <option value="">Ditolak</option>
-                <option value="">Bisa Diambil</option>
-                <option value="">Ditolak</option>
+            <form action="<?php echo e(route('mahasiswa.dashboard')); ?>" class="block w-1/6">
+            
+                <select id="small" onchange="this.form.submit()" name="status"
+                class=" p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value=""> -- Filter --</option>
+                <option value="*">Semua</option>
+                <option value="2">Menunggu</option>
+                <option value="3">Diproses</option>
+                <option value="1">Selesai</option>
+                <option value="4">Bisa Diambil</option>
+                <option value="5">Ditolak</option>
             </select>
+            </form>
         </div>
         <div
             class="pl-20 md:h-[60vh] h-[60vh] overflow-y-scroll scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-800 w-full flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg  dark:border-0 border-2 mb-6">

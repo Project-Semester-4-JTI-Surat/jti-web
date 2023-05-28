@@ -10,6 +10,7 @@ use App\Traits\ApiResponse;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DataController extends Controller
 {
@@ -30,7 +31,8 @@ class DataController extends Controller
      */
     public function dosen() : JsonResponse
     {
-        return $this->baseResponseData('Data Dosen',Dosen::all());
+        $auth = Auth::user();
+        return $this->baseResponseData('Data Dosen',Dosen::where('nip','!=','-')->where('prodi_id','=',$auth->prodi_id)->get());
     }
 
     /**
@@ -38,7 +40,8 @@ class DataController extends Controller
      */
     public function koordinator() : JsonResponse
     {
-        return $this->baseResponseData('Data Dosen',Koordinator::all());
+        $auth = Auth::user();
+        return $this->baseResponseData('Data Koordinator',Koordinator::where('nama','!=','-')->where('prodi_id','=',$auth->prodi_id)->get());
     }
 
     /**
@@ -46,7 +49,7 @@ class DataController extends Controller
      */
     public function prodi() : JsonResponse
     {
-        return $this->baseResponseData('Data Dosen',Prodi::where('id','!=','2')->get());
+        return $this->baseResponseData('Data Prodi',Prodi::where('id','!=','2')->get());
     }
 
     /**
@@ -54,7 +57,7 @@ class DataController extends Controller
      */
     public function JenisSurat() : JsonResponse
     {
-        return $this->baseResponseData('Data Dosen',JenisSurat::all());
+        return $this->baseResponseData('Data Jenis Surat',JenisSurat::where('keterangan','!=','-')->get());
     }
 
 

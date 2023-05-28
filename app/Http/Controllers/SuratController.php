@@ -126,16 +126,17 @@ class SuratController extends Controller
     }
     public function detail($id)
     {
-        $surat = Surat::with(['anggota', 'anggota.prodi'])->where('uuid', '=', $id)->get();
+        $surat = Surat::with(['anggota', 'anggota.prodi','dosen','koordinator'])->where('uuid', '=', $id)->get();
         return $this->successResponseData('Detail Surat', $surat);
         // return $this->responseCollection('Detail Surat',$surat);
     }
     
     public function pengajuan_surat()
     {
+        $auth = Auth::guard('mahasiswa')->user();
         $jsurat = JenisSurat::where('kode','!=','DASH')->get();
-        $dosen = Dosen::where('nama','!=','-')->get();
-        $koordinator = Koordinator::where('nama','!=','-')->get();
+        $dosen = Dosen::where('nama','!=','-')->where('prodi_id','=',$auth->prodi_id)->get();
+        $koordinator = Koordinator::where('nama','!=','-')->where('prodi_id','=',$auth->prodi_id)->get();
         $prodi = Prodi::where('id','!=','2')->get();
         return view('mahasiswa.pengajuan-surat',compact('jsurat','dosen','koordinator','prodi'));
     }

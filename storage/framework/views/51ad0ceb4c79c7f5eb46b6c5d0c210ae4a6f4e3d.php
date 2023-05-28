@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/libs/select2/select2.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('css/mahasiswa/pengajuan_surat.css')); ?>">
     <title>Pengajuan Surat</title>
 </head>
@@ -91,7 +92,7 @@
                 <div class="form-label">
                     <label for="">Nama Mitra</label>
                 </div>
-                <input type="text" name="nama_mitra" placeholder="Kepada" />
+                <input type="text" name="nama_mitra" placeholder="Kepada" required />
                 <div class="form-label">
                     <label for="">Alamat Mitra</label>
                 </div>
@@ -109,7 +110,7 @@
                 <div style="padding:  0.5rem  0 1rem 0; display: flex; justify-content: center;">
                     <div style=" float: left;clear: none;">
                         <input style=" float: left; clear: none; margin: 2px 0 0 2px;" type="radio" id="individu"
-                            name="status_keanggotan" value="individu" id="individu">
+                            name="status_keanggotan" checked  value="individu" id="individu">
                         <label for=""
                             style="float: left; clear: none; display: block; padding: 0px 1em 0px 8px;">Individu</label>
                     </div>
@@ -133,6 +134,7 @@
     </main>
 </body>
 <script src="<?php echo e(asset('vendor/libs/jquery/jquery.js')); ?>"></script>
+<script src="<?php echo e(asset('vendor/libs/sweet-alert/sweetalert.min.js')); ?>"></script>
 <script src="<?php echo e(asset('vendor/libs/jquery/validate/jquery.validate.js')); ?>"></script>
 <script src="<?php echo e(asset('js/mahasiswa.js')); ?>"></script>
 <script src="<?php echo e(asset('js/jquery.prefix-input.js')); ?>"></script>
@@ -147,7 +149,6 @@
     $(".next").click(function() {
         if (animating) return false;
         animating = true;
-
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
