@@ -102,8 +102,8 @@ class AuthController extends Controller
 
     public function update_account(Request $request)
     {
-        $input = $request->only(['nim','nama','password','alamat','no_hp']);
-        if($request->has('password')) $input = $request->only(['nim','nama','password','alamat','no_hp']); 
+        $input = $request->only(['password']);
+        // if($request->has('password')) $input = $request->only(['nim','nama','password','alamat','no_hp']); 
         $auth = Auth::user();
         Mahasiswa::find($auth->uuid)->update($input);
         return $this->successResponse('Data Akun berhasil diubah');
