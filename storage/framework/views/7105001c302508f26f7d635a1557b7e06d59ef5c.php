@@ -115,17 +115,11 @@
         <!-- <img src="assets/img/home.png" alt="" class="w-[300px] min-[960px]:w-[500px]"> -->
         <div class="w-full md:w-[45%]  pr-8">
             <h1 class="text-6xl font-bold">JTI-Surat</h1>
-            <h2 class="py-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa labore soluta excepturi
-                itaque dolor sit nam ipsam tempore repellat praesentium asperiores accusamus culpa ex aperiam, quos in
-                nihil sint deserunt.
-                Nihil rem laudantium officia accusantium repellendus atque, ducimus totam sint impedit libero
-                consectetur quo eaque enim veritatis aperiam aspernatur omnis expedita ullam deserunt corporis odio iure
-                itaque magnam. Eligendi, asperiores.
-                Dignissimos temporibus quidem saepe qui? Nam, dignissimos eius consectetur pariatur inventore in
-                eligendi consequatur dolorem, temporibus amet rerum debitis optio harum, ut beatae eveniet nostrum
-                aliquid laudantium soluta id nesciunt!</h2>
+            <h2 class="py-6">Merupakan website untuk melakukan pengajuan pembuatan surat seperti surat pengajuan pkl,
+                 surat survey tempat dan lain-lain secara online kepada Admin Jurusan Teknologi Informasi,
+                  Dengan tujuan mempermudah mahasiswa dalam meminta persetujuan</h2>
             <div class="pt-8">
-                <a href="#" class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-md">Get
+                <a href="<?php echo e(route('mahasiswa.login')); ?>" class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-md">Get
                     Started
                     <!-- <span class="bx bx-chevron-right"></span> -->
                 </a>
@@ -174,7 +168,7 @@
                 <div class="py-5 px-7 dark:border-0 border dark:bg-gray-800 rounded-lg mb-6">
                     <details class="group">
                         <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                            <span> Lorem ipsum dolor sit amet consectetur?</span>
+                            <span> Apakah dapat mendaftar akun yang sama 2 kali?</span>
                             <span class="transition group-open:rotate-180">
                                 <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -184,17 +178,15 @@
                             </span>
                         </summary>
                         <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, dolore debitis fugit at
-                            praesentium quia iste. Expedita voluptates esse, quo fuga deleniti rerum. Cupiditate cum
-                            quia maxime debitis eveniet necessitatibus?
+                            Tidak, karena saat pendaftaran sebelumnya anda telah memasukkan data dan tercatat di database,
+                            jika memaksa proses register akan gagal.
                         </p>
                     </details>
                 </div>
                 <div class="py-5 px-7 dark:border-0 border dark:bg-gray-800 rounded-lg mb-6">
                     <details class="group">
                         <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                            <span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, dolore debitis fugit at
-                                praesentium quia iste?</span>
+                            <span> </span>
                             <span class="transition group-open:rotate-180">
                                 <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

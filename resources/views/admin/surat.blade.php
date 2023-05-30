@@ -200,9 +200,12 @@
                         visible: {{ Request::get('status') == 5 ? 'true' : 'false'  }}
                     },
                     {
-                        data: 'softfile',
-                        name: 'softfile',
-                        visible: {{ Request::get('status') == 4 ? 'true' : 'false'  }}
+                        data: 'softfile_scan',
+                        name: 'softfile_scan',
+                        //visible: {{ Request::get('status') == 4 ? 'true' : 'false'  }},
+                        render: function(data, type, row) {
+                           return '<a target="_blank" href={{ env('ASSET_URL') }}/softfile/'+row.softfile_scan+' class="btn btn-primary">File Scan</a>';
+                        }
                     },
                     {
                         data: 'keterangan',

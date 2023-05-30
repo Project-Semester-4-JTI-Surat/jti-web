@@ -42,7 +42,7 @@
                             class="bg-transparent pl-3 pr-4 hover:text-red-500 dark:hover:text-red-500 text-gray-900 rounded  hover:transform md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white  md:dark:hover:bg-transparent group transition-all duration-300 ease-in-out"
                             href="#faq"> -->
                         <div class="flex">
-                            <img class="w-10 h-10 rounded-full mx-auto" src="../assets/img/1.png" alt="">
+                            <img class="w-10 h-10 rounded-full mx-auto" src="{{ asset('img/avatars/user.png') }}" alt="">
                             <p class="py-2 pl-5">{{ Auth::guard('mahasiswa')->user()->nama }}</p>
                         </div>
 
@@ -156,7 +156,8 @@
                     <label for="confirm_password"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
                     <textarea
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ $surat->status->keterangan }}</textarea>
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ $surat->status->keterangan }} {{ $surat->status->keterangan == 'Ditolak' ? '- '.$surat->alasan_penolakan : '' }}
+                        </textarea>
                 </div>
                 @if (!$surat->filescan == '')
                     <div class="mb-6">

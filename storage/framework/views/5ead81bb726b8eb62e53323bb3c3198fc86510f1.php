@@ -55,7 +55,6 @@
                                 <th>Email</th>
                                 <th>Prodi</th>
                                 <th>No HP</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -126,13 +125,6 @@
                         data: 'no_hp',
                         name: 'no_hp'
                     },
-                    {
-                        data: 'aksi',
-                        name: 'aksi',
-                       // render: function(data, type, row) {
-                         //   return '<button onclick="edit(' + row.id + ')" class="btn btn-icon me-2 btn-primary"><span class="tf-icons bx bx-pencil"></span></button>';
-                        //}
-                    }
                 ],
             });
         }

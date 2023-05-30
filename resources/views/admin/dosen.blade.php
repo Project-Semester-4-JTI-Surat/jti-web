@@ -107,7 +107,6 @@
                                 <th>NIP</th>
                                 <th>Nama</th>
                                 <th>Prodi</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -217,13 +216,6 @@
                         data: 'prodi.keterangan',
                         name: 'prodi.keterangan'
                     },
-                    {
-                        data: 'aksi',
-                        name: 'aksi',
-                        // render: function(data, type, row) {
-                        //   return '<button onclick="edit(' + row.id + ')" class="btn btn-icon me-2 btn-primary"><span class="tf-icons bx bx-pencil"></span></button>';
-                        //}
-                    }
                 ],
             });
         }

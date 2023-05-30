@@ -42,7 +42,7 @@
                             class="bg-transparent pl-3 pr-4 hover:text-red-500 dark:hover:text-red-500 text-gray-900 rounded  hover:transform md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white  md:dark:hover:bg-transparent group transition-all duration-300 ease-in-out"
                             href="#faq"> -->
                         <div class="flex">
-                            <img class="w-10 h-10 rounded-full mx-auto" src="../assets/img/1.png" alt="">
+                            <img class="w-10 h-10 rounded-full mx-auto" src="{{ asset('img/avatars/user.png') }}" alt="">
                             <p class="py-2 pl-5">{{ Auth::guard('mahasiswa')->user()->nama }}</p>
                         </div>
 
@@ -102,7 +102,7 @@
             </form>
         </div>
         <div
-            class="pl-20 md:h-[60vh] h-[60vh] overflow-y-scroll scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-800 w-full flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg  dark:border-0 border-2 mb-6">
+            class="pl-20 md:h-[60vh] h-[60vh] overflow-y-scroll  w-full flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg  dark:border-0 border-2 mb-6">
             <div class="grid grid-flow-row gap-y-5 dark:text-white mt-9" id="data">
             @foreach($get_anggota as $key => $value)
                 <a href="{{ route('mahasiswa.detail_surat',$value->uuid) }}" class="group">
@@ -110,7 +110,7 @@
                         <div class="flex justify-between ">
                             <h3 class="text-xl font-bold">{{ $value->kode_surat }}</h3>
                             <span
-                                class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 pt-1 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ $value->keterangan }}</span>
+                                class="{{ $value->keterangan == 'Ditolak' ? 'bg-red-100 text-red-800  dark:bg-red-900 dark:text-red-300' : 'bg-blue-100 text-blue-800  dark:bg-blue-900 dark:text-blue-300' }} text-xs font-medium mr-2 px-2.5 pt-1 rounded-full">{{ $value->keterangan }}</span>
                         </div>
                         <p>{{ $value->keterangan_surat }}</p>
 

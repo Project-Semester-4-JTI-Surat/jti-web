@@ -45,7 +45,7 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Alamat</span>
-                        <input type="text" class="input" id="alamat" value="{{ old('alamat') }}" name="alamat" placeholder="+62 8xxxxxxxxxx"
+                        <input type="text" class="input" id="alamat" value="{{ old('alamat') }}" name="alamat" placeholder="ex. Jl.xx ,no.xx"
                             required>
                     </div>
                     <div class="input-box">
@@ -116,6 +116,7 @@
                     },
                     no_hp: {
                         required: true,
+                        numeric: true,
                         minlength: 13,
                     },
                     email: {

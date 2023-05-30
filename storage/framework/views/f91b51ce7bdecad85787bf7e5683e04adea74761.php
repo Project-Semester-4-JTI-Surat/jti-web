@@ -85,13 +85,25 @@
                                 </div>
                             <?php endif; ?>
 
-                            <?php if($surat->status_id == 3 || $surat->status_id == 4): ?>
+                            <?php if($surat->status_id == 3): ?>
                                 <div class="row justify-content-end">
                                     <div class="col-sm-10">
                                         <a href="<?php echo e(route('admin.surat.dapat_diambil', ['id' => $surat->uuid])); ?>"
                                             class="btn btn-primary">Dapat diambil </a>
                                         <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi
-                                            status dapat diambil
+                                             dapat diambil
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if($surat->status_id == 4): ?>
+                                 <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                        <a href="<?php echo e(route('admin.surat.surat_selesai', ['id' => $surat->uuid])); ?>"
+                                            class="btn btn-success">Selesai </a>
+                                        <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi
+                                            selesai
                                         </div>
                                     </div>
                                 </div>

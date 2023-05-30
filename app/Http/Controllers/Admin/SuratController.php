@@ -89,12 +89,12 @@ class SuratController extends Controller
                             break;
                         case '3':
                             return '
-                        <span class="badge bg-primary">Diproses <div class="spinner-border spinner-border-sm" role="status"></div></span>
+                        <span class="badge bg-primary">Diproses </span>
                         ';
                             break;
                         case '4':
                             return '
-                            <span class="badge bg-success">Dapat Diambil <div class="spinner-border spinner-border-sm" role="status"></div></span>
+                            <span class="badge bg-success">Dapat Diambil </span>
                             ';
                             break;
                         case '5':
@@ -135,6 +135,14 @@ class SuratController extends Controller
         $surat->status_id = 3;
         $surat->update();
         return redirect()->route('admin.surat.index', ['status' => 3]);
+    }
+    
+    public function surat_selesai($id)
+    {
+        $surat = Surat::find($id);
+        $surat->status_id = 1;
+        $surat->update();
+        return redirect()->route('admin.surat.index', ['status' => 1]);
     }
 
     public function tolak_surat(Request $request, $id)

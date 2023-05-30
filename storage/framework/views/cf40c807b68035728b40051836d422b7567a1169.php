@@ -202,10 +202,12 @@
 
                     },
                     {
-                        data: 'softfile',
-                        name: 'softfile',
-                        visible: <?php echo e(Request::get('status') == 4 ? 'true' : 'false'); ?>
-
+                        data: 'softfile_scan',
+                        name: 'softfile_scan',
+                        //visible: <?php echo e(Request::get('status') == 4 ? 'true' : 'false'); ?>,
+                        render: function(data, type, row) {
+                           return '<a target="_blank" href=<?php echo e(env('ASSET_URL')); ?>/softfile/'+row.softfile_scan+' class="btn btn-primary">File Scan</a>';
+                        }
                     },
                     {
                         data: 'keterangan',

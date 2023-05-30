@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('vendor/libs/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/libs/sweet-alert/sweetalert2.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/mahasiswa/pengajuan_surat.css') }}">
     <title>Pengajuan Surat</title>
 </head>
@@ -77,11 +77,11 @@
                 <div class="form-label">
                     <label for="">Pilih Tanggal Pelaksanan</label>
                 </div>
-                <input type="date" name="tanggal_pelaksanaan" placeholder="Tanggal" />
+                <input type="date" name="tanggal_pelaksanaan" id="tanggal_pelaksanaan" placeholder="Tanggal" />
                 <div class="form-label">
                     <label for="">Pilih Tanggal Selesai</label>
                 </div>
-                <input type="date" name="tanggal_selesai" placeholder="Tanggal" />
+                <input type="date" name="tanggal_selesai" id="tanggal_selesai" placeholder="Tanggal" />
                 <input type="button" name="next" class="next action-button" value="Next" />
             </fieldset>
 
@@ -91,15 +91,15 @@
                 <div class="form-label">
                     <label for="">Nama Mitra</label>
                 </div>
-                <input type="text" name="nama_mitra" placeholder="Kepada" required />
+                <input type="text" name="nama_mitra" id="nama_mitra" placeholder="Kepada" />
                 <div class="form-label">
                     <label for="">Alamat Mitra</label>
                 </div>
-                <textarea name="alamat_mitra" placeholder="Alamat"></textarea>
+                <textarea name="alamat_mitra" id="alamat_mitra" placeholder="Alamat"></textarea>
                 <div class="form-label">
                     <label for="">Keterangan</label>
                 </div>
-                <textarea name="keterangan" placeholder="Keterangan"></textarea>
+                <textarea name="keterangan" id="keterangan" placeholder="Keterangan"></textarea>
                 <input type="button" name="previous" class="previous action-button" value="Previous" />
 
                 <input type="button" name="next" class="next action-button" value="Next" />
@@ -109,7 +109,7 @@
                 <div style="padding:  0.5rem  0 1rem 0; display: flex; justify-content: center;">
                     <div style=" float: left;clear: none;">
                         <input style=" float: left; clear: none; margin: 2px 0 0 2px;" type="radio" id="individu"
-                            name="status_keanggotan" checked  value="individu" id="individu">
+                            name="status_keanggotan"  value="individu" id="individu">
                         <label for=""
                             style="float: left; clear: none; display: block; padding: 0px 1em 0px 8px;">Individu</label>
                     </div>
@@ -300,7 +300,18 @@
         }
     })
 
-    $('#multistepsform').submit(function() {
+    $('#multistepsform').submit(function(e) {
+        var nama_mitra = $('#nama_mitra').val();
+        var alamat_mitra = $('#alamat_mitra').val();
+        var keterangan = $('#keterangan').val();
+        var tanggal_selesai = $('#tanggal_selesai').val();
+        var tanggal_pelaksanaan = $('#tanggal_pelaksanaan').val();
+        if(nama_mitra == '' || alamat_mitra == '' || keterangan == '' || tanggal_pelaksanaan == '' || tanggal_selesai == ''){
+            e.preventDefault();
+              swal("Error", "Oops ada data yang anda lewatkan..", "error");
+        console.log(tanggal_selesai+" => ");
+
+        }
         console.log("submited");
     })
 

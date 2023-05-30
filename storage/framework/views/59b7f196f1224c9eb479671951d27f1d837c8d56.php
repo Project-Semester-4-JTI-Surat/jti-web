@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title> <?php echo e(env('APP_NAME')); ?> - Mahasiswa Register </title>
     <link rel="stylesheet" href="<?php echo e(asset('css/auth/mahasiswa_register.css')); ?>">
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('img/favicon/logo.svg')); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -45,7 +46,7 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Alamat</span>
-                        <input type="text" class="input" id="alamat" value="<?php echo e(old('alamat')); ?>" name="alamat" placeholder="+62 8xxxxxxxxxx"
+                        <input type="text" class="input" id="alamat" value="<?php echo e(old('alamat')); ?>" name="alamat" placeholder="ex. Jl.xx ,no.xx"
                             required>
                     </div>
                     <div class="input-box">
@@ -131,6 +132,7 @@ unset($__errorArgs, $__bag); ?>
                     },
                     no_hp: {
                         required: true,
+                        numeric: true,
                         minlength: 13,
                     },
                     email: {

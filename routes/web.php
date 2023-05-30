@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
        Route::get('/detail/{id?}',[SuratController::class, 'detail'])->name('detail'); 
        Route::get('proses_surat/{id}',[SuratController::class, 'proses_surat'])->name('proses_surat');
        Route::get('dapat_diambil/{id}',[SuratController::class, 'dapat_diambil'])->name('dapat_diambil');
+       Route::get('surat_selesai/{id}',[SuratController::class, 'surat_selesai'])->name('surat_selesai');
        Route::post('softfile/save/{id}',[SuratController::class,'softfile_save'])->name('softfile_save');
        Route::post('tolak/{id}',[SuratController::class, 'tolak_surat'])->name('tolak_surat');
        Route::get('print/{id}',[SuratController::class, 'print'])->name('print');

@@ -6,6 +6,7 @@ use App\Http\Controllers\FAQController;
 use App\Http\Controllers\SuratController;
 use App\Http\Middleware\MahasiswaApiCheck;
 use App\Mail\Verification;
+use App\Rules\MahasiswaCheck;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -50,7 +51,7 @@ Route::group(['prefix' => 'mahasiswa'], function () {
 Route::group(['prefix'=>'data', 'middleware'=>MahasiswaApiCheck::class],function(){
     Route::get('dosen',[DataController::class, 'dosen']);
     Route::get('koordinator',[DataController::class, 'koordinator']);
-    Route::get('prodi',[DataController::class, 'prodi']);
+    Route::get('prodi',[DataController::class, 'prodi'])->excludedMiddleware(MahasiswaCheck::class);
     Route::get('jenis_surat',[DataController::class, 'JenisSurat']);
 });
 
