@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon/logo.svg') }}" />
-    <link rel="stylesheet" href="{{ asset('css/mahasiswa/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('img/favicon/logo.svg')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('css/mahasiswa/style.css')); ?>">
     <link rel="shortcut icon" href="../assets/img/logo.svg" type="image/x-icon">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <title>JTI-Surat</title>
@@ -80,7 +80,7 @@
                         </a>
                     </li>
                     <li class="pt-4 md:pt-0">
-                        <a href="{{ route('mahasiswa.login') }}"
+                        <a href="<?php echo e(route('mahasiswa.login')); ?>"
                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md">Login
                             <!-- <span class="bx bx-chevron-right"></span> -->
                         </a>
@@ -119,7 +119,7 @@
                  surat survey tempat dan lain-lain secara online kepada Admin Jurusan Teknologi Informasi,
                   Dengan tujuan mempermudah mahasiswa dalam meminta persetujuan</h2>
             <div class="pt-8">
-                <a href="{{ route('mahasiswa.login') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-md">Get
+                <a href="<?php echo e(route('mahasiswa.login')); ?>" class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-md">Get
                     Started
                     <!-- <span class="bx bx-chevron-right"></span> -->
                 </a>
@@ -302,8 +302,8 @@
 
 </body>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-<script src="{{ asset('vendor/libs/jquery/jquery.js') }}"></script>
-<script src="{{ asset('js/scrollreveal.js') }}"></script>
+<script src="<?php echo e(asset('vendor/libs/jquery/jquery.js')); ?>"></script>
+<script src="<?php echo e(asset('js/scrollreveal.js')); ?>"></script>
 <!-- <script src="assets/js/scroll-active.js"></script> -->
 <script>
     $(document).scroll(function() {
@@ -402,3 +402,4 @@
 </script> -->
 
 </html>
+<?php /**PATH E:\xampp8\htdocs\jti-web\resources\views/mahasiswa/index.blade.php ENDPATH**/ ?>
