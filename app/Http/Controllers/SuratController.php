@@ -147,6 +147,74 @@ class SuratController extends Controller
         return view('mahasiswa.detail-surat',compact('surat'));
     }
 
+    public function apiSuratInsert(Request $request)
+    {
+        $input = $request->only([`kode_surat`, `status_id`,'prodi_id', `dosen_id`, `kode_koordinator`, `nama_mitra`, `alamat_mitra`, `tanggal_dibuat`, `tanggal_pelaksanaan`, `tanggal_selesai`, `judul_ta`, `kebutuhan`, `keterangan`]);
+        // dd($input);
+        $now = Carbon::now()->format('Y-m-d');
+        $count = count($request->get('nama_anggota'));
+        if ($request->has('web')) {
+            $user_nim = Auth::guard('mahasiswa')->user()->nim;
+        }else{
+            $user_nim = Auth::user()->nim;
+        }
+
+        $arr = array(
+                "kode_surat" => $input['kode_surat'],
+                // "dosen_id" => $request->has('dosen_id') ?? $input['dosen_id'],
+                "prodi_id" => $input['prodi_id'],
+                // "kode_koordinator" => $request->has('koordinator_id') == '' ?? $input['koordinator_id'],
+                "nama_mitra" => $input['nama_mitra'],
+                "alamat_mitra" => $input['alamat_mitra'],
+                "tanggal_dibuat" => $now,
+                "tanggal_pelaksanaan" => $input['tanggal_pelaksanaan'],
+                "tanggal_selesai" => $input['tanggal_selesai'],
+                "kebutuhan" => $input['kebutuhan'],
+                "keterangan" => $input['keterangan'],
+        );
+        if ( $request->has('koordinator_id')) $arr += array("kode_koordinator" => $input['koordinator_id'],);
+        if ( $request->has('dosen_id')) $arr += array("dosen_id" => $input['dosen_id']);
+        if ( $request->has('judul_ta')) $arr += array("judul_ta" => $input['judul_ta']);
+      
+        // dd($arr);
+        $surat = Surat::create($arr);
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            array('cluster' => env('PUSHER_APP_CLUSTER'))
+        );
+        $data = array(
+            'id' => $surat->uuid,
+            'kode_surat' => $request->get('kode_surat'),
+            'nama_mhs' => '',
+            'nim_mhs' => '',
+        );
+        $pusher->trigger(
+            'my-channel',
+            'my-event',
+            $data
+        );
+        return $this->successResponseData('Surat berhasil diajukan', $surat->uuid);
+    }
+
+    public function apiAnggotaInsert(Request $request,$id)
+    {
+        $auth = Auth::user();
+        $field =  [
+            'surat_id' => $id,
+            'individu' => 'true',
+            'ketua'=>'false',
+            'nama' => $request->get('nama_anggota'),
+            'nim' => $request->get('nim_anggota'),
+            'no_hp' => $request->get('nohp_anggota'),
+            'prodi_id' => $request->get('prodi_id_anggota'),
+        ];
+        if($request->get('nama_anggota') == $auth->nama) $field += array('ketua'=>'true');
+        Anggota::create($field);
+        return $this->successResponse('Surat berhasil diajukan');
+    }
+
 
 }
 /**

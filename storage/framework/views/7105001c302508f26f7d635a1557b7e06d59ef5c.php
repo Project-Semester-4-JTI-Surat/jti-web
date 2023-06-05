@@ -20,7 +20,7 @@
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pt-6">
             <a href="https://flowbite.com/" class="flex items-center">
                 <!-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" /> -->
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">JTI-Surat</span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"> JTI-Surat</span>
             </a>
             <button data-collapse-toggle="navbar-default" id="toogle" type="button"
                 class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -117,7 +117,7 @@
             <h1 class="text-6xl font-bold">JTI-Surat</h1>
             <h2 class="py-6">Merupakan website untuk melakukan pengajuan pembuatan surat seperti surat pengajuan pkl,
                  surat survey tempat dan lain-lain secara online kepada Admin Jurusan Teknologi Informasi,
-                  Dengan tujuan mempermudah mahasiswa dalam meminta persetujuan</h2>
+                  Dengan tujuan mempermudah mahasiswa dalam meminta persetujuan</h2>
             <div class="pt-8">
                 <a href="<?php echo e(route('mahasiswa.login')); ?>" class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-md">Get
                     Started
@@ -142,10 +142,44 @@
                     <div>
                         <h4 tabindex="0"
                             class="focus:outline-none text-2xl text-gray-800 dark:text-gray-100 font-bold mb-3">
-                            About US 1</h4>
-                        <p tabindex="0" class="focus:outline-none text-gray-800 dark:text-gray-100 text-sm">Probabo,
-                            inquit, sic agam, ut labore et voluptatem sequi nesciunt, neque porro quisquam est, quid
-                            malum, sensu iudicari, sed ut alterum.</p>
+                            Pengguna JTI-Surat</h4>
+                        <p tabindex="0" class="focus:outline-none text-gray-800 dark:text-gray-100 text-sm"> 
+                            JTI-Surat digunakan oleh mahasiswa Jurusan Teknologi Informasi, dari program studi TIF, TKK, dan MIF, baik yang berstatus mahasiswa reguler 
+                            di kampus utama maupun mahasiswa di kampus cabang. Penggunaan JTI-Surat juga tidak terbatas pada 
+                            semester tertentu, sehingga Anda dapat mengajukan surat mulai dari semester awal hingga akhir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div
+                    class="max-w-xs h-[20rem] flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg  dark:border-0 border mb-6 py-5 px-4">
+                    <div>
+                        <h4 tabindex="0"
+                            class="focus:outline-none text-2xl text-gray-800 dark:text-gray-100 font-bold mb-3">
+                            Proses JTI-Surat</h4>
+                        <p tabindex="0" class="focus:outline-none text-gray-800 dark:text-gray-100 text-sm"> 
+                            Anda hanya perlu melakukan login. 
+                            Jika belum memiliki akun, Anda dapat mendaftar terlebih dahulu. 
+                            Setelah berhasil login, Anda akan diarahkan ke halaman dashboard yang tertulis "Surat Saya". 
+                            Tempat di mana surat-surat Anda diproses. 
+                            Selanjutnya, terdapat proses pengajuan surat yang melibatkan tiga langkah pengisian data, 
+                            yaitu data kampus, data instansi/mitra, dan data anggota. 
+                            <br>Terakhir,pada profil pengguna terdapat pengaturan untuk memperbarui akun (setting) dan pilihan untuk keluar (sign out).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div
+                    class="max-w-xs h-[20rem] flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg  dark:border-0 border mb-6 py-5 px-4">
+                    <div>
+                        <h4 tabindex="0"
+                            class="focus:outline-none text-2xl text-gray-800 dark:text-gray-100 font-bold mb-3">
+                            Koodinator admin JTI-Surat</h4>
+                        <p tabindex="0" class="focus:outline-none text-gray-800 dark:text-gray-100 text-sm"> 
+                            Meskipun website JTI-Surat ini dapat diakses oleh semua program studi dari jurusan Teknologi informasi,
+                             namun terdapat perbedaan koordinator admin untuk setiap program studi.</p>
                     </div>
                 </div>
             </div>
@@ -186,7 +220,7 @@
                 <div class="py-5 px-7 dark:border-0 border dark:bg-gray-800 rounded-lg mb-6">
                     <details class="group">
                         <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                            <span> </span>
+                            <span>Bagaimana jika terjadi kesalahan dalam memasukkan data?</span>
                             <span class="transition group-open:rotate-180">
                                 <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -196,16 +230,15 @@
                             </span>
                         </summary>
                         <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, dolore debitis fugit at
-                            praesentium quia iste. Expedita voluptates esse, quo fuga deleniti rerum. Cupiditate cum
-                            quia maxime debitis eveniet necessitatibus?
+                            Kalau begitu, anda dapat ke setting akun,
+                            di sana anda dapat mengubah nama, prodi, nomer hp, dan password.
                         </p>
                     </details>
                 </div>
                 <div class="py-5 px-7 dark:border-0 border dark:bg-gray-800 rounded-lg mb-6">
                     <details class="group">
                         <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-                            <span> Lorem ipsum dolor sit amet consectetur?</span>
+                            <span>Apakah perbedaan menunggu, diproses, bisa di ambil, ditolak, dan selesai?</span>
                             <span class="transition group-open:rotate-180">
                                 <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -215,9 +248,15 @@
                             </span>
                         </summary>
                         <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, dolore debitis fugit at
-                            praesentium quia iste. Expedita voluptates esse, quo fuga deleniti rerum. Cupiditate cum
-                            quia maxime debitis eveniet necessitatibus?
+                            > Menunggu adalah status awal ketika anda baru saja selesai mengirim surat pengajuan. 
+                            <br>
+                            > Diproses adalah status ketika admin telah melihat isi surat pengajuan dan memproses surat pengajuan yang telah anda di kirim.
+                            <br>
+                            > Bisa di ambil adalah status ketika admin telah menyesetujui surat pengajuan yang telah di anda kirim dan anda dapat mengambilnya secara online(soft file) ataupun secara langsung.
+                            <br>
+                            > Di tolak adalah status ketika ada ketentuan yang kurang saat melakukan pengajuan, admin biasanya memberikan alasan kenapa surat pengajuan yang di berikan ditolak.
+                            <br>
+                            > Selesai adalah status ketika anda telah mengambil izin surat pengajuan yang telah di setujui.
                         </p>
                     </details>
                 </div>
