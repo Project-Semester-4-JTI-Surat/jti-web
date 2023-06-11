@@ -9,6 +9,7 @@ use App\Http\Requests\SaveNewPasswordRequest;
 use App\Mail\ResetPassword;
 use App\Mail\Verification;
 use App\Models\Mahasiswa;
+use App\Models\Prodi;
 use App\Traits\ApiResponse;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -25,7 +26,9 @@ class AuthController extends Controller
     use ApiResponse;
     public function register(MahasiswaRegisterRequest $request)
     {
-        $input = $request->only(['nim', 'nama', 'email', 'prodi_id', 'alamat', 'no_hp', 'tanggal_lahir', 'password']);
+        $input = $request->only(['nim', 'nama', 'email', 'alamat', 'no_hp', 'tanggal_lahir', 'password']);
+        $prodi = Prodi::where('keterangan','=',$request->input('prodi'))->first();
+        $input += array('prodi_id'=>$prodi->id);
         $mhs = Mahasiswa::create($input);
         #belum di implementasikan ya ges ya....
         // Mail::to($input['email'])->send(new Verification($input['email'],$mhs->uuid));

@@ -45,7 +45,7 @@ Route::group(['prefix' => 'mahasiswa'], function () {
 
 
         Route::post('surat/insert',[SuratController::class, 'apiSuratInsert']);
-        Route::post('surat/insert/anggota',[SuratController::class, 'apiAnggotaInsert']);
+        Route::post('surat/insert/anggota/{id}',[SuratController::class, 'apiAnggotaInsert']);
     });
 
     
@@ -55,8 +55,8 @@ Route::group(['prefix' => 'mahasiswa'], function () {
 Route::group(['prefix'=>'data', 'middleware'=>MahasiswaApiCheck::class],function(){
     Route::get('dosen',[DataController::class, 'dosen']);
     Route::get('koordinator',[DataController::class, 'koordinator']);
-    Route::get('prodi',[DataController::class, 'prodi'])->excludedMiddleware(MahasiswaCheck::class);
     Route::get('jenis_surat',[DataController::class, 'JenisSurat']);
 });
+Route::get('data/prodi',[DataController::class, 'prodi']);
 
 Route::get('faq/',[FAQController::class, 'index_api']);

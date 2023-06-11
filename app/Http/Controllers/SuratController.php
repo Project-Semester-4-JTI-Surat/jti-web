@@ -150,9 +150,12 @@ class SuratController extends Controller
     public function apiSuratInsert(Request $request)
     {
         $input = $request->only([`kode_surat`, `status_id`,'prodi_id', `dosen_id`, `kode_koordinator`, `nama_mitra`, `alamat_mitra`, `tanggal_dibuat`, `tanggal_pelaksanaan`, `tanggal_selesai`, `judul_ta`, `kebutuhan`, `keterangan`]);
+        $jenisSurat = JenisSurat::where('keterangan','=',$request->kode_surat)->first();
+        $dosen = Dosen::where('nama','=',$request->dosen)->first();
+        $koordinator = Koordinator::where('nama','=',$request->koordinator)->first();
+        $prodi = Prodi::where('keterangan','=',$request->prodi)->first();
         // dd($input);
         $now = Carbon::now()->format('Y-m-d');
-        $count = count($request->get('nama_anggota'));
         if ($request->has('web')) {
             $user_nim = Auth::guard('mahasiswa')->user()->nim;
         }else{
@@ -160,9 +163,9 @@ class SuratController extends Controller
         }
 
         $arr = array(
-                "kode_surat" => $input['kode_surat'],
+                "kode_surat" => $jenisSurat->kode,
                 // "dosen_id" => $request->has('dosen_id') ?? $input['dosen_id'],
-                "prodi_id" => $input['prodi_id'],
+                "prodi_id" => $prodi->id,
                 // "kode_koordinator" => $request->has('koordinator_id') == '' ?? $input['koordinator_id'],
                 "nama_mitra" => $input['nama_mitra'],
                 "alamat_mitra" => $input['alamat_mitra'],
@@ -172,8 +175,8 @@ class SuratController extends Controller
                 "kebutuhan" => $input['kebutuhan'],
                 "keterangan" => $input['keterangan'],
         );
-        if ( $request->has('koordinator_id')) $arr += array("kode_koordinator" => $input['koordinator_id'],);
-        if ( $request->has('dosen_id')) $arr += array("dosen_id" => $input['dosen_id']);
+        if ( $koordinator) $arr += array("kode_koordinator" => $koordinator->uuid);
+        if ($dosen) $arr += array("dosen_id" => $dosen->uuid);
         if ( $request->has('judul_ta')) $arr += array("judul_ta" => $input['judul_ta']);
       
         // dd($arr);
@@ -203,14 +206,14 @@ class SuratController extends Controller
         $auth = Auth::user();
         $field =  [
             'surat_id' => $id,
-            'individu' => 'true',
-            'ketua'=>'false',
-            'nama' => $request->get('nama_anggota'),
-            'nim' => $request->get('nim_anggota'),
-            'no_hp' => $request->get('nohp_anggota'),
-            'prodi_id' => $request->get('prodi_id_anggota'),
+            'individu' => 'false',
+            'nama' => str_replace('\"',"",$request->get('nama_anggota'),$count),
+            'nim' => str_replace('\"',"",$request->get('nim_anggota'),$count),
+            'no_hp' => str_replace('\"',"", $request->get('nohp_anggota'),$count),
+            'prodi_id' => (int)str_replace('\"',"",$request->get('prodi_id_anggota'),$count),
         ];
         if($request->get('nama_anggota') == $auth->nama) $field += array('ketua'=>'true');
+        // return $this->successResponseData("kontol",$field['nama']);
         Anggota::create($field);
         return $this->successResponse('Surat berhasil diajukan');
     }

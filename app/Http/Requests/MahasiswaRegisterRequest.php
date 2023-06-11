@@ -27,8 +27,7 @@ class MahasiswaRegisterRequest extends FormRequest
         return [
             'nim' => 'required|max:9|unique:\App\Models\Mahasiswa,nim', 
             'nama' => 'required|regex:/^[\pL\s]+$/u',
-            'email'=>'required|email', 
-            'prodi_id'=>'required|numeric', 
+            'email'=>'required|email',
             'alamat'=>'required', 
             'no_hp'=>'required', 
             'tanggal_lahir'=>'required|date', 
