@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Detail Surat'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -76,7 +75,7 @@
                                     <textarea id="keterangan" class="form-control" readonly aria-describedby="basic-icon-default-message2"><?php echo e($surat->keterangan); ?></textarea>
                                 </div>
                             </div>
-                            <?php if($surat->status_id == 2): ?>
+                            <?php if($surat->status_id == 1): ?>
                                 <div class="row justify-content-end">
                                     <div class="col-sm-10">
                                         <a href="<?php echo e(route('admin.surat.proses_surat', ['id' => $surat->uuid])); ?>"
@@ -97,17 +96,17 @@
                                 </div>
                             <?php endif; ?>
 
-                            <?php if($surat->status_id == 4): ?>
-                                 <div class="row justify-content-end">
-                                    <div class="col-sm-10">
-                                        <a href="<?php echo e(route('admin.surat.surat_selesai', ['id' => $surat->uuid])); ?>"
-                                            class="btn btn-success">Selesai </a>
-                                        <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi
-                                            selesai
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
                         </form>
                     </div>
                 </div>
@@ -168,7 +167,7 @@
                 </div>
             </div>
         </div>
-        <?php if($surat->status_id == 4): ?>
+        <?php if($surat->status_id != 1): ?>
             <div class="card mb-4">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">Upload softfile</h5>
@@ -195,7 +194,7 @@
                 </div>
             </div>
         <?php endif; ?>
-        <?php if($surat->status_id == 2): ?>
+        <?php if($surat->status_id == 1): ?>
             <div class="card mb-4">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">Tolak Pengajuan</h5>
@@ -240,8 +239,12 @@
             });
             FilePond.registerPlugin(
                 FilePondPluginFileValidateType,
+                FilePondPluginPdfPreview
             );
             $('#softfile').filepond({
+                allowPdfPreview: true,
+                pdfPreviewHeight: 320,
+                pdfComponentExtraParams: 'toolbar=0&view=fit&page=1',
                 acceptedFileTypes: ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword'],
                 credits: false,
                 fileValidateTypeDetectType: [],
@@ -253,6 +256,7 @@
                 labelTapToRetry: `ketuk untuk coba lagi`,
                 labelFileProcessing: `Sedang memproses`,
                 labelIdle: `Seret dan tempel atau <span class="filepond--label-action">Pilih dokumen</span>`,
+                labelInvalidField: 'File tidak didukung',
                 server: {
                     url: "<?php echo e(env('APP_URL')); ?>",
                     process: "/temp/file/upload",

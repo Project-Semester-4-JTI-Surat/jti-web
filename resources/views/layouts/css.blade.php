@@ -10,8 +10,9 @@
 
 <!-- Icons. Uncomment required icon fonts -->
 <link rel="stylesheet" href="{{ asset('vendor/fonts/boxicons.css') }}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-{{-- <link rel="stylesheet" href="{{ asset('assets/vendor/css/bootstrap.css') }}" /> --}}
+{{-- <link rel="stylesheet" href="{{ asset('assets/vendor/css/bootstrap.css') }}" />--}}
 <!-- Core CSS -->
 <link rel="stylesheet" href="{{ asset('vendor/css/core.css') }}" class="template-customizer-core-css" />
 <link rel="stylesheet" href="{{ asset('vendor/css/theme-default.css') }}"
@@ -21,11 +22,17 @@
 <link rel="stylesheet" href="{{ asset('vendor/libs/select2/select2.css') }}" />
 <link rel="stylesheet" href="{{ asset('vendor/libs/sweet-alert/sweetalert2.css') }}" />
 <link rel="stylesheet" href="{{ asset('vendor/libs/filepond/filepond.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('vendor/libs/datepicker/daterange-picker.css') }}" />
+<link rel="stylesheet" href="{{ asset('vendor/libs/datepicker/date-picker.css') }}" />
 <!-- Vendors CSS -->
 <link rel="stylesheet" href="{{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
 <link rel="stylesheet" href="{{ asset('vendor/libs/apex-charts/apex-charts.css') }}" />
+
 <style>
+.swal-modal .swal-text {
+            text-align: center;
+        }
     .iconClass {
         position: relative;
     }

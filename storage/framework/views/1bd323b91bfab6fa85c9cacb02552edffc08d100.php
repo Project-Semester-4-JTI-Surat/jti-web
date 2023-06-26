@@ -46,6 +46,12 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
         </li>
+         <li class="menu-item <?php echo e(Route::currentRouteName() == 'admin.rekap.index' ? 'active' : ''); ?>">
+            <a class="menu-link" href="<?php echo e(route('admin.rekap.index')); ?>">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Support">Rekap Surat</div>
+            </a>
+        </li>
         <li class="menu-item <?php echo e(Route::currentRouteName() == 'admin.prodi.index' ? 'active' : ''); ?>">
             <a class="menu-link" href="<?php echo e(route('admin.prodi.index')); ?>">
                 <i class="menu-icon tf-icons bx bx-building"></i>

@@ -55,6 +55,7 @@
                                 <th>Email</th>
                                 <th>Prodi</th>
                                 <th>No HP</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,10 +79,74 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
             });
-            loadTarif();
+            loadDataMahasiswa();
         })
 
-        function loadTarif() {
+        function reset_password(id){
+            var url = "{{ route('admin.mahasiswa.reset_password',['id'=>':id']) }}";
+            // console.log(data);
+            swal({
+                title: "Anda yakin?",
+                text: "Dengan anda setuju, data mahasiswa akan di reset password nya menjadi (jtipolije)",
+                icon: "warning",
+                buttons: ['Batal','OK'],
+                dangerMode: true
+            }).then((willDelete) => {
+                // console.log(willDelete);
+                if (willDelete) {
+                    $.ajax({
+                        url: url.replace(':id', id),
+                        type: 'GET',
+                        cache: false,
+                        processData: false,
+                        success: (data) => {
+                            loadDataMahasiswa();
+                            swal("Success", "Password berhasil di reset", "success");
+                            // $("#btn-save").html('Submit');
+                            // $("#btn-save"). attr("disabled", false);
+                        },
+                        error: function(data) {
+                            swal("Gagal", "Error!!", "error");
+                        }
+                    })
+                }
+
+            });
+        }
+
+        function delete_data(id){
+            var url = "{{ route('admin.mahasiswa.hapus',['id'=>':id']) }}";
+            // console.log(data);
+            swal({
+                title: "Anda yakin?",
+                text: "Dengan anda setuju, data mahasiswa akan dihapus dari database dan mahasiswa harus melakukan registrasi terlebih dahulu",
+                icon: "warning",
+                buttons: ['Batal','OK'],
+                dangerMode: true
+            }).then((willDelete) => {
+                // console.log(willDelete);
+                if (willDelete) {
+                    $.ajax({
+                        url: url.replace(':id', id),
+                        type: 'GET',
+                        cache: false,
+                        processData: false,
+                        success: (data) => {
+                            loadDataMahasiswa();
+                            swal("Success", "Data berhasil di hapus", "success");
+                            // $("#btn-save").html('Submit');
+                            // $("#btn-save"). attr("disabled", false);
+                        },
+                        error: function(data) {
+                            swal("Gagal", "Error!!", "error");
+                        }
+                    })
+                }
+
+            });
+        }
+
+        function loadDataMahasiswa() {
             var url = "{{ route('admin.mahasiswa.index') }}";
             $('#tableMhs').DataTable({
                 searching: true,
@@ -124,6 +189,11 @@
                     {
                         data: 'no_hp',
                         name: 'no_hp'
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                        visible: {{ Auth::guard('admin')->user()->role_id == 1 ? 'true' : 'false' }}
                     },
                 ],
             });

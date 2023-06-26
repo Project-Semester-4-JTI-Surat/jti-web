@@ -10,9 +10,11 @@ use App\Models\JenisSurat;
 use App\Models\Mahasiswa;
 use App\Models\Surat;
 use App\Traits\PrintKodeSurat;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -54,13 +56,13 @@ class SuratController extends Controller
     public function getSurat(Request $request)
     {
         $id = $request->get('status');
-        //id =  2 
+        //id =  2
         //ambil surat sesuai dengan admin prodi..
         $user = Auth::guard('admin')->user();
         $surat =  '';
         /**
          * Experimental Features
-         * Masih ada bug yg belum terselesaikan.. 
+         * Masih ada bug yg belum terselesaikan..
          */
         //Cek Jika role Admin adalah super admin
         // dd($user->role_id);
@@ -82,17 +84,17 @@ class SuratController extends Controller
                 })
                 ->addColumn('status', function ($row) {
                     switch ($row->status_id) {
-                        case '2':
+                        case '1':
                             return '
                         <span class="badge bg-primary">Menunggu Diproses</span>
                         ';
                             break;
-                        case '3':
+                        case '2':
                             return '
                         <span class="badge bg-primary">Diproses </span>
                         ';
                             break;
-                        case '4':
+                        case '3':
                             return '
                             <span class="badge bg-success">Dapat Diambil </span>
                             ';
@@ -136,7 +138,7 @@ class SuratController extends Controller
         $surat->update();
         return redirect()->route('admin.surat.index', ['status' => 3]);
     }
-    
+
     public function surat_selesai($id)
     {
         $surat = Surat::find($id);
@@ -171,12 +173,30 @@ class SuratController extends Controller
 
     public function softfile_save(Request $request, $id)
     {
-        $softfile = $request->get('softfile');
-        $tempExt = pathinfo(public_path('assets/img/temp/') . $softfile, PATHINFO_EXTENSION);
-        $filename = $id . '.' . $tempExt;
-        rename(public_path('assets/temp/') . $softfile, public_path('assets/softfile/') . $filename);
         $surat = Surat::find($id);
-        $surat->softfile_scan = $filename;
+        $now = Carbon::now()->format('d-m-Y');
+        $pengaju = Anggota::where('surat_id','=',$surat->uuid)->first();
+        $softfile = $request->get('softfile');
+        $tempExt = pathinfo(storage_path('public/') . $softfile, PATHINFO_EXTENSION);
+        $filename =  $surat->kode_surat.'_'.$now.'_'.$pengaju->nim.'.' . $tempExt;
+//        dd($filename);
+        if (str_contains($surat->prodi->keterangan,"TIF")){
+            $prodi = 'TIF';
+            Storage::move("public/".$softfile,"public/TIF/".$filename);
+//            rename(storage_path('public/'). $softfile, storage_path('public/TIF/') . $filename);
+        }elseif (str_contains($surat->prodi->keterangan,"MIF")){
+            $prodi = 'MIF';
+//            rename(storage_path('public/'). $softfile, storage_path('public/MIF/') . $filename);
+            Storage::move("public/".$softfile,"public/MIF/".$filename);
+        }else{
+            $prodi = 'TKK';
+//            rename(storage_path('public/'). $softfile, storage_path('public/TKK/') . $filename);
+            Storage::move("public/".$softfile,"public/TKK/".$filename);
+
+        }
+//        dd($softfile);
+        $surat->softfile_scan = $prodi.'/'.$filename;
+        $surat->status_id = 4;
         $surat->update();
         return redirect()->route('admin.surat.index', ['status' => 4]);
     }

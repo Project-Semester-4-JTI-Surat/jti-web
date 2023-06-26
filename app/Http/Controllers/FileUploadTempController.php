@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FileUploadTempController extends Controller
 {
@@ -11,7 +12,8 @@ class FileUploadTempController extends Controller
         if ($request->has('softfile')) {
             $file = $request->file('softfile');
             $filename = $file->getClientOriginalName();
-            $file->move(public_path().'/assets/temp/',$filename);
+            $file->storeAs('public',$filename);
+//            $file->move(public_path().'/assets/temp/',$filename);
             // $file->move(public_path('assets/temp/'), $filename);
             return $filename;
         }
@@ -20,6 +22,7 @@ class FileUploadTempController extends Controller
 
     public function temp_delete($filename)
     {
-        unlink(public_path('assets/temp/') . $filename);
+        Storage::delete('public/'.$filename);
+//        unlink(storage_path() . $filename);
     }
 }

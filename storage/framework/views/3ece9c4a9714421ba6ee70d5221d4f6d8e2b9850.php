@@ -172,4 +172,5 @@
     //     //   }
     //     //   $( "#test" ).text( "pageX: " + cursorX +",pageY: " + cursorY );
     // }
-</script><?php /**PATH C:\laragon\www\jti-surat\resources\views/mahasiswa/dashboard.blade.php ENDPATH**/ ?>
+</script>
+<?php /**PATH C:\laragon\www\jti-surat\resources\views/mahasiswa/dashboard.blade.php ENDPATH**/ ?>

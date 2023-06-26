@@ -41,6 +41,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
 
     Route::group(['prefix' => 'mahasiswa', 'as' => 'mahasiswa.'], function () {
         Route::get('/', [MahasiswaController::class, 'index'])->name('index');
+        Route::get('reset_password/{id}',[MahasiswaController::class, 'reset_password'])->name('reset_password');
+        Route::get('delete/{id}',[MahasiswaController::class, 'hapus'])->name('hapus');
+    });
+
+    Route::group(['prefix'=>'rekap','as'=>'rekap.'],function (){
+        Route::get('/',[\App\Http\Controllers\Admin\RekapController::class, 'index'])->name('index');
+        Route::post('/export',[\App\Http\Controllers\Admin\RekapController::class,'export'])->name('export');
     });
 
     Route::group(['prefix' => 'dosen', 'as' => 'dosen.'], function () {
@@ -55,7 +62,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
 
     Route::group(['prefix'=>'surat','as'=>'surat.'],function(){
        Route::get('/',[SuratController::class, 'getSurat'])->name('index');
-       Route::get('/detail/{id?}',[SuratController::class, 'detail'])->name('detail'); 
+       Route::get('/detail/{id?}',[SuratController::class, 'detail'])->name('detail');
        Route::get('proses_surat/{id}',[SuratController::class, 'proses_surat'])->name('proses_surat');
        Route::get('dapat_diambil/{id}',[SuratController::class, 'dapat_diambil'])->name('dapat_diambil');
        Route::get('surat_selesai/{id}',[SuratController::class, 'surat_selesai'])->name('surat_selesai');
@@ -63,7 +70,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
        Route::post('tolak/{id}',[SuratController::class, 'tolak_surat'])->name('tolak_surat');
        Route::get('print/{id}',[SuratController::class, 'print'])->name('print');
     });
-    
+
     Route::group(['prefix' => 'prodi', 'as' => 'prodi.'], function () {
         Route::get('/', [ProdiController::class, 'index'])->name('index');
     });
@@ -98,6 +105,7 @@ Route::group(['prefix'=>'mahasiswa','as'=>'mahasiswa.'],function(){
         Route::get('pengajuan_surat',[MahasiswaSuratController::class, 'pengajuan_surat'])->name('pengajuan_surat');
         Route::get('surat/detail/{id}',[MahasiswaSuratController::class, 'detail_surat'])->name('detail_surat');
         Route::post('surat/pengajuan',[MahasiswaSuratController::class, 'insert'])->name('surat_insert');
+        Route::get('kode_anjungan/{kode}',[MahasiswaSuratController::class, 'kode_anjungan'])->name('kode_anjungan');
     });
 });
 

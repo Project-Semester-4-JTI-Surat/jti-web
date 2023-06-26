@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo e(asset('css/mahasiswa/style.css')); ?>">
     <link rel="icon" type="image/x-icon" href="<?php echo e(asset('img/favicon/logo.svg')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/libs/filepond/filepond.min.css')); ?>" />
     <title><?php echo e(env('APP_NAME')); ?> - Detail Surat</title>
 </head>
 
@@ -171,6 +172,13 @@
                         </a>
                     </div>
                 <?php endif; ?>
+                <?php if($surat->metode_pengajuan == 'Anjungan'): ?>
+                    <div class="mb-6">
+                        <label for="confirm_password"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload File</label>
+                        <input name="softfile" id="softfile" type="file">
+                    </div>
+                <?php endif; ?>
                 <h1 class="dark:text-white py-2 text-xl font-bold">Daftar Anggota</h1>
                 <?php
                     $anggota = App\Models\Anggota::where('surat_id', '=', $surat->uuid)->get();
@@ -211,6 +219,8 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Flowbite" required>
                             </div>
+
+
                         </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -238,8 +248,51 @@
 </html>
 <script src="<?php echo e(asset('vendor/libs/jquery/jquery.js')); ?>"></script>
 <script src="<?php echo e(asset('vendor/libs/jquery/validate/jquery.validate.js')); ?>"></script>
+<script src="<?php echo e(asset('vendor/libs/filepond/filepond.min.js')); ?>"></script>
+<script src="<?php echo e(asset('vendor/libs/filepond/filepond.jquery.js')); ?>"></script>
+<script src="<?php echo e(asset('vendor/libs/filepond/filepond-plugin-file-validate-type.js')); ?>"></script>
+<script src="<?php echo e(asset('vendor/libs/filepond/filepond-plugin-pdf-preview.min.js')); ?>"></script>
 <script src="<?php echo e(asset('js/mahasiswa.js')); ?>"></script>
 <script>
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+        });
+        FilePond.registerPlugin(
+            FilePondPluginFileValidateType,
+            FilePondPluginPdfPreview
+        );
+        $('#softfile').filepond({
+            allowPdfPreview: true,
+            pdfPreviewHeight: 320,
+            pdfComponentExtraParams: 'toolbar=0&view=fit&page=1',
+            acceptedFileTypes: ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword'],
+            credits: false,
+            fileValidateTypeDetectType: [],
+            fileValidateTypeLabelExpectedTypes: 'File harus berekstensi .pdf/.doc atau .docx',
+            labelFileProcessingComplete: `Upload Berhasil`,
+            labelTapToUndo: `ketuk untuk membatalkan`,
+            labelTapToCancel: `ketuk untuk membatalkan`,
+            labelFileProcessingError: `Gagal Memproses`,
+            labelTapToRetry: `ketuk untuk coba lagi`,
+            labelFileProcessing: `Sedang memproses`,
+            labelIdle: `Seret dan tempel atau <span class="filepond--label-action">Pilih dokumen</span>`,
+            labelInvalidField: 'File tidak didukung',
+            server: {
+                url: "<?php echo e(env('APP_URL')); ?>",
+                process: "/temp/file/upload",
+                revert: {
+                    url: "/temp/file/delete/",
+                    method: 'GET',
+                },
+                headers: {
+                    'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
+                }
+            }
+        }, );
+    })
     var toogle = $('#toogle');
     toogle.click(function(e) {
         var hide = $("#navbar-default").toggleClass("hidden");

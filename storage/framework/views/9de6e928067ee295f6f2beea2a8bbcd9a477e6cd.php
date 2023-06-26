@@ -1,8 +1,8 @@
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 <script src="<?php echo e(asset('vendor/libs/jquery/jquery.js')); ?>"></script>
-<script src="<?php echo e(asset('vendor/libs/popper/popper.js')); ?>"></script>
 <script src="<?php echo e(asset('vendor/js/bootstrap.js')); ?>"></script>
+<script src="<?php echo e(asset('vendor/libs/popper/popper.js')); ?>"></script>
 <script src="<?php echo e(asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.js')); ?>"></script>
 <script src="<?php echo e(asset('vendor/libs/datatable/datatables/jquery.dataTables.min.js')); ?>"></script>
 <script src="<?php echo e(asset('vendor/libs/datatable/datatables/dataTables.bootstrap5.min.js')); ?>"></script>
@@ -15,14 +15,17 @@
 <script src="<?php echo e(asset('vendor/libs/apex-charts/apexcharts.js')); ?>"></script>
 <script src="<?php echo e(asset('vendor/libs/filepond/filepond.min.js')); ?>"></script>
 <script src="<?php echo e(asset('vendor/libs/filepond/filepond.jquery.js')); ?>"></script>
+<script src="<?php echo e(asset('vendor/libs/datepicker/date-picker/datepicker.js')); ?>"></script>
+<script src="<?php echo e(asset('vendor/libs/datepicker/date-picker/datepicker.en.js')); ?>"></script>
 <script src="<?php echo e(asset('vendor/libs/filepond/filepond-plugin-file-validate-type.js')); ?>"></script>
+<script src="<?php echo e(asset('vendor/libs/filepond/filepond-plugin-pdf-preview.min.js')); ?>"></script>
 <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 
 <script src="<?php echo e(asset('vendor/js/menu.js')); ?>"></script>
 <!-- endbuild -->
 <script>
     $(function() {
-       
+
         const notifications = localStorage.getItem('notifications')
         if (!notifications) {
             localStorage.setItem('notifications', 0)

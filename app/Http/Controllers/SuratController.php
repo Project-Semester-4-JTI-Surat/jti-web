@@ -8,12 +8,15 @@ use App\Models\Anggota;
 use App\Models\Dosen;
 use App\Models\JenisSurat;
 use App\Models\Koordinator;
+use App\Models\PengajuanAnjungan;
 use App\Models\Prodi;
 use App\Models\Surat;
 use App\Traits\ApiResponse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Pusher\Pusher;
 
 class SuratController extends Controller
@@ -29,11 +32,26 @@ class SuratController extends Controller
     }
     public function insert(Request $request)
     {
+        $mahasiswa = Auth::guard('mahasiswa')->user();
         // $input = $request->all();
-        $input = $request->only([`kode_surat`, `status_id`,'prodi_id', `dosen_id`, `kode_koordinator`, `nama_mitra`, `alamat_mitra`, `tanggal_dibuat`, `tanggal_pelaksanaan`, `tanggal_selesai`, `judul_ta`, `kebutuhan`, `keterangan`]);
+        $input = $request->only(['kode_surat', 'status_id','prodi_id', 'dosen_id', 'kode_koordinator', 'nama_mitra', 'alamat_mitra', 'tanggal_dibuat', 'tanggal_pelaksanaan', 'tanggal_selesai', 'judul_ta', 'kebutuhan', 'keterangan','metode_pengajuan']);
         // dd($input);
+        $detailSurat = Anggota::where('nim','=',$mahasiswa->nim)->first();
         $now = Carbon::now()->format('Y-m-d');
         $count = count($request->get('nama_anggota'));
+        // dd($surat);
+
+        /**
+         *
+         * Perlu Koordinasi lebih lanjut..
+         */
+        // if ($detailSurat) {
+        //     $surat = Surat::where('uuid','=',$detailSurat->surat_id)->where('status_id','==',4)->orWhere('status_id','==',5)->count();
+        //     dd($surat);
+        //     // $surat = Surat::where('uuid','=',$detailSurat->surat_id)->where('status_id','==',4)->orWhere('status_id','==',5)->count();
+        //     if($surat == 1) return redirect()->back()->with('multiple','true');
+        // }
+
         if ($request->has('web')) {
             $user_nim = Auth::guard('mahasiswa')->user()->nim;
         }else{
@@ -56,11 +74,11 @@ class SuratController extends Controller
         if ( $request->has('koordinator_id')) $arr += array("kode_koordinator" => $input['koordinator_id'],);
         if ( $request->has('dosen_id')) $arr += array("dosen_id" => $input['dosen_id']);
         if ( $request->has('judul_ta')) $arr += array("judul_ta" => $input['judul_ta']);
-      
+
         // dd($arr);
         $id = Surat::create($arr);
         // dd($count);
-        
+
         //cek jika mahasiswa yg bersangkutan individu
         if ($count == 1) {
             $prodi = Prodi::where('keterangan','=',$request->get('prodi_id_anggota')[0])->first();
@@ -84,7 +102,7 @@ class SuratController extends Controller
                     'no_hp' => $request->get('nohp_anggota')[$i],
                     'prodi_id' => $request->get('prodi_id_anggota')[$i],
                 );
-                
+
                 //cek nim mahasiswa(mahasiswa yg login otomatis menjadi ketua kelompok)
                 if ($request->get('nim_anggota')[$i] == $user_nim) {
                     $array_field += array(
@@ -118,6 +136,16 @@ class SuratController extends Controller
             $data
         );
         if ($request->has('web')) {
+            if ($input['metode_pengajuan'] == 'Anjungan') {
+                $random = strtoupper(Str::random(9));
+                $array = array(
+                    'kode'=>$random,
+                    'kode_surat'=>$input['kode_surat'],
+                    'mahasiswa_id'=>$mahasiswa->uuid,
+                );
+                PengajuanAnjungan::create($array);
+                return redirect()->route('mahasiswa.kode_anjungan',$random);
+            }
             return redirect()->route('mahasiswa.dashboard');
         }
         // event(new SuratBroadcast($request->get('kode_surat'),$request->get('nama_anggota')[0],$request->get('nim_anggota')[0]));
@@ -130,7 +158,7 @@ class SuratController extends Controller
         return $this->successResponseData('Detail Surat', $surat);
         // return $this->responseCollection('Detail Surat',$surat);
     }
-    
+
     public function pengajuan_surat()
     {
         $auth = Auth::guard('mahasiswa')->user();
@@ -149,7 +177,7 @@ class SuratController extends Controller
 
     public function apiSuratInsert(Request $request)
     {
-        $input = $request->only([`kode_surat`, `status_id`,'prodi_id', `dosen_id`, `kode_koordinator`, `nama_mitra`, `alamat_mitra`, `tanggal_dibuat`, `tanggal_pelaksanaan`, `tanggal_selesai`, `judul_ta`, `kebutuhan`, `keterangan`]);
+        $input = $request->only(['kode_surat', 'status_id','prodi_id', 'dosen_id', 'kode_koordinator', 'nama_mitra', 'alamat_mitra', 'tanggal_dibuat', 'tanggal_pelaksanaan', 'tanggal_selesai', 'judul_ta', 'kebutuhan', 'keterangan']);
         $jenisSurat = JenisSurat::where('keterangan','=',$request->kode_surat)->first();
         $dosen = Dosen::where('nama','=',$request->dosen)->first();
         $koordinator = Koordinator::where('nama','=',$request->koordinator)->first();
@@ -178,7 +206,7 @@ class SuratController extends Controller
         if ( $koordinator) $arr += array("kode_koordinator" => $koordinator->uuid);
         if ($dosen) $arr += array("dosen_id" => $dosen->uuid);
         if ( $request->has('judul_ta')) $arr += array("judul_ta" => $input['judul_ta']);
-      
+
         // dd($arr);
         $surat = Surat::create($arr);
         $pusher = new Pusher(
@@ -218,20 +246,11 @@ class SuratController extends Controller
         return $this->successResponse('Surat berhasil diajukan');
     }
 
+    function kode_anjungan($kode): View
+    {
+        $kode = implode("-", str_split($kode, 3));
+        return view('mahasiswa.kode_anjungan',compact('kode'));
+    }
+
 
 }
-/**
- * $array = ['nim_anggota][i]
- * 
- * $array = [
- * 
- *  ]
- */
-
-//  $array = [
-//     'identitas'=>'1',
-//     'sub'=>[
-//         'sub1' => 1,
-//     ],
-// ];
-// echo $array['identitas'];

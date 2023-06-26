@@ -23,7 +23,7 @@
                                 <strong>Oopss</strong> Mohon cek kembali username dan password anda
                             </div>
                         @endif
-                        <p class="mb-4">Masukkan email dan password anda</p>
+                        <p class="mb-4">Masukkan username dan password anda</p>
 
                         <form id="formAuthentication" class="mb-3" action="{{ route('auth.login_process') }}" method="POST">
                         {{ csrf_field() }}

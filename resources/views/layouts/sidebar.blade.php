@@ -46,6 +46,12 @@
                 @endforeach
             </ul>
         </li>
+         <li class="menu-item {{ Route::currentRouteName() == 'admin.rekap.index' ? 'active' : '' }}">
+            <a class="menu-link" href="{{ route('admin.rekap.index') }}">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Support">Rekap Surat</div>
+            </a>
+        </li>
         <li class="menu-item {{ Route::currentRouteName() == 'admin.prodi.index' ? 'active' : '' }}">
             <a class="menu-link" href="{{ route('admin.prodi.index') }}">
                 <i class="menu-icon tf-icons bx bx-building"></i>

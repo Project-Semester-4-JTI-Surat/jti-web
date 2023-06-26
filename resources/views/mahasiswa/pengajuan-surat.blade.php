@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('vendor/libs/sweet-alert/sweetalert2.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/mahasiswa/pengajuan_surat.css') }}">
     <title>Pengajuan Surat</title>
+    <style>
+        .swal-modal .swal-text {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -100,6 +105,15 @@
                     <label for="">Keterangan</label>
                 </div>
                 <textarea name="keterangan" id="keterangan" placeholder="Keterangan"></textarea>
+                <div class="form-label">
+                    <label for="">Metode Pengajuan</label>
+                </div>
+                <select name="metode_pengajuan" placeholder="metode_pengajuan" id="metode_pengajuan">
+                    <option value=""> --Pilih Metode Pengajuan--</option>
+                    <option value="Anjungan">Anjungan</option>
+                    <option value="Admin">Admin</option>
+
+                </select>
                 <input type="button" name="previous" class="previous action-button" value="Previous" />
 
                 <input type="button" name="next" class="next action-button" value="Next" />
@@ -109,7 +123,7 @@
                 <div style="padding:  0.5rem  0 1rem 0; display: flex; justify-content: center;">
                     <div style=" float: left;clear: none;">
                         <input style=" float: left; clear: none; margin: 2px 0 0 2px;" type="radio" id="individu"
-                            name="status_keanggotan"  value="individu" id="individu">
+                            name="status_keanggotan" value="individu" id="individu">
                         <label for=""
                             style="float: left; clear: none; display: block; padding: 0px 1em 0px 8px;">Individu</label>
                     </div>
@@ -132,12 +146,18 @@
         </form>
     </main>
 </body>
+
 <script src="{{ asset('vendor/libs/jquery/jquery.js') }}"></script>
 <script src="{{ asset('vendor/libs/sweet-alert/sweetalert.min.js') }}"></script>
 <script src="{{ asset('vendor/libs/jquery/validate/jquery.validate.js') }}"></script>
 <script src="{{ asset('js/mahasiswa.js') }}"></script>
 <script src="{{ asset('js/jquery.prefix-input.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+@if (Session::has('multiple'))
+    <script>
+        swal("Error", "Surat sebelumnya belum terselesaikan, Harap selesaikan surat sebelumnya terlebih dahulu", "error");
+    </script>
+@endif
 <script>
     $(document).ready(function() {
 
@@ -306,10 +326,11 @@
         var keterangan = $('#keterangan').val();
         var tanggal_selesai = $('#tanggal_selesai').val();
         var tanggal_pelaksanaan = $('#tanggal_pelaksanaan').val();
-        if(nama_mitra == '' || alamat_mitra == '' || keterangan == '' || tanggal_pelaksanaan == '' || tanggal_selesai == ''){
+        if (nama_mitra == '' || alamat_mitra == '' || keterangan == '' || tanggal_pelaksanaan == '' ||
+            tanggal_selesai == '') {
             e.preventDefault();
-              swal("Error", "Oops ada data yang anda lewatkan..", "error");
-        console.log(tanggal_selesai+" => ");
+            swal("Error", "Oops ada data yang anda lewatkan..", "error");
+            console.log(tanggal_selesai + " => ");
 
         }
         console.log("submited");

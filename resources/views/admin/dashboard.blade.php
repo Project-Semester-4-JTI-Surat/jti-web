@@ -70,12 +70,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($statistik_pengajuan as $key => $value)
-                                        <tr>
-                                        <td>{{ $value->keterangan }}</td>
-                                        <td>{{ $value->count_prodi }}</td>
-                                    </tr>
-                                    @endforeach
+{{--                                    @foreach($statistik_pengajuan as $key => $value)--}}
+{{--                                        <tr>--}}
+{{--                                        <td>{{ $value->keterangan }}</td>--}}
+{{--                                        <td>{{ $value->count_prodi }}</td>--}}
+{{--                                    </tr>--}}
+{{--                                    @endforeach--}}
                                 </tbody>
 
                             </table>
@@ -163,6 +163,6 @@
 
 @php
     use App\Models\Prodi;
-    
+
     $ambilProdi = $prodi = Prodi::where('id', '!=', '2')->get();
 @endphp

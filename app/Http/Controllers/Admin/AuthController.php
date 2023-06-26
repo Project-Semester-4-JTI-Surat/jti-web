@@ -34,17 +34,17 @@ class AuthController extends Controller
 
     public function create(Request $request)
     {
-        
+
     }
 
     public function dashboard()
     {
-        // DB::beginTransaction(); 
+        // DB::beginTransaction();
         $date = Carbon::now()->format('y-m-d');
-        $statistik_pengajuan = DB::select('SELECT prodi.keterangan, COUNT(prodi_id) as count_prodi FROM `surat` JOIN prodi ON prodi_id = prodi.id GROUP BY prodi_id');
+//        $statistik_pengajuan = DB::select('SELECT prodi.keterangan, COUNT(prodi_id) as count_prodi FROM `surat` JOIN prodi ON prodi_id = prodi.id GROUP BY prodi_id');
         // dd(Auth::guard('admin')->user()->admin_prod);
         // dd($statistik_pengajuan);
-        return view('admin.dashboard',compact('statistik_pengajuan'));
+        return view('admin.dashboard');
     }
 
     public function logout()

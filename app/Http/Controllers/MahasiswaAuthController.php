@@ -19,7 +19,9 @@ class MahasiswaAuthController extends Controller
     public function index()
     {
         return view('mahasiswa.login');
+//        return view('mahasiswa.uiv2.login');
     }
+
 
     public function login_process(MahasiswaLoginRequest $request)
     {
@@ -41,12 +43,13 @@ class MahasiswaAuthController extends Controller
     {
         $prodi = Prodi::where('id','!=','2')->get();
         // dd($prodi);
-        return view('mahasiswa.register',compact('prodi'));
+//        return view('mahasiswa.register',compact('prodi'));
+        return view('mahasiswa.uiv2.register',compact('prodi'));
     }
 
     public function register_process(MahasiswaRegisterRequest $request)
     {
-        // dd($request->validated());
+        dd($request->validated());
         Mahasiswa::create($request->validated());
         return redirect()->route('mahasiswa.login');
     }
@@ -65,7 +68,8 @@ class MahasiswaAuthController extends Controller
             ->where('anggota.nama', '=', $auth->nama)
             ->get(['surat.uuid','surat.judul_ta','surat.kebutuhan','surat.keterangan as keterangan_surat', 'surat.kode_surat', 'status.keterangan']);
         }
-        // dd($get_anggota);
+
+//         dd($get_anggota);
         return view('mahasiswa.dashboard',compact('get_anggota'));
     }
 

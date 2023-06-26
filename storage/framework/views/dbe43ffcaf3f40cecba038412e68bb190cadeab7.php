@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Dashboard'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -70,12 +69,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $__currentLoopData = $statistik_pengajuan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <tr>
-                                        <td><?php echo e($value->keterangan); ?></td>
-                                        <td><?php echo e($value->count_prodi); ?></td>
-                                    </tr>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
+
+
+
+
                                 </tbody>
 
                             </table>
@@ -130,7 +129,7 @@
 
 <?php
     use App\Models\Prodi;
-    
+
     $ambilProdi = $prodi = Prodi::where('id', '!=', '2')->get();
 ?>
 

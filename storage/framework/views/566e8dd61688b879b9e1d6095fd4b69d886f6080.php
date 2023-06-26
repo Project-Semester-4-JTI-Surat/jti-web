@@ -23,7 +23,7 @@
                                 <strong>Oopss</strong> Mohon cek kembali username dan password anda
                             </div>
                         <?php endif; ?>
-                        <p class="mb-4">Masukkan email dan password anda</p>
+                        <p class="mb-4">Masukkan username dan password anda</p>
 
                         <form id="formAuthentication" class="mb-3" action="<?php echo e(route('auth.login_process')); ?>" method="POST">
                         <?php echo e(csrf_field()); ?>
@@ -132,4 +132,5 @@
 </body>
 
 
-</html><?php /**PATH C:\laragon\www\jti-surat\resources\views/login.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\laragon\www\jti-surat\resources\views/login.blade.php ENDPATH**/ ?>

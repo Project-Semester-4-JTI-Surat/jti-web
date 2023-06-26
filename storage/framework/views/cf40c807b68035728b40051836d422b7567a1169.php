@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Data Surat'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -70,7 +69,7 @@
         <div class="card">
             <h5 class="card-header">Data Surat</h5>
             <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
-              
+
             </div>
             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                 <div class="table-responsive text-nowrap">
@@ -81,16 +80,10 @@
                                 <th>NO</th>
                                 <th>uuid</th>
                                 <th>Kode Surat</th>
-                                <th>Prodi</th>
-                                <th>Status</th>
-                                <th>Dosen</th>
-                                <th>Koordinator</th>
+
                                 <th>Nama Mitra</th>
                                 <th>Alamat Mitra</th>
-                                <th>Tanggal Dibuat</th>
-                                <th>Tanggal Pelaksanaan</th>
-                                <th>Tanggal Selesai</th>
-                                <th>Judul Ta</th>
+
                                 <th>Kebutuhan</th>
                                 <th>Alasan Penolakan</th>
                                 <th>Softfile</th>
@@ -151,22 +144,7 @@
                         data: 'kode_surat',
                         name: 'kode_surat',
                     },
-                    {
-                        data: 'prodi.keterangan',
-                        name: 'prodi.keterangan',
-                    },
-                    {
-                        data: 'status',
-                        name: 'status',
-                    },
-                    {
-                        data: 'dosen.nama',
-                        name: 'dosen.nama',
-                    },
-                    {
-                        data: 'koordinator.nama',
-                        name: 'koordinator.nama',
-                    },
+
                     {
                         data: 'nama_mitra',
                         name: 'nama_mitra',
@@ -175,22 +153,7 @@
                         data: 'alamat_mitra',
                         name: 'alamat_mitra',
                     },
-                    {
-                        data: 'tanggal_dibuat',
-                        name: 'tanggal_dibuat',
-                    },
-                    {
-                        data: 'tanggal_pelaksanaan',
-                        name: 'tanggal_pelaksanaan',
-                    },
-                    {
-                        data: 'tanggal_selesai',
-                        name: 'tanggal_selesai',
-                    },
-                    {
-                        data: 'judul_ta',
-                        name: 'judul_ta',
-                    },
+
                     {
                         data: 'kebutuhan',
                         name: 'kebutuhan',
@@ -204,9 +167,12 @@
                     {
                         data: 'softfile_scan',
                         name: 'softfile_scan',
-                        //visible: <?php echo e(Request::get('status') == 4 ? 'true' : 'false'); ?>,
+                        // visible: row.softfile_scan =='null' ? 'true' : 'false',
+                         hideIfEmpty: true,
                         render: function(data, type, row) {
-                           return '<a target="_blank" href=<?php echo e(env('ASSET_URL')); ?>/softfile/'+row.softfile_scan+' class="btn btn-primary">File Scan</a>';
+                           return row.softfile_scan != '' ?
+                           '<a target="_blank" href=<?php echo e(env('APP_URL')); ?>/storage/'+row.softfile_scan+' class="btn btn-primary">File Scan</a>'
+                           : '-';
                         }
                     },
                     {

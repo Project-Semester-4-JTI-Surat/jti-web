@@ -38,7 +38,7 @@ class AdminController extends Controller
     {
         $input = $request->only(['username','nama','role_id','prodi_id','no_hp','jk']);
         // dd($input);
-        $passwordField = array('password'=>'12345678');
+        $passwordField = array('password'=>'jtipolije');
         $field = $input + $passwordField;
         Admin::create($field);
         // dd($field);
