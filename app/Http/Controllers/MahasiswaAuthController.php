@@ -18,8 +18,8 @@ class MahasiswaAuthController extends Controller
     // use AuthenticateUsers;
     public function index()
     {
-        return view('mahasiswa.login');
-//        return view('mahasiswa.uiv2.login');
+//        return view('mahasiswa.login');
+        return view('mahasiswa.uiv2.login');
     }
 
 

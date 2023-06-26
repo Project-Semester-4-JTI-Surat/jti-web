@@ -24,7 +24,8 @@
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
 
-                                <form id="formAuthentication">
+                                <form id="formAuthentication" action="{{ route('mahasiswa.login_process') }}" method="POST">
+                                    @csrf
                                     <h5 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
                                     <div class="form-outline mb-3">
                                         <label class="form-label" for="nim">NIM</label>

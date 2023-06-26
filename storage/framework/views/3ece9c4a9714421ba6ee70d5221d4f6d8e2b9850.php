@@ -10,13 +10,13 @@
     <title><?php echo e(env('APP_NAME')); ?> - Dashboard Mahasiswa</title>
 </head>
 
-<body class="dark:bg-gray-900" id="main">
-    <nav class="w-full h-[5rem] z-0 items-end dark:text-white bg-bodyColor border-gray-200 dark:bg-gray-900 md:px-12 transition-all ease-out duration-500 px-9"
+<body class="" id="main">
+    <nav class="w-full h-[5rem] z-0 items-end bg-bodyColor border-gray-200  md:px-12 transition-all ease-out duration-500 px-9"
         id="navbar">
         <div class="max-w-screen-xl flex  items-center justify-between mx-auto pt-6">
             <a href="" class="flex items-center">
                 <!-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" /> -->
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">JTI-Surat</span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap">JTI-Surat</span>
             </a>
             <div class="cursor-pointer md:hidden items-center p-2 ml-3" onclick="dropdown()">
                 <img class="w-10 h-10 rounded-full mx-auto" src="../assets/img/1.png" alt="">
@@ -35,11 +35,11 @@
             <div class="hidden w-full md:block md:w-auto transition-all ease-out duration-500 pl-20"
                 id="navbar-default">
                 <ul id="navbar-list"
-                    class="transform duration-300 ease-out sm:transition-none font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white md:dark:bg-opacity-0 dark:bg-gray-800 dark:border-gray-700">
+                    class="transform duration-300 ease-out sm:transition-none font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white">
 
                     <li class="py-1 md:py-0 cursor-pointer" onclick="dropdown()">
                         <!-- <a id="nav-link"
-                            class="bg-transparent pl-3 pr-4 hover:text-red-500 dark:hover:text-red-500 text-gray-900 rounded  hover:transform md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white  md:dark:hover:bg-transparent group transition-all duration-300 ease-in-out"
+                            class="bg-transparent pl-3 pr-4 hover:text-red-500 dark:hover:text-red-500 text-gray-900 rounded  hover:transform md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0  md:dark:hover:bg-transparent group transition-all duration-300 ease-in-out"
                             href="#faq"> -->
                         <div class="flex">
                             <img class="w-10 h-10 rounded-full mx-auto" src="<?php echo e(asset('img/avatars/user.png')); ?>" alt="">
@@ -69,7 +69,7 @@
         <div class="  pt-3 flex justify-end">
             <div class="z-10 hidden relative  bg-white divide-y divide-gray-100 rounded-lg shadow-md max-w-lg w-44 dark:bg-gray-700"
                 id="dropdown">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                     <li>
                         <a href="<?php echo e(route('mahasiswa.profile')); ?>"
                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
@@ -86,11 +86,11 @@
 
     <main class="px-2 mt-14">
         <div class="py-10 pl-9 flex ">
-            <h1 class="text-3xl font-bold dark:text-white pr-8">Surat Saya</h1>
+            <h1 class="text-3xl font-bold pr-8">Surat Saya</h1>
             <form action="<?php echo e(route('mahasiswa.dashboard')); ?>" class="block w-1/6">
             
                 <select id="small" onchange="this.form.submit()" name="status"
-                class=" p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                class=" p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
                 <option value=""> -- Filter --</option>
                 <option value="*">Semua</option>
                 <option value="2">Menunggu</option>
@@ -102,8 +102,8 @@
             </form>
         </div>
         <div
-            class="pl-20 md:h-[60vh] h-[60vh] overflow-y-scroll  w-full flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg  dark:border-0 border-2 mb-6">
-            <div class="grid grid-flow-row gap-y-5 dark:text-white mt-9" id="data">
+            class="pl-20 md:h-[60vh] h-[60vh] overflow-y-scroll  w-full flex flex-col justify-between bg-white rounded-lg  dark:border-0 border-2 mb-6">
+            <div class="grid grid-flow-row gap-y-5 mt-9" id="data">
             <?php $__currentLoopData = $get_anggota; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <a href="<?php echo e(route('mahasiswa.detail_surat',$value->uuid)); ?>" class="group">
                     <div class=" cursor-pointer">
@@ -125,7 +125,7 @@
     </main>
     <footer class="">
         <div class="">
-            <p class="text-center dark:text-white"> &copy; JTI-Surat, 2023 </p>
+            <p class="text-center"> &copy; JTI-Surat, 2023 </p>
             <!-- <div class="max-w-2xl mx-auto text-white py-10">
             <div class="mt-28 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
             </div>

@@ -33,8 +33,9 @@
                 <div class="col-lg-6 mb-lg-0">
                     <div class="card">
                         <div class="card-body ">
-                            <form id="form-register">
+                            <form id="form-register" action="{{ route('mahasiswa.register_process') }}" method="post">
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-group">
