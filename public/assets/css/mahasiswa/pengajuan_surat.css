@@ -22,6 +22,14 @@ body {
     text-align: start;
     position: relative;
 }
+@media only screen and (min-width: 992px) {
+    #multistepsform {
+        width: 70%;
+        margin: 50px auto;
+        text-align: start;
+        position: relative;
+    }
+}
 
 .form-label {
     padding: 0.5rem 0 0.5rem 0;
@@ -48,14 +56,14 @@ body {
 #multistepsform textarea {
     padding: 15px;
     border: 1px solid #434f5b;
-    
+
     border-radius: 3px;
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
     font-family: 'Poppins';
     color: #303c48;
-    
+
     font-size: 13px;
 }
 
@@ -182,59 +190,4 @@ td {
 
 tr:nth-child(even) {
     background-color: #f2f2f2
-}
-
-@media (prefers-color-scheme: dark) {
-    html {
-        background-color: rgb(15 23 42);
-        color: white;
-
-    }
-
-    #multistepsform fieldset {
-        background-color: rgb(30 41 59);
-    }
-
-    #multistepsform .fs-title {
-        font-size: 15px;
-        text-transform: uppercase;
-        color: white;
-        margin-bottom: 10px;
-    }
-
-    #multistepsform .fs-subtitle {
-        font-weight: normal;
-        font-size: 13px;
-        color: white;
-        margin-bottom: 20px;
-    }
-
-    #multistepsform input,
-    #multistepsform select,
-    #multistepsform textarea {
-        padding: 15px;
-        /* border: 1px solid #ccc; */
-        border-radius: 3px;
-        margin-bottom: 10px;
-        width: 100%;
-        box-sizing: border-box;
-        font-family: 'Poppins';
-        color: white;
-        background-color: rgba(15, 23, 42, 0.469);
-        font-size: 13px;
-    }
-
-    #multistepsform input:disabled,
-    #multistepsform select:disabled,
-    #multistepsform textarea:disabled {
-        border: 1px solid #212121;
-        color: #000000;
-    }
-
-    #multistepsform input:focus,
-    #multistepsform textarea:focus {
-        border-color: #679b9b;
-        outline: none;
-        color: #637373;
-    }
 }

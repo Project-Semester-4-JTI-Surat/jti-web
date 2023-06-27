@@ -16,7 +16,7 @@
     <div class="px-4 py-3 px-md-5 text-lg-start" style="background-color: hsl(0, 0%, 96%)">
         <div class="container">
             <div class="row gx-lg-5 align-items-center">
-                <div class="col-lg-6 mb-lg-0">
+                <div class="col-lg-6 mb-lg-0" id="typography">
                     <h1 class="my-3 display-3 fw-bold ls-tight">
                         JTI - Surat <br />
                         <span class="text-primary">Mengajukan surat dengan penuh kemudahan</span>
@@ -30,7 +30,7 @@
                     </p>
                 </div>
 
-                <div class="col-lg-6 mb-lg-0">
+                <div class="col-lg-6 mb-lg-0" id="form">
                     <div class="card">
                         <div class="card-body ">
                             <form id="form-register" action="<?php echo e(route('mahasiswa.register_process')); ?>" method="post">
@@ -117,6 +117,7 @@
 </section>
 </body>
 <?php echo $__env->make('layouts.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<script src="<?php echo e(asset('js/scrollreveal.js')); ?>"></script>
 <script>
     (function($) {
         $.fn.inputFilter = function(callback, errMsg) {
@@ -262,6 +263,26 @@
             $('#password').attr("type", "password");
         }
     });
+    const sr = ScrollReveal({
+        origin: 'left',
+        distance: '30px',
+        duration: 2000,
+        reset: true
+    });
+
+    sr.reveal(`#typography`, {
+        interval: 200
+    })
+    const sr2 = ScrollReveal({
+        origin: 'right',
+        distance: '30px',
+        duration: 2000,
+        reset: true
+    });
+
+    sr2.reveal(`#form`, {
+        interval: 200
+    })
 </script>
 </html>
 <?php /**PATH C:\laragon\www\jti-surat\resources\views/mahasiswa/uiv2/register.blade.php ENDPATH**/ ?>

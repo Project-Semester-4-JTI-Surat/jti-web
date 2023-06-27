@@ -10,14 +10,14 @@
     <title>{{ env('APP_NAME') }} - Profil</title>
 </head>
 
-<body class="h-full w-full dark:bg-gradient-to-t dark:from-blue-950 dark:to-gray-900 dark:bg-no-repeat">
+<body class="h-full w-full ">
     <main class="px-20 mt-14 py-28">
-        <h1 class="text-center font-bold dark:text-white text-2xl pb-10">Update Profile</h1>
+        <h1 class="text-center font-bold  text-2xl pb-10">Update Profile</h1>
         <div
-            class="pl-6 h-full w-full flex flex-col flex-shrink-1 bg-white dark:bg-gray-800 rounded-lg  dark:border-0 border-2 mb-6">
+            class="pl-6 h-full w-full flex flex-col flex-shrink-1 bg-white rounded-lg border-2 mb-6">
             <div
-                class="px-6 py-6 h-full w-full flex flex-col flex-shrink-1 bg-white dark:bg-gray-800 rounded-lg  dark:border-0 border-2 mb-6">
-                <div class="flex p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
+                class="px-6 py-6 h-full w-full flex flex-col flex-shrink-1 bg-white mb-6">
+                <div class="flex p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50"
                     role="alert">
                     <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -35,27 +35,27 @@
                     {{ csrf_field() }}
                     <div class="mb-6">
                         <label for="nama"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 ">Nama</label>
                         <input type="text" readonly value="{{ $auth->nama }}" id="nama"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     </div>
                     <div class="mb-6">
                         <label for="nim"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIM</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 ">NIM</label>
                         <input type="text" readonly id="nim" value="{{ $auth->nim }}"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     </div>
                     <div class="mb-6">
                         <label for="prodi"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prodi</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 ">Prodi</label>
                         <input type="text" readonly id="prodi" value="{{ $auth->prodi->keterangan }}"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     </div>
                     <div class="mb-6">
                         <label for="email"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
                         <input type="email" readonly id="email" value="{{ $auth->email }}"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" value="" id="password-switch" class="sr-only peer">
@@ -67,10 +67,10 @@
                     </label>
                     <div class="mb-6">
                         <label for="password"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 ">Password</label>
                         <input type="password" id="password" disabled name="password"
                             class="@if ($errors->has('password'))  border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:border-red-400
-                            @else  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @endif
+                            @else  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  @endif
                             ">
 
                         @error('password')
@@ -88,7 +88,7 @@
     </main>
     <footer class="">
         <div class="">
-            <p class="text-center dark:text-white"> &copy; JTI-Surat, 2023 </p>
+            <p class="text-center "> &copy; JTI-Surat, 2023 </p>
             <!-- <div class="max-w-2xl mx-auto text-white py-10">
             <div class="mt-28 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
             </div>

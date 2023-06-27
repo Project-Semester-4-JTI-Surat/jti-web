@@ -102,7 +102,7 @@
             </form>
         </div>
         <div
-            class="pl-20 md:h-[60vh] h-[60vh] overflow-y-scroll  w-full flex flex-col justify-between bg-white rounded-lg  dark:border-0 border-2 mb-6">
+            class="pl-20 md:h-[60vh] h-[60vh] overflow-y-scroll  w-full flex flex-col justify-between bg-white dark:bg-gray-800 rounded-lg  dark:border-0 border-2 mb-6">
             <div class="grid grid-flow-row gap-y-5 mt-9" id="data">
             <?php $__currentLoopData = $get_anggota; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <a href="<?php echo e(route('mahasiswa.detail_surat',$value->uuid)); ?>" class="group">
