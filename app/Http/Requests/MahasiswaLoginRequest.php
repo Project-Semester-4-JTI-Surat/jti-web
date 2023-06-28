@@ -27,8 +27,8 @@ class MahasiswaLoginRequest extends FormRequest
     {
         return [
             // 'email'=>'required|email',
-            'nim'=>['required',new MahasiswaCheck(),'max:9','regex:/^E\d{8}/'], 
-            'password'=>'required|min:8'
+            'nim'=>['required',new MahasiswaCheck(),'max:9','regex:/^E\d{8}/'],
+            'password'=>'required'
         ];
     }
 }

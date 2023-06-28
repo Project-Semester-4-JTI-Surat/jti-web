@@ -32,7 +32,8 @@ class MahasiswaRegisterRequest extends FormRequest
             'alamat'=>'required',
             'no_hp'=>'required',
             'tanggal_lahir'=>'required|date',
-            'password'=>['required',Password::min(8)->letters()->numbers()],
+//            'password'=>['required',Password::min(8)->letters()->numbers()],
+            'password'=>'required',
             // 'password_confirmed'=>'same:password',
         ];
     }
