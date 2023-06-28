@@ -105,15 +105,7 @@
                     <label for="">Keterangan</label>
                 </div>
                 <textarea name="keterangan" id="keterangan" placeholder="Keterangan"></textarea>
-                <div class="form-label">
-                    <label for="">Metode Pengajuan</label>
-                </div>
-                <select name="metode_pengajuan" placeholder="metode_pengajuan" id="metode_pengajuan">
-                    <option value=""> --Pilih Metode Pengajuan--</option>
-                    <option value="Anjungan">Anjungan</option>
-                    <option value="Admin">Admin</option>
 
-                </select>
                 <input type="button" name="previous" class="previous action-button" value="Previous" />
 
                 <input type="button" name="next" class="next action-button" value="Next" />

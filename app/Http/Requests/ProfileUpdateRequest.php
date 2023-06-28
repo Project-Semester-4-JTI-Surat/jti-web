@@ -25,7 +25,10 @@ class ProfileUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'password'=>['required',Password::min(8)->letters()->numbers()],
+
+//            'password'=>['required',Password::min(8)->letters()->numbers()],
+            'password'=>'required',
+            'email'=>'required'
         ];
     }
 }

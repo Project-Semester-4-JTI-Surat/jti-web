@@ -54,7 +54,7 @@
                     <div class="mb-6">
                         <label for="email"
                             class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
-                        <input type="email" readonly id="email" value="{{ $auth->email }}"
+                        <input type="email" disabled id="email" value="{{ $auth->email }}" name="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
@@ -107,9 +107,11 @@
         if (this.checked) {
             $('#btn-submit').attr('disabled', false)
             $('#password').attr('disabled', false);
+            $('#email').attr('disabled', false);
         } else {
             $('#btn-submit').attr('disabled', true)
             $('#password').attr('disabled', true);
+            $('#email').attr('disabled', true);
 
         }
     });

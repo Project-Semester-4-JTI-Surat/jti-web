@@ -39,7 +39,7 @@
                         <div class="card text-white bg-success">
                             <div class="card-body">
                                 <span class="fw-semibold d-block mb-1">Surat Selesai</span>
-                                <h3 class="card-title text-white mb-2"><?php echo e(App\Models\Surat::where('status_id','=','1')->count()); ?></h3>
+                                <h3 class="card-title text-white mb-2"><?php echo e(App\Models\Surat::where('status_id','=',4)->count()); ?></h3>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         <div class="card text-white bg-danger">
                             <div class="card-body">
                                 <span class="fw-semibold d-block mb-1">Surat Ditolak</span>
-                                <h3 class="card-title text-white mb-2"><?php echo e(App\Models\Surat::where('status_id','=','5')->count()); ?></h3>
+                                <h3 class="card-title text-white mb-2"><?php echo e(App\Models\Surat::where('status_id','=',5)->count()); ?></h3>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <span class="d-block mb-1">Surat Menunggu</span>
-                                <h3 class="card-title text-nowrap mb-2"><?php echo e(App\Models\Surat::where('status_id','=','2')->count()); ?></h3>
+                                <h3 class="card-title text-nowrap mb-2"><?php echo e(App\Models\Surat::where('status_id','=',1)->count()); ?></h3>
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <span class="d-block mb-1">Surat Diproses</span>
-                                <h3 class="card-title text-nowrap mb-2"><?php echo e(App\Models\Surat::where('status_id','=','3')->count()); ?></h3>
+                                <h3 class="card-title text-nowrap mb-2"><?php echo e(App\Models\Surat::where('status_id','=',2)->count()); ?></h3>
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                                             <h5 class="text-nowrap mb-2">Surat Dapat Diambil</h5>
                                         </div>
                                         <div class="mt-sm-auto">
-                                            <h3 class="mb-0"><?php echo e(App\Models\Surat::where('status_id','=','4')->count()); ?></h3>
+                                            <h3 class="mb-0"><?php echo e(App\Models\Surat::where('status_id','=',3)->count()); ?></h3>
                                         </div>
                                     </div>
                                 </div>
