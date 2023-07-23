@@ -26,7 +26,7 @@
 
                                 <form id="formAuthentication" action="{{ route('mahasiswa.login_process') }}" method="POST">
                                     @csrf
-                                    <h5 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                                    <h5 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px; font-size: large">Masukkan nim dan password anda</h5>
                                     <div class="form-outline mb-3">
                                         <label class="form-label" for="nim">NIM</label>
                                         <input type="text" name="nim" id="nim" class="form-control form-control" />

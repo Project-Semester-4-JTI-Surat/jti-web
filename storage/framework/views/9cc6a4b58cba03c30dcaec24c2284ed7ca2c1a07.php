@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Data Dosen'); ?>
 <?php $__env->startSection('content'); ?>
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -219,6 +218,7 @@
         }
         $('#formTambahData').submit(function(e) {
             var form = $('#formTambahData');
+            // form.resetForm();
             if (form.valid()) {
                 console.log(form.valid());
                 e.preventDefault();
@@ -231,6 +231,9 @@
                     contentType: false,
                     processData: false,
                     success: (data) => {
+                        form.each(function(){
+                            this.reset();
+                        });
                         $('#tambahData').modal('hide');
                         loadTable();
                         swal("Success", "Data berhasil dimasukkan", "success");

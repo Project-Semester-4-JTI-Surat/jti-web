@@ -69,12 +69,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
-
-
-
-
-
+                                    <?php $__currentLoopData = $statistik_pengajuan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <tr>
+                                        <td><?php echo e($value->keterangan); ?></td>
+                                        <td><?php echo e($value->count_prodi); ?></td>
+                                    </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
 
                             </table>
@@ -123,7 +123,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 <?php $__env->stopSection(); ?>
 
