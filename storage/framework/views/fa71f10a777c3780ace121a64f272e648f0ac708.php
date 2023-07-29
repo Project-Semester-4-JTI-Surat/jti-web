@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('css/mahasiswa/style.css')); ?>">
     <link rel="icon" type="image/x-icon" href="<?php echo e(asset('img/favicon/logo.svg')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('vendor/libs/filepond/filepond.min.css')); ?>" />
-    <title><?php echo e(env('APP_NAME')); ?> - Detail Surat</title>
+    <title>JTI-Surat - Detail Surat</title>
 </head>
 
 <body class="" id="main">
@@ -88,7 +88,7 @@
 
                         </textarea>
                 </div>
-                <?php if($surat->filescan != 'null'): ?>
+                <?php if($surat->softfile_scan != ''): ?>
                     <div class="mb-6">
                         <label for="confirm_password"
                             class="block mb-2 text-sm font-medium text-gray-900 ">File Scan</label>

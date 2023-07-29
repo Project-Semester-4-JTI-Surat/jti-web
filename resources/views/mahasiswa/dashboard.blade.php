@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon/logo.svg') }}" />
     <link rel="stylesheet" href="{{ asset('css/mahasiswa/style.css') }}">
-    <title>{{ env('APP_NAME') }} - Dashboard Mahasiswa</title>
+    <title>JTI-Surat - Dashboard Mahasiswa</title>
 </head>
 
 <body class="" id="main">

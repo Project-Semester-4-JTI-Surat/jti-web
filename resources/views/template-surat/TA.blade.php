@@ -49,7 +49,7 @@
     <p style="margin-top:0pt; margin-bottom:8pt; text-align:right;"><span style="font-family:'Times New Roman';">a n Direktur</span></p>
     <p style="margin-top:0pt; margin-bottom:8pt; text-align:right;"><span style="font-family:'Times New Roman';">Wakil Direktur Bidang Akademik</span></p>
     <p style="margin-top:0pt; margin-bottom:8pt; text-align:right;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
-    <p style="margin-top:0pt; margin-bottom:8pt; text-align:right;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
+    <p style="  margin-top:0pt; margin-bottom:8pt; text-align:right;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
     <p style="margin-top:0pt; margin-bottom:8pt; text-align:right; line-height:normal;"><strong><span style="font-family:'Times New Roman';">Surateno, S.Kom, M.Kom</span></strong></p>
     <p style="margin-top:0pt; margin-bottom:8pt; text-align:right; line-height:normal;"><strong><span style="font-family:'Times New Roman';">NIP. 19790703 200312 1 001</span></strong></p>
 </div>

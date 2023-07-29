@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/mahasiswa/style.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon/logo.svg') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/filepond/filepond.min.css') }}" />
-    <title>{{ env('APP_NAME') }} - Detail Surat</title>
+    <title>JTI-Surat - Detail Surat</title>
 </head>
 
 <body class="" id="main">
@@ -87,7 +87,7 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ $surat->status->keterangan }} {{ $surat->status->keterangan == 'Ditolak' ? '- '.$surat->alasan_penolakan : '' }}
                         </textarea>
                 </div>
-                @if ($surat->filescan != 'null')
+                @if ($surat->softfile_scan != '')
                     <div class="mb-6">
                         <label for="confirm_password"
                             class="block mb-2 text-sm font-medium text-gray-900 ">File Scan</label>

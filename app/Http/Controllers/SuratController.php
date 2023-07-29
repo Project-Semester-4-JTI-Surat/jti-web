@@ -254,5 +254,11 @@ class SuratController extends Controller
         return view('mahasiswa.kode_anjungan',compact('kode'));
     }
 
+    function scanQr($id)
+    {
+        //ambil surat sesuai dengan id yg dikirim
+
+    }
+
 
 }

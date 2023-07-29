@@ -108,17 +108,17 @@
                                 </div>
                             @endif
 
-{{--                            @if($surat->status_id == 4)--}}
-{{--                                 <div class="row justify-content-end">--}}
-{{--                                    <div class="col-sm-10">--}}
-{{--                                        <a href="{{ route('admin.surat.surat_selesai', ['id' => $surat->uuid]) }}"--}}
-{{--                                            class="btn btn-success">Selesai </a>--}}
-{{--                                        <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi--}}
-{{--                                            selesai--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            @endif--}}
+                            @if($surat->status_id == 2)
+                                 <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                        <a href="{{ route('admin.surat.surat_selesai', ['id' => $surat->uuid]) }}"
+                                            class="btn btn-success">Selesai </a>
+                                        <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi
+                                            selesai
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </form>
                     </div>
                 </div>

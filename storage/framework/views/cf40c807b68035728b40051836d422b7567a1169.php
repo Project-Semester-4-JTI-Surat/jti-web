@@ -165,15 +165,15 @@
 
                     },
                     {
-                        data: 'softfile_scan',
-                        name: 'softfile_scan',
+                        data: 'softfile',
+                        name: 'softfile',
                         // visible: row.softfile_scan =='null' ? 'true' : 'false',
                          hideIfEmpty: true,
-                        render: function(data, type, row) {
-                           return row.softfile_scan != '' ?
-                           '<a target="_blank" href=<?php echo e(env('APP_URL')); ?>/storage/'+row.softfile_scan+' class="btn btn-primary">File Scan</a>'
-                           : '-';
-                        }
+                        
+                        
+                        
+                        
+                        
                     },
                     {
                         data: 'keterangan',
@@ -191,7 +191,7 @@
                     {
                         data: 'print',
                         name: 'print',
-                        visible: <?php echo e(Request::get('status') == 4 ? 'true' : 'false'); ?>
+                        visible: <?php echo e(Request::get('status') != 1 ? 'true' : 'false'); ?>
 
                     },
                 ],
