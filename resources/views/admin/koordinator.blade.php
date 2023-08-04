@@ -250,6 +250,9 @@
                     contentType: false,
                     processData: false,
                     success: (data) => {
+                        form.each(function(){
+                            this.reset();
+                        });
                         $('#tambahData').modal('hide');
                         loadTable();
                         swal("Success", "Data berhasil dimasukkan", "success");
