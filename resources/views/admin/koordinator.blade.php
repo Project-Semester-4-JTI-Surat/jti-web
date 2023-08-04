@@ -46,7 +46,7 @@
                         <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    
+
                         <form method="POST" id="formTambahData">
                         {{ csrf_field() }}
                             <div class="row">
@@ -106,7 +106,7 @@
                     Tambah Data
                 </button>
              @endif
-                
+
             </div>
             <div style="padding-left: 2rem; padding-right: 2rem; padding-bottom: 2rem">
                 <div class="table-responsive text-nowrap">
@@ -147,6 +147,9 @@
             $.validator.addMethod("checkAlpha", function(value, element) {
                 return (new RegExp("^[a-zA-Z ]*$").test(value))
             }, "Kolom harus diisi dengan huruf");
+            $.validator.addMethod("checkAlphaSym", function(value, element) {
+                return (new RegExp("^[a-zA-Z .,]*$").test(value))
+            }, "Kolom harus diisi dengan huruf");
             $('#formTambahData').validate({
                 // wrapper: "#form-input",
                 rules: {
@@ -156,7 +159,7 @@
                     },
                     nama: {
                         required: true,
-                        checkAlpha: true,
+                        checkAlphaSym: true,
                     },
                     no_hp: {
                         required: true,
