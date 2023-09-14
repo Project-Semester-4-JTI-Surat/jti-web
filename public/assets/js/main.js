@@ -7,6 +7,8 @@
 let menu, animate;
 
 (function () {
+  console.log('%c Hayooo mau ngapain.. wkwkwk, mau ngutek-ngutek ya. Gaboleh loh',
+  'color: white; background-color: red');
   // Initialize menu
   //-----------------
 
