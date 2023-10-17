@@ -120,3 +120,4 @@ Route::get('/', function () {
 Route::post('temp/file/upload',[FileUploadTempController::class,'temp_upload'])->name('temp-upload');
 Route::get('temp/file/delete/{filename?}',[FileUploadTempController::class,'temp_delete'])->name('temp_delete');
 // Route::curr
+Route::get('surat/detail/{uuid}',[SuratController::class,'scanQr'])->name('scanQr');

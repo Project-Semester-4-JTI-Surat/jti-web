@@ -70,12 +70,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-{{--                                    @foreach($statistik_pengajuan as $key => $value)--}}
-{{--                                        <tr>--}}
-{{--                                        <td>{{ $value->keterangan }}</td>--}}
-{{--                                        <td>{{ $value->count_prodi }}</td>--}}
-{{--                                    </tr>--}}
-{{--                                    @endforeach--}}
+                                    @foreach($statistik_pengajuan as $key => $value)
+                                        <tr>
+                                        <td>{{ $value->keterangan }}</td>
+                                        <td>{{ $value->count_prodi }}</td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
 
                             </table>
@@ -124,40 +124,7 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-lg-12">
-            <div class="card">
-                <div class="d-flex align-items-end row">
 
-                    <div class="card-body">
-                        <div style="padding-left: 1rem;">
-                            <h5 class="card-title text-primary">Statistika</h5>
-                        </div>
-                        <div class="table-responsive text-nowrap">
-
-                            <table class="table" id="tableAdmin">
-                                <thead>
-                                    <tr>
-                                        <th>Prodi</th>
-                                        <th>Jumlah Pengajuan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($statistik_pengajuan as $key => $value)
-                                        <tr>
-                                        <td>{{ $value->keterangan }}</td>
-                                        <td>{{ $value->count_prodi }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-
-                            </table>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div> --}}
     </div>
 @endsection
 

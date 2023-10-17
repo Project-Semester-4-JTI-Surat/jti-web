@@ -27,6 +27,7 @@
                             <th>NO</th>
                             <th>Kode</th>
                             <th>Prodi</th>
+                            <th>Metode Pengajuan</th>
                             <th>File Scan</th>
                             <th>Tanggal dibuat</th>
                             <th>Kebutuhan</th>
@@ -84,6 +85,11 @@
                         data: 'prodi.keterangan',
                         name: 'prodi.keterangan',
                     },
+                    {
+                        data: 'metode_pengajuan',
+                        name: 'metode_pengajuan',
+                    },
+
                     {
                         data: 'softfile_scan',
                         name: 'softfile_scan',

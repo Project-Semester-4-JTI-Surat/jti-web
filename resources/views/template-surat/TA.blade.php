@@ -1,5 +1,10 @@
 <div>
     <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
     <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">Nomor :</span><span style="font-family:'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-family:'Times New Roman';">/ PL17 / PP / {{\Carbon\Carbon::now()->format('Y')}}</span></p>
     <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">Perihal :&nbsp;</span><strong><span style="font-family:'Times New Roman';">Permohonan Ijin Survei</span></strong></p>
     <p style="margin-top:0pt; margin-bottom:8pt;"><strong><span style="font-family:'Times New Roman';">Kepada Yth.</span></strong></p>

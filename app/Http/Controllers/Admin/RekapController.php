@@ -35,7 +35,8 @@ class RekapController extends Controller
     public function export(Request $request)
     {
         $user = Auth::guard('admin')->user();
-        if ($request->has('date')){
+//        dd($request->only(['date'])['date'] != null);
+        if ($request->only(['date'])['date'] != null){
             $input = $request->only(['date']);
             $date = explode(" - ", $input['date'], 2);
             $firstDate = Carbon::parse(trim($date[0], ' '))->format('Y-m-d');

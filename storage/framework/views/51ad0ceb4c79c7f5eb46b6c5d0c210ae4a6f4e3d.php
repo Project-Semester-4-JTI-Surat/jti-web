@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo e(asset('vendor/libs/sweet-alert/sweetalert2.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/libs/sweet-alert/sweetalert2.css')); ?>"/>
     <link rel="stylesheet" href="<?php echo e(asset('css/mahasiswa/pengajuan_surat.css')); ?>">
     <title>Pengajuan Surat</title>
     <style>
@@ -16,129 +16,157 @@
 </head>
 
 <body>
-    <main>
-        <form id="multistepsform" method="POST" action="<?php echo e(route('mahasiswa.surat_insert')); ?>">
-            <!-- progressbar -->
-            <ul id="progressbar" class="">
-                <li class="active">Data Kampus</li>
-                <li>Data Instansi</li>
-                <li>Data Anggota</li>
 
-            </ul>
-            <?php echo e(csrf_field()); ?>
+<main>
+    <form id="multistepsform" method="POST" action="<?php echo e(route('mahasiswa.surat_insert')); ?>">
+        <!-- progressbar -->
+        <ul id="progressbar" class="">
+            <li class="active">Data Kampus</li>
+            <li>Data Instansi</li>
+            <li>Data Anggota</li>
 
-            <!-- fieldsets -->
-            <fieldset class="hidden">
-                <h2 class="fs-title">Kebutuhan Surat </h2>
-                <h3 class="fs-subtitle"></h3>
-                <div class="form-label">
-                    <label for="">Jenis Surat</label>
+        </ul>
+        <?php if($errors->any()): ?>
+            <div class="error-wrapper">
+
+                <div class="error-alert">
+                    
+                    
+                    
+                    
+                    <ul>
+                        <?php echo implode('', $errors->all('<li clas="text-error">:message</li>')); ?>
+
+                    </ul>
                 </div>
-                <input type="hidden" name="web" value="true">
-                <input type="hidden" name="prodi_id" value="<?php echo e(Auth::guard('mahasiswa')->user()->prodi_id); ?>">
-                <select name="kode_surat" placeholder="Jenis Surat" id="jenis_surat">
-                    <option value=""> --Jenis Surat--</option>
-                    <?php $__currentLoopData = $jsurat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($value->kode); ?>"> <?php echo e($value->keterangan); ?></option>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </select>
+            </div>
+        <?php endif; ?>
 
-                <div class="form-label">
-                    <label for="">Koordinator</label>
-                </div>
-                <select name="koordinator_id" placeholder="Koordinator" id="koordinator">
-                    <option value=""> --Pilih Koordinator--</option>
-                    <?php $__currentLoopData = $koordinator; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($value->uuid); ?>"> <?php echo e($value->nama); ?></option>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php echo e(csrf_field()); ?>
 
-                </select>
+        <!-- fieldsets -->
+        <fieldset class="hidden" id="kebutuhan_surat">
+            <h2 class="fs-title">Kebutuhan Surat </h2>
+            <h3 class="fs-subtitle"></h3>
+            <div class="form-label">
+                <label for="">Jenis Surat</label>
+            </div>
+            <input type="hidden" name="web" value="true">
+            <input type="hidden" name="metode_pengajuan" value="admin">
+            <input type="hidden" name="prodi_id" value="<?php echo e(Auth::guard('mahasiswa')->user()->prodi_id); ?>">
+            <select name="kode_surat" placeholder="Jenis Surat" id="jenis_surat">
+                <option value=""> --Jenis Surat--</option>
+                <?php $__currentLoopData = $jsurat; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($value->kode); ?>"> <?php echo e($value->keterangan); ?></option>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </select>
 
-                <div class="form-label">
-                    <label for="">Dosen</label>
-                </div>
-                <select name="dosen_id" placeholder="Dosen" id="dosen">
-                    <option value=""> --Pilih Dosen--</option>
-                    <?php $__currentLoopData = $dosen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($value->uuid); ?>"> <?php echo e($value->nama); ?></option>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </select>
+            <div class="form-label">
+                <label for="">Koordinator</label>
+            </div>
+            <select name="koordinator_id" placeholder="Koordinator" id="koordinator">
+                <option value=""> --Pilih Koordinator--</option>
+                <?php $__currentLoopData = $koordinator; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($value->uuid); ?>"> <?php echo e($value->nama); ?></option>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                <div class="form-label">
-                    <label for="">Kebutuhan</label>
-                </div>
-                <select name="kebutuhan" placeholder="Kebutuhan" id="Kebutuhan">
-                    <option value=""> --Pilih Kebutuhan--</option>
-                    <option value="Eksternal">Eksternal</option>
-                    <option value="Internal">Internal</option>
+            </select>
 
-                </select>
+            <div class="form-label">
+                <label for="">Dosen</label>
+            </div>
+            <select name="dosen_id" placeholder="Dosen" id="dosen">
+                <option value=""> --Pilih Dosen--</option>
+                <?php $__currentLoopData = $dosen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($value->uuid); ?>"> <?php echo e($value->nama); ?></option>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </select>
 
-                <div class="form-label">
-                    <label for="judul_ta">Judul TA</label>
-                </div>
-                <input id="judul_ta" type="text" name="judul_ta"
-                    placeholder="Masukkan judul ta.. Jika memilih jenis surat TA(Tugas Akhir)" />
+            <div class="form-label">
+                <label for="">Kebutuhan</label>
+            </div>
+            <select name="kebutuhan" placeholder="Kebutuhan" id="Kebutuhan">
+                <option value=""> --Pilih Kebutuhan--</option>
+                <option value="Eksternal">Eksternal</option>
+                <option value="Internal">Internal</option>
 
-                <div class="form-label">
-                    <label for="">Pilih Tanggal Pelaksanan</label>
-                </div>
-                <input type="date" name="tanggal_pelaksanaan" id="tanggal_pelaksanaan" placeholder="Tanggal" />
-                <div class="form-label">
-                    <label for="">Pilih Tanggal Selesai</label>
-                </div>
-                <input type="date" name="tanggal_selesai" id="tanggal_selesai" placeholder="Tanggal" />
-                <input type="button" name="next" class="next action-button" value="Next" />
-            </fieldset>
+            </select>
 
-            <fieldset>
-                <h2 class="fs-title">Data Instansi</h2>
-                <h3 class="fs-subtitle">Mohon isi kolom dibawah ini dengan benar</h3>
-                <div class="form-label">
-                    <label for="">Nama Mitra</label>
-                </div>
-                <input type="text" name="nama_mitra" id="nama_mitra" placeholder="Kepada" />
-                <div class="form-label">
-                    <label for="">Alamat Mitra</label>
-                </div>
-                <textarea name="alamat_mitra" id="alamat_mitra" placeholder="Alamat"></textarea>
-                <div class="form-label">
-                    <label for="">Keterangan</label>
-                </div>
-                <textarea name="keterangan" id="keterangan" placeholder="Keterangan"></textarea>
+            <div class="form-label">
+                <label for="judul_ta">Judul TA</label>
+            </div>
+            <input id="judul_ta" type="text" name="judul_ta" value="<?php echo e(old('judul_ta')); ?>"
+                   placeholder="Masukkan judul ta.. Jika memilih jenis surat TA(Tugas Akhir)"/>
 
-                <input type="button" name="previous" class="previous action-button" value="Previous" />
+            <div class="form-label">
+                <label for="tanggal_pelaksanaan">Pilih Tanggal Pelaksanan</label>
+            </div>
+            <input type="date" name="tanggal_pelaksanaan" value="<?php echo e(old('tanggal_pelaksanaan')); ?>" id="tanggal_pelaksanaan" placeholder="Tanggal"/>
 
-                <input type="button" name="next" class="next action-button" value="Next" />
-            </fieldset>
-            <fieldset>
-                <h2 class="fs-title">Data Anggota</h2>
-                <div style="padding:  0.5rem  0 1rem 0; display: flex; justify-content: center;">
-                    <div style=" float: left;clear: none;">
-                        <input style=" float: left; clear: none; margin: 2px 0 0 2px;" type="radio" id="individu"
-                            name="status_keanggotan" value="individu" id="individu">
-                        <label for=""
-                            style="float: left; clear: none; display: block; padding: 0px 1em 0px 8px;">Individu</label>
-                    </div>
-                    <div style=" float: left; clear: none;">
-                        <input style=" float: left; clear: none; margin: 2px 0 0 2px;" type="radio" id="kelompok"
-                            name="status_keanggotan" id="" value="kelompok">
-                        <label for=""
-                            style="float: left; clear: none; display: block; padding: 0px 1em 0px 8px;">Kelompok</label>
-                    </div>
-                </div>
-                <div id="kolom-dataAnggota">
-
-                </div>
-
-
-                <button type="button" name="previous" class="previous action-button">Previous</button>
-                <button type="submit" class="action-button">Submit</button>
-            </fieldset>
+            <div class="form-label">
+                <label for="tanggal_selesai">Pilih Tanggal Selesai</label>
+            </div>
+            <input type="date" name="tanggal_selesai" value="<?php echo e(old('tanggal_selesai')); ?>" id="tanggal_selesai" placeholder="Tanggal"/>
+            <button type="button" name="next" class="next action-button">Next</button>
             
-        </form>
-    </main>
+        </fieldset>
+
+        <fieldset id="data_instansi">
+            <h2 class="fs-title">Data Instansi</h2>
+            <h3 class="fs-subtitle">Mohon isi kolom dibawah ini dengan benar</h3>
+            <div class="form-label">
+                <label for="">Nama Mitra</label>
+            </div>
+            <input type="text" value="<?php echo e(old('nama_mitra')); ?>" name="nama_mitra" id="nama_mitra" placeholder="Kepada"/>
+            <div class="form-label">
+                <label for="">Alamat Mitra</label>
+            </div>
+            <textarea name="alamat_mitra" id="alamat_mitra" placeholder="Alamat"><?php echo e(old('alamat_mitra')); ?></textarea>
+
+            <input type="button" name="previous" class="previous action-button" value="Previous"/>
+
+            
+            <button type="button" name="next" class="next action-button">Next</button>
+        </fieldset>
+        <fieldset id="data_anggota">
+            <h2 class="fs-title">Data Anggota</h2>
+            <div style="padding:  0.5rem  0 1rem 0; display: flex; justify-content: center;">
+                <div style=" float: left;clear: none;">
+                    <input style=" float: left; clear: none; margin: 2px 0 0 2px;" type="radio" id="individu"
+                           name="status_keanggotan" value="individu" id="individu">
+                    <label for=""
+                           style="float: left; clear: none; display: block; padding: 0px 1em 0px 8px;">Individu</label>
+                </div>
+                <div style=" float: left; clear: none;">
+                    <input style=" float: left; clear: none; margin: 2px 0 0 2px;" type="radio" id="kelompok"
+                           name="status_keanggotan" id="" value="kelompok">
+                    <label for=""
+                           style="float: left; clear: none; display: block; padding: 0px 1em 0px 8px;">Kelompok</label>
+                </div>
+            </div>
+            <div id="kolom-dataAnggota">
+
+            </div>
+
+
+            <button type="button" name="previous" class="previous action-button">Previous</button>
+            <button type="submit" class="action-button">Submit</button>
+        </fieldset>
+        
+    </form>
+</main>
 </body>
+<?php if(Auth::guard('mahasiswa')->check()): ?>
+    <script>
+        var timeout = (<?php echo e(config('session.lifetime')); ?> * 60000);
+        setTimeout(function(){
+            window.location.reload(1);
+        },  timeout);
+
+
+
+    </script>
+<?php endif; ?>
 
 <script src="<?php echo e(asset('vendor/libs/jquery/jquery.js')); ?>"></script>
 <script src="<?php echo e(asset('vendor/libs/sweet-alert/sweetalert.min.js')); ?>"></script>
@@ -152,45 +180,64 @@
     </script>
 <?php endif; ?>
 <script>
-    $(document).ready(function() {
-
+    $(document).ready(function () {
+        $('#koordinator').attr('disabled', true);
+        $('#dosen').attr('disabled', true);
     });
     var current_fs, next_fs, previous_fs;
     var left, opacity, scale;
     var animating;
-    $(".next").click(function() {
+    $(".next").click(function () {
         if (animating) return false;
-        animating = true;
         current_fs = $(this).parent();
-        next_fs = $(this).parent().next();
-        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-        next_fs.show();
-        current_fs.animate({
-            opacity: 0
-        }, {
-            step: function(now, mx) {
-                scale = 1 - (1 - now) * 0.2;
-                left = now * 50 + "%";
-                opacity = 1 - now;
-                current_fs.css({
-                    transform: "scale(" + scale + ")",
-                    position: "absolute"
-                });
-                next_fs.css({
-                    left: left,
-                    opacity: opacity
-                });
-            },
-            duration: 800,
-            complete: function() {
-                current_fs.hide();
-                animating = false;
-            },
-            easing: "easeInOutBack"
-        });
+        fieldID = current_fs[0]['id'];
+        var $inputs = $('#'+fieldID+' :input:not(:hidden):not(:button):not(:disabled)');
+        var error;
+        // console.log($inputs);
+        $inputs.each(function(index){
+            // console.log($(this).val)
+            console.log("attr "+$(this).attr('id')+"-> "+$(this).val());
+
+            if ($(this).val() === ''){
+                swal("Error", "Mohon isi field yang tersedia dengan data yang valid", "error");
+                error = true;
+            }else{
+                error = false;
+            }
+        })
+        console.log(error);
+        if (!error){
+            animating = true;
+            next_fs = $(this).parent().next();
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+            next_fs.show();
+            current_fs.animate({
+                opacity: 0
+            }, {
+                step: function (now, mx) {
+                    scale = 1 - (1 - now) * 0.2;
+                    left = now * 50 + "%";
+                    opacity = 1 - now;
+                    current_fs.css({
+                        transform: "scale(" + scale + ")",
+                        position: "absolute"
+                    });
+                    next_fs.css({
+                        left: left,
+                        opacity: opacity
+                    });
+                },
+                duration: 800,
+                complete: function () {
+                    current_fs.hide();
+                    animating = false;
+                },
+                easing: "easeInOutBack"
+            });
+        }
     });
 
-    $(".previous").click(function() {
+    $(".previous").click(function () {
         if (animating) return false;
         animating = true;
 
@@ -204,7 +251,7 @@
         current_fs.animate({
             opacity: 0
         }, {
-            step: function(now, mx) {
+            step: function (now, mx) {
                 scale = 0.8 + (1 - now) * 0.2;
                 left = (1 - now) * 50 + "%";
                 opacity = 1 - now;
@@ -217,7 +264,7 @@
                 });
             },
             duration: 800,
-            complete: function() {
+            complete: function () {
                 current_fs.hide();
                 animating = false;
             },
@@ -225,11 +272,11 @@
         });
     });
 
-    $(".submit").click(function() {
+    $(".submit").click(function () {
         return false;
     });
 
-    $('#individu').click(function() {
+    $('#individu').click(function () {
         let individu = ` <div id="form-individu" style="display: none;">
                     <input type="text" name="nama_anggota[]" value="<?php echo e(Auth::guard('mahasiswa')->user()->nama); ?>"
                         readonly />
@@ -250,9 +297,9 @@
         $('#kolom-dataAnggota').append(individu);
         $('#form-individu').toggle(this.checked)
     });
-    $('#kelompok').click(function() {
+    $('#kelompok').click(function () {
         let kelompok = `<div id="form-kelompok" style="display: none; overflow-x:auto;">
-                    <button type="button" id="tambahAnggota" class="action-button">+</button>
+                    <button type="button" id="tambahAnggota" class="action-button">Tambah Anggota</button>
                     <div id="parent-list">
                         <div id="list"
                             style="border-style: solid; border-color: #e1e1e1; padding: 1rem 1rem 1rem 1rem; margin-bottom: 1.5rem;">
@@ -283,11 +330,11 @@
              <select name="prodi_id_anggota[]"  id="prodi_id_anggota">
                                 <option value=""> --Pilih Prodi--</option>
                                 <?php $__currentLoopData = $prodi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($value->id); ?>"> <?php echo e($value->keterangan); ?></option>
+        <option value="<?php echo e($value->id); ?>"> <?php echo e($value->keterangan); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-          <button type="button" id="hapusField" class="action-button">x</button>
-         </div>`;
+        </select>
+<button type="button" id="hapusField" class="action-button">x</button>
+</div>`;
 
         $("#tambahAnggota").on("click", () => {
             $("#parent-list").append(template);
@@ -297,7 +344,7 @@
         })
     });
 
-    $('#jenis_surat').on('change', function() {
+    $('#jenis_surat').on('change', function () {
         if (this.value == "MK") {
             $('#koordinator').attr('disabled', true);
             $('#dosen').attr('disabled', false);
@@ -305,29 +352,36 @@
             $('#koordinator').attr('disabled', false);
             $('#dosen').attr('disabled', true);
         }
-        if (this.value != "TA") {
-            $('#judul_ta').attr('disabled', true)
-        } else {
+        if (this.value == "TA" || this.value == "OBS") {
             $('#judul_ta').attr('disabled', false)
+        } else {
+            $('#judul_ta').attr('disabled', true)
 
         }
     })
 
-    $('#multistepsform').submit(function(e) {
-        var nama_mitra = $('#nama_mitra').val();
-        var alamat_mitra = $('#alamat_mitra').val();
-        var keterangan = $('#keterangan').val();
-        var tanggal_selesai = $('#tanggal_selesai').val();
-        var tanggal_pelaksanaan = $('#tanggal_pelaksanaan').val();
-        if (nama_mitra == '' || alamat_mitra == '' || keterangan == '' || tanggal_pelaksanaan == '' ||
-            tanggal_selesai == '') {
-            e.preventDefault();
-            swal("Error", "Oops ada data yang anda lewatkan..", "error");
-            console.log(tanggal_selesai + " => ");
-
-        }
-        console.log("submited");
-    })
+    function redirect()
+    {
+        window.location="<?php echo e(route('mahasiswa.dashboard')); ?>";
+    }
+    // $('#multistepsform').submit(function (e) {
+    //     var nama_mitra = $('#nama_mitra').val();
+    //     var alamat_mitra = $('#alamat_mitra').val();
+    //     var keterangan = $('#keterangan').val();
+    //     var tanggal_selesai = $('#tanggal_selesai').val();
+    //     var tanggal_pelaksanaan = $('#tanggal_pelaksanaan').val();
+    //     if (nama_mitra == '' || alamat_mitra == '' || keterangan == '' || tanggal_pelaksanaan == '' ||
+    //         tanggal_selesai == '') {
+    //         e.preventDefault();
+    //         swal("Error", "Oops ada data yang anda lewatkan..", "error");
+    //         console.log(tanggal_selesai + " => ");
+    //
+    //     }
+    //
+    //     // alert("Anda akan di arahkan kembali ke dashboard");
+    //     // redirect()
+    //     // setTimeout('Redirect()', 2000);
+    // })
 
     function setPrefix(data) {
         var prefix = '+62';
@@ -336,19 +390,24 @@
         }
     }
 
-    $('[data-form="no_hp"]').keyup(function() {
+    $('[data-form="no_hp"]').keyup(function () {
         var prefix = '+62';
         if (this.value.substring(0, prefix.length) != prefix) {
             this.value = prefix;
         }
     });
-    $('[data-form="no_hp"]').blur(function() {
+    $('[data-form="no_hp"]').blur(function () {
         var prefix = '+62';
         if (this.value.substring(0, prefix.length) != prefix) {
             this.value = prefix;
         }
         //this.value = prefix;
         //if(!(this.value.match('^+62'))) this.value = prefix;
+    })
+    $('#tanggal_pelaksanaan').change(function (){
+        const val = $(this).val();
+        console.log(val);
+        $('#tanggal_selesai').attr({'min':val});
     })
 </script>
 
