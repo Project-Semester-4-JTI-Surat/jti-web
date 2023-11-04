@@ -6,7 +6,11 @@
     <title>
     </title>
     <style>
-        @media print{
+         @media print{
+            body{
+                page-break-after: always;
+                padding: 0 30px 0 30px;
+            }
             .btn-cetak{
                 display: none;
             }
@@ -19,7 +23,10 @@
             -webkit-print-color-adjust:exact !important;
             print-color-adjust:exact !important;
             font-family: 'Times New Roman';
-            font-size: 14px
+            font-size: 12px
+        }
+        span, p {
+            font-size: 12pt !important;
         }
 
         h3, p { margin:0pt }
@@ -41,6 +48,9 @@
     &nbsp;
     &nbsp;
     <button onclick="window.print()" class="btn-cetak">Cetak</button>
+    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
+    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
+    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
@@ -152,14 +162,6 @@
         &#xa0;
     </p> <p style="text-align:justify">
         &#xa0;
-    </p> <p style="text-align:justify">
-        &#xa0;
-    </p> <p style="text-align:justify">
-        &#xa0;
-    </p> <p style="text-align:justify">
-        &#xa0;
-    </p> <p style="text-align:justify">
-        &#xa0;
     </p>
     <p style="text-align:justify">
         <span style="width:279pt; display:inline-block">&#xa0;</span>a.n Direktur
@@ -167,9 +169,7 @@
     <p style="text-indent:279pt; text-align:justify">
         Wakil Direktur Bidang Akademik,
     </p>
-    <p style="text-align:justify">
-        &#xa0;
-    </p>
+    
     <p style="text-align:justify">
         &#xa0;
     </p><p style="text-align:justify">
@@ -203,28 +203,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
         window.print();
-        (function() {
-            var beforePrint = function() {
-
-            };
-            var afterPrint = function() {
-                alert("Anda akan diarahkan ke halaman dashboard");
-                window.location="{{route('mahasiswa.dashboard')}}";
-            };
-
-            if (window.matchMedia) {
-                var mediaQueryList = window.matchMedia('print');
-                mediaQueryList.addListener(function(mql) {
-                    if (mql.matches) {
-                        beforePrint();
-                    } else {
-                        afterPrint();
-                    }
-                });
-            }
-
-            window.onbeforeprint = beforePrint;
-            window.onafterprint = afterPrint;
-        }());
 </script>
 </html>

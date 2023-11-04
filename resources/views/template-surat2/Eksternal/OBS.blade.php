@@ -7,10 +7,6 @@
     </title>
     <style>
         @media print{
-            body{
-                page-break-after: always;
-                padding: 0 30px 0 30px;
-            }
             .btn-cetak{
                 display: none;
             }
@@ -19,15 +15,11 @@
             }
         }
 
-
         body {
             -webkit-print-color-adjust:exact !important;
             print-color-adjust:exact !important;
             font-family: 'Times New Roman';
-            font-size: 12px
-        }
-        span, p {
-            font-size: 12pt !important;
+            font-size: 14px
         }
 
         h3, p { margin:0pt }
@@ -40,26 +32,18 @@
         span.FooterChar { font-size:12pt }
         span.HeaderChar { font-size:12pt }
         span.Hyperlink { text-decoration:underline; color:#0000ff }
-
     </style>
 </head>
 <body>
 <div>
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
     <button onclick="window.print()" class="btn-cetak">Cetak</button>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
-    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
-    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
-    <div>
         <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>Nomor : &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/ PL17 / PP / {{\Carbon\Carbon::now()->format('Y')}}</span></p>
         <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>Perihal : Permohonan Ijin Survei</span></p>
         <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>Kepada Yth.</span></p>
-        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-family:"Times New Roman",serif;'>Pimpinan {{ $surat->nama_mitra }}&nbsp;</span></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-family:"Times New Roman",serif;'>{{ $surat->nama_mitra }}&nbsp;</span></strong></p>
         <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-family:"Times New Roman",serif;'>{{ $surat->alamat_mitra }}</span></strong></p>
         <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-family:"Times New Roman",serif;'>Di</span></strong></p>
         <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><strong><span style='font-family:"Times New Roman",serif;'>&nbsp; &nbsp; &nbsp; Tempat</span></strong></p>
@@ -118,22 +102,34 @@
         &#xa0;
     </p> <p style="text-align:justify">
         &#xa0;
+    </p> <p style="text-align:justify">
+        &#xa0;
+    </p> <p style="text-align:justify">
+        &#xa0;
+    </p> <p style="text-align:justify">
+        &#xa0;
+    </p> <p style="text-align:justify">
+        &#xa0;
     </p>
     <p style="text-align:justify">
-        <span style="width:279pt; display:inline-block">&#xa0;</span>a.n Ketua
+        <span style="width:279pt; display:inline-block">&#xa0;</span>a.n Direktur
     </p>
     <p style="text-indent:279pt; text-align:justify">
-        Jurusan Teknologi Informasi,
+        Wakil Direktur Bidang Akademik,
     </p>
-    <div style="  margin:1rem 10rem 1rem 0; text-align:right;">
-        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
-        ->merge(asset('img/polije_logo.png'), .27, true)
-        ->size(100)->generate(route('scanQr',$surat->uuid))) !!} ">
-    </div>
     <p style="text-align:justify">
-        <span style="width:279pt; display:inline-block">&#xa0;</span><strong>Hendra Yufit Riskiawan, S.Kom, M.Cs</strong>
+        &#xa0;
     </p>
-
+    <p style="text-align:justify">
+        &#xa0;
+    </p><p style="text-align:justify">
+        &#xa0;
+    </p><p style="text-align:justify">
+        &#xa0;
+    </p>
+    <p style="text-align:justify">
+        <span style="width:279pt; display:inline-block">&#xa0;</span><strong>Surateno, S.Kom, M.Kom</strong>
+    </p>
     <p>
         <span style="width:36pt; display:inline-block">&#xa0;</span><span style="width:36pt; display:inline-block">&#xa0;</span><span
             style="width:36pt; display:inline-block">&#xa0;</span><span
@@ -141,7 +137,7 @@
             style="width:36pt; display:inline-block">&#xa0;</span><span
             style="width:36pt; display:inline-block">&#xa0;</span><span
             style="width:36pt; display:inline-block">&#xa0;</span>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;
-        <strong>NIP 19830203 200604 1 003</strong>
+        <strong>NIP 19790703 200312 1 001</strong>
     </p>
     {{--    <p style="font-size:9pt">--}}
     {{--        <strong><span style="color:#ffffff">Tembusan Kpd Yth:</span></strong>--}}
@@ -156,6 +152,29 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-        window.print();
+    window.print();
+    (function() {
+        var beforePrint = function() {
+
+        };
+        var afterPrint = function() {
+            alert("Anda akan diarahkan ke halaman dashboard");
+            window.location="{{route('mahasiswa.dashboard')}}";
+        };
+
+        if (window.matchMedia) {
+            var mediaQueryList = window.matchMedia('print');
+            mediaQueryList.addListener(function(mql) {
+                if (mql.matches) {
+                    beforePrint();
+                } else {
+                    afterPrint();
+                }
+            });
+        }
+
+        window.onbeforeprint = beforePrint;
+        window.onafterprint = afterPrint;
+    }());
 </script>
 </html>

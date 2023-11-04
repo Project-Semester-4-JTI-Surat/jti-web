@@ -7,6 +7,10 @@
     </title>
     <style>
         @media print{
+            body{
+                page-break-after: always;
+                padding: 0 30px 0 30px;
+            }
             .btn-cetak{
                 display: none;
             }
@@ -20,11 +24,12 @@
             -webkit-print-color-adjust:exact !important;
             print-color-adjust:exact !important;
             font-family: 'Times New Roman';
-            font-size: 14px
+            font-size: 12px
         }
         span, p {
             font-size: 12pt !important;
         }
+
         h3, p { margin:0pt }
         li { margin-top:0pt; margin-bottom:0pt }
         h3 { text-align:center; page-break-inside:auto; page-break-after:avoid; font-family:'Times New Roman'; font-size:10pt; font-weight:bold; color:#000000 }
@@ -48,6 +53,9 @@
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
+    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
+    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
+    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <div>
         <p style="text-align:justify; line-height:115%">
             Nomor <span style="width:17pt; display:inline-block">&#xa0;</span>&#xa0; :<span
@@ -65,7 +73,7 @@
             &#xa0;
         </p>
         <p style="text-align:justify; line-height:115%">
-            <strong>KepadaYth.</strong>
+            <strong>Kepada Yth.</strong>
         </p>
         <p style="text-align:justify; line-height:115%">
             <strong>Pimpinan {{$surat->nama_mitra}}</strong>
@@ -83,7 +91,7 @@
 {{--        <p style="margin-left:63pt; text-align:justify; font-size:3pt;">&nbsp;</p>--}}
         <p style="text-align:justify;">Adapun mahasiswa yang dimaksud adalah :</p>
         <p style="margin-left:63pt; text-align:justify; font-size:9pt;">&nbsp;</p>
-        <table style="width:440.6pt; margin-left:5.4pt; border-collapse:collapse;">
+        <table style="width:100%; border-collapse:collapse;">
             <tbody>
             <tr style="height:10.55pt;">
                 <td style="width:150.35pt; border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle; background-color:#cccccc;">
@@ -96,41 +104,31 @@
                     <p style="text-align:center;"><strong>Judul Skripsi</strong></p>
                 </td>
             </tr>
-            <tr>
-                <td style="width:150.35pt; border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt double #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
-                    <p style="text-align:center;">{{Auth::guard('mahasiswa')->user()->nama}}</p>
-                    <p style="text-align:center;"><br></p>
-                </td>
-                <td style="width:61.95pt; border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
-                    <p style="margin-right:1.7pt; text-align:center;">{{Auth::guard('mahasiswa')->user()->nim}}</p>
-                    <p style="margin-right:1.7pt; text-align:center;"><br></p>
-                </td>
-                <td style="border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
-                    <p style="margin-left:0.8pt; text-align:center;">{{$surat->judul_ta}}</p>
-                    <p style="margin-right:1.7pt; text-align:center;"><br></p>
-                </td>
-            </tr>
+                <tr>
+                    <td style="width:150.35pt; border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt double #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
+                        <p style="text-align:center;">{{$anggota->nama}}</p>
+                        <p style="text-align:center;"><br></p>
+                    </td>
+                    <td style="width:61.95pt; border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
+                        <p style="margin-right:1.7pt; text-align:center;">{{$anggota->nim}}</p>
+                        <p style="margin-right:1.7pt; text-align:center;"><br></p>
+                    </td>
+                    <td style="border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
+                        <p style="margin-left:0.8pt; text-align:center;">{{$surat->judul_ta}}</p>
+                        <p style="margin-right:1.7pt; text-align:center;"><br></p>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <p style="margin-left:63pt; text-align:justify; font-size:5pt;">&nbsp;</p>
-        <p style="text-align:justify;">Konfirmasi kesediaan Bapak/Ibu untuk menerima ijin survey mahasiswa kami dapat disampaikan pada <strong>{{ $surat->koordinator->nama }}</strong> dengan no Hp. {{$surat->dosen->no_hp}} <span class="selectable-text">{{ $surat->koordinator->no_hp }}</span> selaku Koordinator Bidang Tugas Akhir/Skripsi Program Studi {{ $surat->prodi->note }} Politeknik Negeri Jember.</p>
+        <p style="text-align:justify;">Konfirmasi kesediaan Bapak/Ibu untuk menerima ijin survey mahasiswa kami dapat disampaikan pada <strong>{{ $surat->koordinator->nama }}</strong> dengan no Hp. {{$surat->koordinator->no_hp}} selaku Koordinator Bidang Tugas Akhir/Skripsi Program Studi {{ $surat->prodi->note }} Politeknik Negeri Jember.</p>
         <p style="text-align:justify; font-size:5pt;">&nbsp;</p>
         <p style="text-align:justify;">Demikian atas kebijakan dan kerjasama yang baik dari Bapak/Ibu dalam turut serta menunjang peningkatan keterampilan anak didik kami, diucapkan terima kasih<span style="font-size:11pt;">.</span></p>
         <p style="text-align:justify">
             &#xa0;
         </p>
     </div>
-    <p style="text-align:justify">
-        &#xa0;
-    </p> <p style="text-align:justify">
-        &#xa0;
-    </p> <p style="text-align:justify">
-        &#xa0;
-    </p> <p style="text-align:justify">
-        &#xa0;
-    </p> <p style="text-align:justify">
-        &#xa0;
-    </p> <p style="text-align:justify">
+   <p style="text-align:justify">
         &#xa0;
     </p> <p style="text-align:justify">
         &#xa0;
@@ -177,29 +175,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     window.print();
-    (function() {
-        var beforePrint = function() {
 
-        };
-        var afterPrint = function() {
-            alert("Anda akan diarahkan ke halaman dashboard");
-            window.location="{{route('mahasiswa.dashboard')}}";
-        };
-
-        if (window.matchMedia) {
-            var mediaQueryList = window.matchMedia('print');
-            mediaQueryList.addListener(function(mql) {
-                if (mql.matches) {
-                    beforePrint();
-                } else {
-                    afterPrint();
-                }
-            });
-        }
-
-        window.onbeforeprint = beforePrint;
-        window.onafterprint = afterPrint;
-    }());
 </script>
 </html>
 

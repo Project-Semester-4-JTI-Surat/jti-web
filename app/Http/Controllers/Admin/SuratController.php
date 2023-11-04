@@ -81,7 +81,7 @@ class SuratController extends Controller
             return DataTables::of($surat)
                 ->addIndexColumn()
                 ->addColumn('softfile', function ($row) {
-                    return $row->softfile_scan == 'null' ? '<a href="' . env('APP_URL') . '/assets/softfile/' . $row->softfile_scan . '"> File Scan </a>' : '-';
+                    return $row->softfile_scan != null ? '<a href="' .Storage::url( $row->softfile_scan). '"> File Scan </a>' : '-';
                     // return '<a href="' . env('APP_URL') . '/assets/softfile/' . $row->softfile_scan . '"> File Scan </a>';
                 })
                 ->addColumn('status', function ($row) {
@@ -206,9 +206,13 @@ class SuratController extends Controller
 
     public function print($id)
     {
-        $surat = Surat::with(['prodi', 'koordinator'])->where('uuid', '=', $id)->first();
-        // dd($surat);
-        return view('template-surat.' . $surat->kebutuhan . '.' . $surat->kode_surat, compact('surat'));
+        $surat = Surat::with(['prodi', 'koordinator', 'dosen'])->where('uuid', '=', $id)->first();
+        $anggota = Anggota::where('surat_id', '=', $id)->get();
+        if ($surat->kode_surat == 'TA') {
+            $anggota = Anggota::where('surat_id', '=', $id)->first();
+        }
+//         dd($anggota);
+        return view('template-surat.' . $surat->kebutuhan . '.' . $surat->kode_surat, compact('surat', 'anggota'));
         // return $this->$surat->kode_surat();
         // $pdf = PDF::loadView('template-surat.'.$surat->kode_surat);
         // return $pdf->stream();

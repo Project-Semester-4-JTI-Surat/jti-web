@@ -7,7 +7,10 @@
     </title>
     <style>
         @media print{
-
+            body{
+                page-break-after: always;
+                padding: 0 30px 0 30px;
+            }
             .btn-cetak{
                 display: none;
             }
@@ -15,6 +18,7 @@
                 background-color:#cccccc;
             }
         }
+
 
         body {
             -webkit-print-color-adjust:exact !important;
@@ -49,13 +53,16 @@
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
-
+    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
+    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
+    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <div>
         <p style="text-align:justify; line-height:115%">
             Nomor <span style="width:17pt; display:inline-block">&#xa0;</span>&#xa0; :<span
                 style="width:8.67pt; display:inline-block">&#xa0;</span>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;
             &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; <span style="width:15pt; display:inline-block">&#xa0;</span><span
-                style="width:36pt; display:inline-block">&#xa0;</span>/ PL17 / PP / {{ \Carbon\Carbon::now()->format('Y') }}
+                style="width:36pt; display:inline-block">&#xa0;</span>/ PL17 / PP / <?php echo e(\Carbon\Carbon::now()->format('Y')); ?>
+
         </p>
         <p style="text-align:justify; line-height:115%">
             Lampiran&#xa0;&#xa0;&#xa0; :<span style="width:1.02pt; display:inline-block">&#xa0;</span> -
@@ -67,13 +74,13 @@
             &#xa0;
         </p>
         <p style="text-align:justify; line-height:115%">
-            <strong>KepadaYth.</strong>
+            <strong>Kepada Yth.</strong>
         </p>
         <p style="text-align:justify; line-height:115%">
-            <strong>Pimpinan {{$surat->nama_mitra}}</strong>
+            <strong>Pimpinan <?php echo e($surat->nama_mitra); ?></strong>
         </p>
         <p style="text-align:justify; line-height:115%">
-            <strong>{{$surat->alamat_mitra}}</strong>
+            <strong><?php echo e($surat->alamat_mitra); ?></strong>
         </p>
         <p style="margin-left:63pt; text-align:justify">
             &#xa0;
@@ -81,8 +88,8 @@
         <p style="text-align:justify;"><strong>&nbsp;</strong></p>
         <p style="text-align:justify;">Dalam rangka penyelenggaraan pendidikan Politeknik Negeri Jember yang berorientasi pada pendidikan profesional, mahasiswa wajib melaksanakan Tugas Akhir / Skripsi sebagai salah satu syarat kelulusan.</p>
         <p style="margin-left:63pt; text-align:justify; font-size:6pt;">&nbsp;</p>
-        <p style="text-align:justify; font-size:14pt;"><span style="font-size:12pt;">Sehubungan dengan hal tersebut mohon Bapak / Ibu berkenan mengijinkan mahasiswa kami dari&nbsp;</span><strong><span style="font-size:12pt;">Program Studi {{ $surat->prodi->note }}&nbsp;</span></strong><span style="font-size:12pt;">melakukan survei guna mendapatkan data dan informasi yang kompeten</span> <span style="font-size:12pt;">sesuai dengan bidang kajiannya di Instansi / perusahaan&nbsp;</span><span style="font-size:12pt;">&nbsp;</span><span style="font-size:12pt;">yang Bapak / Ibu pimpin.</span></p>
-        <p style="margin-left:63pt; text-align:justify; font-size:3pt;">&nbsp;</p>
+        <p style="text-align:justify;"><span style="font-size:12pt;">Sehubungan dengan hal tersebut mohon Bapak / Ibu berkenan mengijinkan mahasiswa kami dari&nbsp;</span><strong><span style="font-size:12pt;">Program Studi <?php echo e($surat->prodi->note); ?>&nbsp;</span></strong><span style="font-size:12pt;">melakukan survei guna mendapatkan data dan informasi yang kompeten</span> <span style="font-size:12pt;">sesuai dengan bidang kajiannya di Instansi / perusahaan&nbsp;</span><span style="font-size:12pt;">&nbsp;</span><span style="font-size:12pt;">yang Bapak / Ibu pimpin.</span></p>
+
         <p style="text-align:justify;">Adapun mahasiswa yang dimaksud adalah :</p>
         <p style="margin-left:63pt; text-align:justify; font-size:9pt;">&nbsp;</p>
         <table style="width:100%; border-collapse:collapse;">
@@ -98,55 +105,54 @@
                     <p style="text-align:center;"><strong>Judul Skripsi</strong></p>
                 </td>
             </tr>
-            <tr>
-                <td style="width:150.35pt; border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt double #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
-                    <p style="text-align:center;">{{$anggota->nama}}</p>
-                    <p style="text-align:center;"><br></p>
-                </td>
-                <td style="width:61.95pt; border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
-                    <p style="margin-right:1.7pt; text-align:center;">{{$anggota->nim}}</p>
-                    <p style="margin-right:1.7pt; text-align:center;"><br></p>
-                </td>
-                <td style="border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
-                    <p style="margin-left:0.8pt; text-align:center;">{{$surat->judul_ta}}</p>
-                    <p style="margin-right:1.7pt; text-align:center;"><br></p>
-                </td>
-            </tr>
-
+                <tr>
+                    <td style="width:150.35pt; border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt double #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
+                        <p style="text-align:center;"><?php echo e($anggota->nama); ?></p>
+                        <p style="text-align:center;"><br></p>
+                    </td>
+                    <td style="width:61.95pt; border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
+                        <p style="margin-right:1.7pt; text-align:center;"><?php echo e($anggota->nim); ?></p>
+                        <p style="margin-right:1.7pt; text-align:center;"><br></p>
+                    </td>
+                    <td style="border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
+                        <p style="margin-left:0.8pt; text-align:center;"><?php echo e($surat->judul_ta); ?></p>
+                        <p style="margin-right:1.7pt; text-align:center;"><br></p>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <p style="margin-left:63pt; text-align:justify; font-size:5pt;">&nbsp;</p>
-        <p style="text-align:justify;">Konfirmasi kesediaan Bapak/Ibu untuk menerima ijin survey mahasiswa kami dapat disampaikan pada <strong>{{ $surat->koordinator->nama }}</strong> dengan no Hp. {{$surat->dosen->no_hp}} <span class="selectable-text">{{ $surat->koordinator->no_hp }}</span> selaku Koordinator Bidang Tugas Akhir/Skripsi Program Studi {{ $surat->prodi->note }} Politeknik Negeri Jember.</p>
+        <p style="text-align:justify;">Konfirmasi kesediaan Bapak/Ibu untuk menerima ijin survey mahasiswa kami dapat disampaikan pada <strong><?php echo e($surat->koordinator->nama); ?></strong> dengan no Hp. <?php echo e($surat->koordinator->no_hp); ?> selaku Koordinator Bidang Tugas Akhir/Skripsi Program Studi <?php echo e($surat->prodi->note); ?> Politeknik Negeri Jember.</p>
         <p style="text-align:justify; font-size:5pt;">&nbsp;</p>
         <p style="text-align:justify;">Demikian atas kebijakan dan kerjasama yang baik dari Bapak/Ibu dalam turut serta menunjang peningkatan keterampilan anak didik kami, diucapkan terima kasih<span style="font-size:11pt;">.</span></p>
         <p style="text-align:justify">
             &#xa0;
         </p>
     </div>
-    <p style="text-align:justify">
-        &#xa0;
-    </p> <p style="text-align:justify">
-        &#xa0;
-    </p> <p style="text-align:justify">
+   <p style="text-align:justify">
         &#xa0;
     </p> <p style="text-align:justify">
         &#xa0;
     </p>
     <p style="text-align:justify">
-        <span style="width:279pt; display:inline-block">&#xa0;</span>a.n Ketua
+        <span style="width:279pt; display:inline-block">&#xa0;</span>a.n Direktur
     </p>
     <p style="text-indent:279pt; text-align:justify">
-        Jurusan Teknologi Informasi,
+        Wakil Direktur Bidang Akademik,
     </p>
-    <div style="  margin:1rem 10rem 1rem 0; text-align:right; padding-right: 10%">
-        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
-        ->merge(asset('img/polije_logo.png'), .27, true)
-        ->size(100)->generate(route('scanQr',$surat->uuid))) !!} ">
-    </div>
     <p style="text-align:justify">
-        <span style="width:279pt; display:inline-block">&#xa0;</span><strong>Hendra Yufit Riskiawan, S.Kom, M.Cs</strong>
+        &#xa0;
     </p>
-
+    <p style="text-align:justify">
+        &#xa0;
+    </p><p style="text-align:justify">
+        &#xa0;
+    </p><p style="text-align:justify">
+        &#xa0;
+    </p>
+    <p style="text-align:justify">
+        <span style="width:279pt; display:inline-block">&#xa0;</span><strong>Surateno, S.Kom, M.Kom</strong>
+    </p>
     <p>
         <span style="width:36pt; display:inline-block">&#xa0;</span><span style="width:36pt; display:inline-block">&#xa0;</span><span
             style="width:36pt; display:inline-block">&#xa0;</span><span
@@ -154,24 +160,25 @@
             style="width:36pt; display:inline-block">&#xa0;</span><span
             style="width:36pt; display:inline-block">&#xa0;</span><span
             style="width:36pt; display:inline-block">&#xa0;</span>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;
-        <strong>NIP 19830203 200604 1 003</strong>
+        <strong>NIP 19790703 200312 1 001</strong>
     </p>
 </div>
-    {{--    <p style="font-size:9pt">--}}
-    {{--        <strong><span style="color:#ffffff">Tembusan Kpd Yth:</span></strong>--}}
-    {{--    </p>--}}
-    {{--    <p style="font-size:9pt">--}}
-    {{--        <strong><span style="color:#ffffff">Ka. Badan Perencanaan Pembangunan Daerah (BAPEDA)</span></strong>--}}
-    {{--    </p>--}}
-    {{--    <p style="font-size:9pt">--}}
-    {{--        <strong><span style="color:#ffffff">Kantor Bupati Kab. Probolingo</span></strong>--}}
-    {{--    </p>--}}
-   {{--    <div class="footer">--}}
+    
+    
+    
+    
+    
+    
+    
+    
+   
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-        window.print();
+    window.print();
+
 </script>
 </html>
 
 
+<?php /**PATH C:\laragon\www\jti-surat\resources\views/template-surat/Eksternal/TA.blade.php ENDPATH**/ ?>

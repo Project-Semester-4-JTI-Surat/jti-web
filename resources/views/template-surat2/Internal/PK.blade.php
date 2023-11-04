@@ -6,11 +6,7 @@
     <title>
     </title>
     <style>
-         @media print{
-            body{
-                page-break-after: always;
-                padding: 0 30px 0 30px;
-            }
+        @media print{
             .btn-cetak{
                 display: none;
             }
@@ -23,10 +19,7 @@
             -webkit-print-color-adjust:exact !important;
             print-color-adjust:exact !important;
             font-family: 'Times New Roman';
-            font-size: 12px
-        }
-        span, p {
-            font-size: 12pt !important;
+            font-size: 14px
         }
 
         h3, p { margin:0pt }
@@ -49,8 +42,6 @@
     &nbsp;
     &nbsp;
     <button onclick="window.print()" class="btn-cetak">Cetak</button>
-    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
-    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
@@ -158,20 +149,7 @@
     </div>
     <p style="text-align:justify">
         &#xa0;
-    </p> 
-    <p style="text-align:justify">
-        &#xa0;
-    </p> 
-    <p style="text-align:justify">
-        &#xa0;
-    </p> 
-    <p style="text-align:justify">
-        &#xa0;
-    </p> 
-    <p style="text-align:justify">
-        &#xa0;
-    </p> 
-    <p style="text-align:justify">
+    </p> <p style="text-align:justify">
         &#xa0;
     </p> <p style="text-align:justify">
         &#xa0;
@@ -190,7 +168,7 @@
     <p style="text-indent:279pt; text-align:justify">
         Jurusan Teknologi Informasi,
     </p>
-    <div style="  margin:1rem 10rem 1rem 0; text-align:right; ">
+    <div style="  margin:1rem 10rem 1rem 0; text-align:right; padding-right: 10%">
         <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
         ->merge(asset('img/polije_logo.png'), .27, true)
         ->size(100)->generate(route('scanQr',$surat->uuid))) !!} ">
@@ -223,5 +201,28 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
         window.print();
+        (function() {
+            var beforePrint = function() {
+
+            };
+            var afterPrint = function() {
+                alert("Anda akan diarahkan ke halaman dashboard");
+                window.location="{{route('mahasiswa.dashboard')}}";
+            };
+
+            if (window.matchMedia) {
+                var mediaQueryList = window.matchMedia('print');
+                mediaQueryList.addListener(function(mql) {
+                    if (mql.matches) {
+                        beforePrint();
+                    } else {
+                        afterPrint();
+                    }
+                });
+            }
+
+            window.onbeforeprint = beforePrint;
+            window.onafterprint = afterPrint;
+        }());
 </script>
 </html>

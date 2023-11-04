@@ -7,7 +7,6 @@
     </title>
     <style>
         @media print{
-
             .btn-cetak{
                 display: none;
             }
@@ -15,15 +14,14 @@
                 background-color:#cccccc;
             }
         }
-
+        p, span{
+            font-size: 12pt !important;
+        }
         body {
             -webkit-print-color-adjust:exact !important;
             print-color-adjust:exact !important;
             font-family: 'Times New Roman';
-            font-size: 12px
-        }
-        span, p {
-            font-size: 12pt !important;
+            font-size: 14px
         }
 
         h3, p { margin:0pt }
@@ -85,7 +83,7 @@
         <p style="margin-left:63pt; text-align:justify; font-size:3pt;">&nbsp;</p>
         <p style="text-align:justify;">Adapun mahasiswa yang dimaksud adalah :</p>
         <p style="margin-left:63pt; text-align:justify; font-size:9pt;">&nbsp;</p>
-        <table style="width:100%; border-collapse:collapse;">
+        <table style="width:440.6pt; margin-left:5.4pt; border-collapse:collapse;">
             <tbody>
             <tr style="height:10.55pt;">
                 <td style="width:150.35pt; border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle; background-color:#cccccc;">
@@ -100,11 +98,11 @@
             </tr>
             <tr>
                 <td style="width:150.35pt; border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt double #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
-                    <p style="text-align:center;">{{$anggota->nama}}</p>
+                    <p style="text-align:center;">{{Auth::guard('mahasiswa')->user()->nama}}</p>
                     <p style="text-align:center;"><br></p>
                 </td>
                 <td style="width:61.95pt; border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
-                    <p style="margin-right:1.7pt; text-align:center;">{{$anggota->nim}}</p>
+                    <p style="margin-right:1.7pt; text-align:center;">{{Auth::guard('mahasiswa')->user()->nim}}</p>
                     <p style="margin-right:1.7pt; text-align:center;"><br></p>
                 </td>
                 <td style="border-top:1.5pt double #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle;">
@@ -112,7 +110,6 @@
                     <p style="margin-right:1.7pt; text-align:center;"><br></p>
                 </td>
             </tr>
-
             </tbody>
         </table>
         <p style="margin-left:63pt; text-align:justify; font-size:5pt;">&nbsp;</p>
@@ -170,7 +167,30 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-        window.print();
+    window.print();
+    (function() {
+        var beforePrint = function() {
+
+        };
+        var afterPrint = function() {
+            alert("Anda akan diarahkan ke halaman dashboard");
+            window.location="{{route('mahasiswa.dashboard')}}";
+        };
+
+        if (window.matchMedia) {
+            var mediaQueryList = window.matchMedia('print');
+            mediaQueryList.addListener(function(mql) {
+                if (mql.matches) {
+                    beforePrint();
+                } else {
+                    afterPrint();
+                }
+            });
+        }
+
+        window.onbeforeprint = beforePrint;
+        window.onafterprint = afterPrint;
+    }());
 </script>
 </html>
 
