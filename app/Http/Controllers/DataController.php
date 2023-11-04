@@ -18,7 +18,7 @@ class DataController extends Controller
     /**
      * @param string $message
      * @param Collection $collection
-     * 
+     *
      * @return JsonResponse
      */
     protected function baseResponseData($message = 'Data' ,Collection $collection) : JsonResponse
@@ -41,7 +41,7 @@ class DataController extends Controller
     public function koordinator() : JsonResponse
     {
         $auth = Auth::user();
-        return $this->baseResponseData('Data Koordinator',Koordinator::where('nama','!=','-')->where('prodi_id','=',$auth->prodi_id)->get());
+        return $this->baseResponseData('Data Koordinator',Koordinator::where('nama','!=','-')->get());
     }
 
     /**

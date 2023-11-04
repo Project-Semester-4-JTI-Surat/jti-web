@@ -27,29 +27,29 @@ class DatabaseSeeder extends Seeder
         // Role::create(
         //     [
         //         'keterangan'=>'Super Admin'
-                
+
         //     ]
         // );
-        // Admin::create(
-        //     [
-        //         'username'=>'adminjti2',
-        //         'nama'=>'Indriana Rahmawati',
-        //         'prodi_id'=>1,
-        //         'role_id'=>1,
-        //         'no_hp'=>'6208122255966',
-        //         'password'=>bcrypt('12345678')
-        //     ]
-        //     );
-        // Admin::create(
-        //     [
-        //         'username'=>'super2',
-        //         'nama'=>'SuperAdmin2',
-        //         'prodi_id'=>2,
-        //         'role_id'=>2,
-        //         'no_hp'=>'6208122255966',
-        //         'password'=>'12345678'
-        //     ]
-        //     );
+         Admin::create(
+             [
+                 'username'=>'adminjti2',
+                 'nama'=>'Indriana Rahmawati',
+                 'prodi_id'=>1,
+                 'role_id'=>1,
+                 'no_hp'=>'6208122255966',
+                 'password'=>'12345678'
+             ]
+             );
+//         Admin::create(
+//             [
+//                 'username'=>'super2',
+//                 'nama'=>'SuperAdmin2',
+//                 'prodi_id'=>2,
+//                 'role_id'=>2,
+//                 'no_hp'=>'6208122255966',
+//                 'password'=>'12345678'
+//             ]
+//             );
         // Prodi::create(
         //     [
         //         'keterangan' => 'MIF Inter'
@@ -83,10 +83,10 @@ class DatabaseSeeder extends Seeder
         //     );
         // Koordinator::create(
         //     [
-        //         'nama'=>'M. Angga Gumilang, S. Pd., M. Eng.', 
-        //         'no_hp'=>'085156168675', 
-        //         'email'=>'angga.gumilang@polije.ac.id', 
-        //         'prodi_id'=>'1', 
+        //         'nama'=>'M. Angga Gumilang, S. Pd., M. Eng.',
+        //         'no_hp'=>'085156168675',
+        //         'email'=>'angga.gumilang@polije.ac.id',
+        //         'prodi_id'=>'1',
         //         'kode_surat'=>'TA'
         //     ]
         //     );

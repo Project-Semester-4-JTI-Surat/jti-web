@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Jti-Surat adalah aplikasi pengajuan surat yang dibuat untuk memudahkan mahasiswa dalam membuat pengajuan di banyak tipe surat" name="description">
     <link rel="icon" type="image/x-icon" href="<?php echo e(asset('img/favicon/logo.svg')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('css/mahasiswa/style.css')); ?>">
     <link rel="shortcut icon" href="../assets/img/logo.svg" type="image/x-icon">
@@ -143,9 +144,9 @@
                         <h4 tabindex="0"
                             class="focus:outline-none text-2xl text-gray-800 dark:text-gray-100 font-bold mb-3">
                             Pengguna JTI-Surat</h4>
-                        <p tabindex="0" class="focus:outline-none text-gray-800 dark:text-gray-100 text-sm"> 
-                            JTI-Surat digunakan oleh mahasiswa Jurusan Teknologi Informasi, dari program studi TIF, TKK, dan MIF, baik yang berstatus mahasiswa reguler 
-                            di kampus utama maupun mahasiswa di kampus cabang. Penggunaan JTI-Surat juga tidak terbatas pada 
+                        <p tabindex="0" class="focus:outline-none text-gray-800 dark:text-gray-100 text-sm">
+                            JTI-Surat digunakan oleh mahasiswa Jurusan Teknologi Informasi, dari program studi TIF, TKK, dan MIF, baik yang berstatus mahasiswa reguler
+                            di kampus utama maupun mahasiswa di kampus cabang. Penggunaan JTI-Surat juga tidak terbatas pada
                             semester tertentu, sehingga Anda dapat mengajukan surat mulai dari semester awal hingga akhir.</p>
                     </div>
                 </div>
@@ -158,13 +159,13 @@
                         <h4 tabindex="0"
                             class="focus:outline-none text-2xl text-gray-800 dark:text-gray-100 font-bold mb-3">
                             Proses JTI-Surat</h4>
-                        <p tabindex="0" class="focus:outline-none text-gray-800 dark:text-gray-100 text-sm"> 
-                            Anda hanya perlu melakukan login. 
-                            Jika belum memiliki akun, Anda dapat mendaftar terlebih dahulu. 
-                            Setelah berhasil login, Anda akan diarahkan ke halaman dashboard yang tertulis "Surat Saya". 
-                            Tempat di mana surat-surat Anda diproses. 
-                            Selanjutnya, terdapat proses pengajuan surat yang melibatkan tiga langkah pengisian data, 
-                            yaitu data kampus, data instansi/mitra, dan data anggota. 
+                        <p tabindex="0" class="focus:outline-none text-gray-800 dark:text-gray-100 text-sm">
+                            Anda hanya perlu melakukan login.
+                            Jika belum memiliki akun, Anda dapat mendaftar terlebih dahulu.
+                            Setelah berhasil login, Anda akan diarahkan ke halaman dashboard yang tertulis "Surat Saya".
+                            Tempat di mana surat-surat Anda diproses.
+                            Selanjutnya, terdapat proses pengajuan surat yang melibatkan tiga langkah pengisian data,
+                            yaitu data kampus, data instansi/mitra, dan data anggota.
                             <br>Terakhir,pada profil pengguna terdapat pengaturan untuk memperbarui akun (setting) dan pilihan untuk keluar (sign out).</p>
                     </div>
                 </div>
@@ -177,7 +178,7 @@
                         <h4 tabindex="0"
                             class="focus:outline-none text-2xl text-gray-800 dark:text-gray-100 font-bold mb-3">
                             Koodinator admin JTI-Surat</h4>
-                        <p tabindex="0" class="focus:outline-none text-gray-800 dark:text-gray-100 text-sm"> 
+                        <p tabindex="0" class="focus:outline-none text-gray-800 dark:text-gray-100 text-sm">
                             Meskipun website JTI-Surat ini dapat diakses oleh semua program studi dari jurusan Teknologi informasi,
                              namun terdapat perbedaan koordinator admin untuk setiap program studi.</p>
                     </div>
@@ -248,7 +249,7 @@
                             </span>
                         </summary>
                         <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                            > Menunggu adalah status awal ketika anda baru saja selesai mengirim surat pengajuan. 
+                            > Menunggu adalah status awal ketika anda baru saja selesai mengirim surat pengajuan.
                             <br>
                             > Diproses adalah status ketika admin telah melihat isi surat pengajuan dan memproses surat pengajuan yang telah anda di kirim.
                             <br>

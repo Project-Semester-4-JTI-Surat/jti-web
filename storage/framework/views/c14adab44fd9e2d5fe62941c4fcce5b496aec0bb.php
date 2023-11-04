@@ -2,7 +2,10 @@
     <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
     <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
     <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
-    <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">Nomor :</span><span style="font-family:'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-family:'Times New Roman';">/ PL17 / PP / 2021</span></p>
+    <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">Nomor :</span><span style="font-family:'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-family:'Times New Roman';">/ PL17 / PP / <?php echo e(\Carbon\Carbon::now()->format('Y')); ?></span></p>
     <p style="margin-top:0pt; margin-bottom:8pt;"><span style="font-family:'Times New Roman';">Perihal :&nbsp;</span><strong><span style="font-family:'Times New Roman';">Permohonan Ijin Survei</span></strong></p>
     <p style="margin-top:0pt; margin-bottom:8pt;"><strong><span style="font-family:'Times New Roman';">Kepada Yth.</span></strong></p>
     <p style="margin-top:0pt; margin-bottom:8pt;"><strong><span style="font-family:'Times New Roman';"><?php echo e($surat->nama_mitra); ?></span></strong></p>
@@ -51,10 +54,11 @@
     <p style="margin-top:0pt; margin-bottom:8pt; text-align:right;"><span style="font-family:'Times New Roman';">a n Direktur</span></p>
     <p style="margin-top:0pt; margin-bottom:8pt; text-align:right;"><span style="font-family:'Times New Roman';">Wakil Direktur Bidang Akademik</span></p>
     <p style="margin-top:0pt; margin-bottom:8pt; text-align:right;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
-    <p style="margin-top:0pt; margin-bottom:8pt; text-align:right;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
+    <p style="  margin-top:0pt; margin-bottom:8pt; text-align:right;"><span style="font-family:'Times New Roman';">&nbsp;</span></p>
     <p style="margin-top:0pt; margin-bottom:8pt; text-align:right; line-height:normal;"><strong><span style="font-family:'Times New Roman';">Surateno, S.Kom, M.Kom</span></strong></p>
     <p style="margin-top:0pt; margin-bottom:8pt; text-align:right; line-height:normal;"><strong><span style="font-family:'Times New Roman';">NIP. 19790703 200312 1 001</span></strong></p>
 </div>
 <script>
     window.print();
-</script><?php /**PATH C:\laragon\www\jti-surat\resources\views/template-surat/TA.blade.php ENDPATH**/ ?>
+</script>
+<?php /**PATH C:\laragon\www\jti-surat\resources\views/template-surat/TA.blade.php ENDPATH**/ ?>

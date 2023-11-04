@@ -38,7 +38,7 @@ class SuratExport implements FromCollection,WithHeadings
                     ->join('anggota','surat.uuid','=','anggota.surat_id')
                     ->where('surat.prodi_id','=',$this->prodi_id)
                     ->whereBetween('surat.tanggal_dibuat',[$this->tanggal_awal,$this->tanggal_akhir])
-                    ->selectRaw('kode_surat ,status.keterangan as status ,prodi.keterangan as prodi,nama_mitra ,anggota.nama ,alamat_mitra ,tanggal_dibuat ,tanggal_pelaksanaan ,tanggal_selesai ,kebutuhan ,alasan_penolakan')
+                    ->selectRaw('kode_surat ,status.keterangan as status ,prodi.keterangan as prodi,nama_mitra ,anggota.nama ,alamat_mitra ,tanggal_dibuat ,tanggal_pelaksanaan ,tanggal_selesai ,kebutuhan,metode_pengajuan ,alasan_penolakan')
                     ->get();
             }else {
                 return DB::table('surat')
@@ -46,7 +46,7 @@ class SuratExport implements FromCollection,WithHeadings
                     ->join('prodi', 'surat.prodi_id', '=', 'prodi.id')
                     ->join('anggota', 'surat.uuid', '=', 'anggota.surat_id')
                     ->where('surat.prodi_id','=',$this->prodi_id)
-                    ->selectRaw('kode_surat ,status.keterangan as status ,prodi.keterangan as prodi,nama_mitra ,anggota.nama ,alamat_mitra ,tanggal_dibuat ,tanggal_pelaksanaan ,tanggal_selesai ,kebutuhan ,alasan_penolakan')
+                    ->selectRaw('kode_surat ,status.keterangan as status ,prodi.keterangan as prodi,nama_mitra ,anggota.nama ,alamat_mitra ,tanggal_dibuat ,tanggal_pelaksanaan ,tanggal_selesai ,kebutuhan,metode_pengajuan ,alasan_penolakan')
                     ->get();
             }
         }else{
@@ -56,14 +56,14 @@ class SuratExport implements FromCollection,WithHeadings
                     ->join('prodi', 'surat.prodi_id', '=', 'prodi.id')
                     ->join('anggota','surat.uuid','=','anggota.surat_id')
                     ->whereBetween('surat.tanggal_dibuat',[$this->tanggal_awal,$this->tanggal_akhir])
-                    ->selectRaw('kode_surat ,status.keterangan as status ,prodi.keterangan as prodi,nama_mitra ,anggota.nama ,alamat_mitra ,tanggal_dibuat ,tanggal_pelaksanaan ,tanggal_selesai ,kebutuhan ,alasan_penolakan')
+                    ->selectRaw('kode_surat ,status.keterangan as status ,prodi.keterangan as prodi,nama_mitra ,anggota.nama ,alamat_mitra ,tanggal_dibuat ,tanggal_pelaksanaan ,tanggal_selesai ,kebutuhan,metode_pengajuan ,alasan_penolakan')
                     ->get();
             }else {
                 return DB::table('surat')
                     ->join('status', 'surat.status_id', '=', 'status.id')
                     ->join('prodi', 'surat.prodi_id', '=', 'prodi.id')
                     ->join('anggota', 'surat.uuid', '=', 'anggota.surat_id')
-                    ->selectRaw('kode_surat ,status.keterangan as status ,prodi.keterangan as prodi,nama_mitra ,anggota.nama ,alamat_mitra ,tanggal_dibuat ,tanggal_pelaksanaan ,tanggal_selesai ,kebutuhan ,alasan_penolakan')
+                    ->selectRaw('kode_surat ,status.keterangan as status ,prodi.keterangan as prodi,nama_mitra ,anggota.nama ,alamat_mitra ,tanggal_dibuat ,tanggal_pelaksanaan ,tanggal_selesai ,kebutuhan,metode_pengajuan ,alasan_penolakan')
                     ->get();
             }
         }
@@ -82,7 +82,8 @@ class SuratExport implements FromCollection,WithHeadings
             'Tanggal Pelaksanaan',
             'Tanggal Selesai',
             'Kebutuhan',
-            'Alasan Penolakan   '
+            'Metode Pengajuan',
+            'Alasan Penolakan   ',
         ];
     }
 }
