@@ -34,7 +34,7 @@ class SuratController extends Controller
     {
         $mahasiswa = Auth::guard('mahasiswa')->user();
         // $input = $request->all();
-        $input = $request->only(['kode_surat','prodi_id', 'dosen_id', 'koordinator_id', 'nama_mitra', 'alamat_mitra', 'tanggal_dibuat', 'tanggal_pelaksanaan', 'tanggal_selesai', 'judul_ta', 'kebutuhan', 'keterangan']);
+        $input = $request->only(['kode_surat','metode_pengajuan','prodi_id', 'dosen_id', 'koordinator_id', 'nama_mitra', 'alamat_mitra', 'tanggal_dibuat', 'tanggal_pelaksanaan', 'tanggal_selesai', 'judul_ta', 'kebutuhan', 'keterangan']);
         // dd($input);
         $detailSurat = Anggota::where('nim','=',$mahasiswa->nim)->first();
         $now = Carbon::now()->format('Y-m-d');
@@ -67,11 +67,11 @@ class SuratController extends Controller
                 "nama_mitra" => $input['nama_mitra'],
                 "alamat_mitra" => $input['alamat_mitra'],
                 "tanggal_dibuat" => $now,
-                "metode_pengajuan"=>"Admin",
+                "metode_pengajuan"=>$input['metode_pengajuan'],
                 "tanggal_pelaksanaan" => $input['tanggal_pelaksanaan'],
                 "tanggal_selesai" => $input['tanggal_selesai'],
                 "kebutuhan" => $input['kebutuhan'],
-                "keterangan" => $input['keterangan'],
+//                "keterangan" => $input['keterangan'],
         );
         if ( $request->has('koordinator_id')) $arr += array("kode_koordinator" => $input['koordinator_id'],);
         if ( $request->has('dosen_id')) $arr += array("dosen_id" => $input['dosen_id']);
@@ -120,34 +120,34 @@ class SuratController extends Controller
                 );
             }
         }
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            array('cluster' => env('PUSHER_APP_CLUSTER'))
-        );
-        $data = array(
-            'id' => $id->uuid,
-            'kode_surat' => $request->get('kode_surat'),
-            'nama_mhs' => $request->get('nama_anggota')[0],
-            'nim_mhs' => $request->get('nim_anggota')[0],
-        );
-        $pusher->trigger(
-            'my-channel',
-            'my-event',
-            $data
-        );
+//        $pusher = new Pusher(
+//            env('PUSHER_APP_KEY'),
+//            env('PUSHER_APP_SECRET'),
+//            env('PUSHER_APP_ID'),
+//            array('cluster' => env('PUSHER_APP_CLUSTER'))
+//        );
+//        $data = array(
+//            'id' => $id->uuid,
+//            'kode_surat' => $request->get('kode_surat'),
+//            'nama_mhs' => $request->get('nama_anggota')[0],
+//            'nim_mhs' => $request->get('nim_anggota')[0],
+//        );
+//        $pusher->trigger(
+//            'my-channel',
+//            'my-event',
+//            $data
+//        );
         if ($request->has('web')) {
-//            if ($input['metode_pengajuan'] == 'Anjungan') {
-//                $random = strtoupper(Str::random(9));
-//                $array = array(
-//                    'kode'=>$random,
-//                    'kode_surat'=>$input['kode_surat'],
-//                    'mahasiswa_id'=>$mahasiswa->uuid,
-//                );
-//                PengajuanAnjungan::create($array);
-//                return redirect()->route('mahasiswa.kode_anjungan',$random);
-//            }
+            if ($input['metode_pengajuan'] == 'Anjungan') {
+                $random = strtoupper(Str::random(9));
+                $array = array(
+                    'kode'=>$random,
+                    'kode_surat'=>$input['kode_surat'],
+                    'surat_id'=>$id->uuid,
+                );
+                PengajuanAnjungan::create($array);
+                return redirect()->route('mahasiswa.kode_anjungan',$random);
+            }
             return redirect()->route('mahasiswa.dashboard');
         }
         // event(new SuratBroadcast($request->get('kode_surat'),$request->get('nama_anggota')[0],$request->get('nim_anggota')[0]));
