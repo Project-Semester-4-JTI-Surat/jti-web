@@ -52,7 +52,7 @@
                 <label for="">Jenis Surat</label>
             </div>
             <input type="hidden" name="web" value="true">
-            <input type="hidden" name="metode_pengajuan" value="admin">
+
             <input type="hidden" name="prodi_id" value="<?php echo e(Auth::guard('mahasiswa')->user()->prodi_id); ?>">
             <select name="kode_surat" placeholder="Jenis Surat" id="jenis_surat">
                 <option value=""> --Jenis Surat--</option>
@@ -73,9 +73,9 @@
             </select>
 
             <div class="form-label">
-                <label for="">Dosen</label>
+                <label for="dosen">Dosen</label>
             </div>
-            <select name="dosen_id" placeholder="Dosen" id="dosen">
+            <select name="dosen_id" id="dosen">
                 <option value=""> --Pilih Dosen--</option>
                 <?php $__currentLoopData = $dosen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <option value="<?php echo e($value->uuid); ?>"> <?php echo e($value->nama); ?></option>
@@ -83,13 +83,21 @@
             </select>
 
             <div class="form-label">
-                <label for="">Kebutuhan</label>
+                <label for="Kebutuhan">Kebutuhan</label>
             </div>
-            <select name="kebutuhan" placeholder="Kebutuhan" id="Kebutuhan">
+            <select name="kebutuhan" id="Kebutuhan">
                 <option value=""> --Pilih Kebutuhan--</option>
                 <option value="Eksternal">Eksternal</option>
                 <option value="Internal">Internal</option>
+            </select>
 
+            <div class="form-label">
+                <label for="metode_pengajuan">Metode Pengajuan</label>
+            </div>
+            <select name="metode_pengajuan" id="metode_pengajuan">
+                <option value=""> --Pilih Kebutuhan--</option>
+                <option value="Anjungan">Anjungan</option>
+                <option value="Admin">Admin</option>
             </select>
 
             <div class="form-label">
