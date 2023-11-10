@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-sm-5 text-center text-sm-left">
                             <div class="card-body pb-0 px-0 px-md-4">
-                                <img src="../assets/img/illustrations/man-with-laptop-light.png" height="140"
+                                <img src="{{asset('img/illustrations/man-with-laptop-light.png')}}" height="140"
                                     alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png"
                                     data-app-light-img="illustrations/man-with-laptop-light.png" />
                             </div>
@@ -55,35 +55,35 @@
                 </div>
             </div>
             <!-- Total Revenue -->
-            <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-                <div class="card">
-                    <div class="row row-bordered g-0">
-                        <div class="col-md-12">
-                            <h5 class="card-header m-0 me-2 pb-3">Statistika</h5>
-                            <div class=" text-nowrap">
+{{--            <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">--}}
+{{--                <div class="card">--}}
+{{--                    <div class="row row-bordered g-0">--}}
+{{--                        <div class="col-md-12">--}}
+{{--                            <h5 class="card-header m-0 me-2 pb-3">Statistika</h5>--}}
+{{--                            <div class=" text-nowrap">--}}
 
-                            <table class="table" id="tableAdmin">
-                                <thead>
-                                    <tr>
-                                        <th>Prodi</th>
-                                        <th>Jumlah Pengajuan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($statistik_pengajuan as $key => $value)
-                                        <tr>
-                                        <td>{{ $value->keterangan }}</td>
-                                        <td>{{ $value->count_prodi }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
+{{--                            <table class="table" id="tableAdmin">--}}
+{{--                                <thead>--}}
+{{--                                    <tr>--}}
+{{--                                        <th>Prodi</th>--}}
+{{--                                        <th>Jumlah Pengajuan</th>--}}
+{{--                                    </tr>--}}
+{{--                                </thead>--}}
+{{--                                <tbody>--}}
+{{--                                    @foreach($statistik_pengajuan as $key => $value)--}}
+{{--                                        <tr>--}}
+{{--                                        <td>{{ $value->keterangan }}</td>--}}
+{{--                                        <td>{{ $value->count_prodi }}</td>--}}
+{{--                                    </tr>--}}
+{{--                                    @endforeach--}}
+{{--                                </tbody>--}}
 
-                            </table>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{{--                            </table>--}}
+{{--                        </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <!--/ Total Revenue -->
             <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
                 <div class="row">
