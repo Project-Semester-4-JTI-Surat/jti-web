@@ -8,13 +8,16 @@ use App\Mail\TolakPengajuan;
 use App\Models\Anggota;
 use App\Models\JenisSurat;
 use App\Models\Mahasiswa;
+use App\Models\Prodi;
 use App\Models\Surat;
 use App\Traits\PrintKodeSurat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Response;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -68,6 +71,7 @@ class SuratController extends Controller
          */
         //Cek Jika role Admin adalah super admin
         // dd($user->role_id);
+
         if ($user->role_id == '2') {
             $surat = Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id)->get();
             // dd($surat);
@@ -81,7 +85,16 @@ class SuratController extends Controller
             return DataTables::of($surat)
                 ->addIndexColumn()
                 ->addColumn('softfile', function ($row) {
-                    return $row->softfile_scan != null ? '<a href="' .Storage::url( $row->softfile_scan). '"> File Scan </a>' : '-';
+                    $prodi = Prodi::find($row->prodi_id);
+                    if (str_contains($prodi->keterangan, "TIF")) {
+                        $prodi = 'TIF';
+                    } elseif (str_contains($prodi->keterangan, "MIF")) {
+                        $prodi = 'MIF';
+                    } else {
+                        $prodi = 'TKK';
+
+                    }
+                    return $row->softfile_scan != null ? '<a href="' .route('downloadSoftfile',['prodi'=>$prodi,'file'=>$row->softfile_scan]) . '"> File Scan </a>' : '-';
                     // return '<a href="' . env('APP_URL') . '/assets/softfile/' . $row->softfile_scan . '"> File Scan </a>';
                 })
                 ->addColumn('status', function ($row) {
@@ -198,7 +211,8 @@ class SuratController extends Controller
 
         }
 //        dd($softfile);
-        $surat->softfile_scan = $prodi . '/' . $filename;
+//        $surat->softfile_scan = $prodi . '/' . $filename;
+        $surat->softfile_scan = $filename;
         $surat->status_id = 4;
         $surat->update();
         return redirect()->route('admin.surat.index', ['status' => 4]);
@@ -224,5 +238,17 @@ class SuratController extends Controller
         $surat = Surat::find($id);
         $anggota = Anggota::where('surat_id', '=', $id)->first();
         return view('detail-surat', compact('surat', 'anggota'));
+    }
+
+    public function downloadSoftfile($prodi_id,$filename)
+    {
+        $folder_name = $prodi_id;
+        $path = 'public/'.$folder_name.'/'.$filename;
+//        dd($path);
+//        $path = $filename;
+        if(!Storage::exists($path)){
+            abort(404);
+        }
+        return Storage::response($path);
     }
 }

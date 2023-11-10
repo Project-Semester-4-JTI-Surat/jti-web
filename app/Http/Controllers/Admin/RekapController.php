@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\SuratExport;
 use App\Http\Controllers\Controller;
+use App\Models\Prodi;
 use App\Models\Surat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,7 +22,18 @@ class RekapController extends Controller
             return DataTables::of($surat)
                 ->addIndexColumn()
                 ->addColumn('file_scan',function ($row){
-                    return $row->softfile_scan == null ? '<a href="' . env('APP_URL') . '/assets/softfile/' . $row->softfile_scan . '"> File Scan </a>' : ' ';
+                    $prodi = Prodi::find($row->prodi_id);
+                    if (str_contains($prodi->keterangan, "TIF")) {
+                        $prodi = 'TIF';
+                    } elseif (str_contains($prodi->keterangan, "MIF")) {
+                        $prodi = 'MIF';
+                    } else {
+                        $prodi = 'TKK';
+
+                    }
+                    return $row->softfile_scan != null ? '<a href="' .route('downloadSoftfile',['prodi'=>$prodi,'file'=>$row->softfile_scan]) . '"> File Scan </a>' : '-';
+
+//                    return $row->softfile_scan == null ? '<a href=""> File Scan </a>' : ' ';
                 })
                 ->addColumn('detail',function ($row){
                     return '<button data-toggle="tooltip" data-placement="bottom" title="Detail pengajuan" class="btn btn-icon me-2 btn-primary" onclick="detail(`'.$row->uuid.'`)"><i class="fa-sharp fa-solid fa-circle-info"></i></button>';

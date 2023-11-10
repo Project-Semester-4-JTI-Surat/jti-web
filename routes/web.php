@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DosenController;
 use App\Http\Controllers\Admin\KoordinatorController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\ProdiController;
+use App\Http\Controllers\Admin\RekapController;
 use App\Http\Controllers\Admin\SuratController;
 use App\Http\Controllers\FileUploadTempController;
 use App\Http\Controllers\MahasiswaAuthController;
@@ -46,8 +47,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     });
 
     Route::group(['prefix'=>'rekap','as'=>'rekap.'],function (){
-        Route::get('/',[\App\Http\Controllers\Admin\RekapController::class, 'index'])->name('index');
-        Route::post('/export',[\App\Http\Controllers\Admin\RekapController::class,'export'])->name('export');
+        Route::get('/',[RekapController::class, 'index'])->name('index');
+        Route::post('/export',[RekapController::class,'export'])->name('export');
     });
 
     Route::group(['prefix' => 'dosen', 'as' => 'dosen.'], function () {
@@ -121,3 +122,5 @@ Route::post('temp/file/upload',[FileUploadTempController::class,'temp_upload'])-
 Route::get('temp/file/delete/{filename?}',[FileUploadTempController::class,'temp_delete'])->name('temp_delete');
 // Route::curr
 Route::get('surat/detail/{uuid}',[SuratController::class,'scanQr'])->name('scanQr');
+
+Route::get('surat/softfile/download/{prodi}/{file}',[SuratController::class,'downloadSoftfile'])->name('downloadSoftfile');
