@@ -17,7 +17,7 @@ use Yajra\DataTables\Facades\DataTables;
 class RekapController extends Controller
 {
     public function index(Request $request){
-        $surat = Surat::with(['prodi'])->get();
+        $surat = Surat::with(['prodi'])->where('status_id','=',4)->get();
         if ($request->ajax()){
             return DataTables::of($surat)
                 ->addIndexColumn()
@@ -38,7 +38,10 @@ class RekapController extends Controller
                 ->addColumn('detail',function ($row){
                     return '<button data-toggle="tooltip" data-placement="bottom" title="Detail pengajuan" class="btn btn-icon me-2 btn-primary" onclick="detail(`'.$row->uuid.'`)"><i class="fa-sharp fa-solid fa-circle-info"></i></button>';
                 })
-                ->rawColumns(['detail','file_scan'])
+                ->addColumn('aksi', function ($row) {
+                    return '<a href="' . route('admin.surat.detail', ['id' => $row->uuid]) . '" class="btn btn-primary">Detail</a>';
+                })
+                ->rawColumns(['detail','file_scan','aksi'])
                 ->make(true);
         }
         return view('admin.rekap');

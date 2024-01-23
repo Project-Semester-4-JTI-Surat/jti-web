@@ -124,3 +124,5 @@ Route::get('temp/file/delete/{filename?}',[FileUploadTempController::class,'temp
 Route::get('surat/detail/{uuid}',[SuratController::class,'scanQr'])->name('scanQr');
 
 Route::get('surat/softfile/download/{prodi}/{file}',[SuratController::class,'downloadSoftfile'])->name('downloadSoftfile');
+
+Route::post('editor/save/{id}',[SuratController::class,'editorSave'])->name('editorSave');

@@ -30,7 +30,7 @@
                             <th>File Scan</th>
                             <th>Tanggal dibuat</th>
                             <th>Kebutuhan</th>
-
+                            <th>Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -109,10 +109,10 @@
                         data: 'kebutuhan',
                         name: 'kebutuhan',
                     },
-                    // {
-                    //     data: 'detail',
-                    //     name: 'detail',
-                    // },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                    },
                 ],
             });
         }

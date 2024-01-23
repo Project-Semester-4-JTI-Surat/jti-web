@@ -5,43 +5,6 @@
     <meta charset="utf-8"/>
     <title>
     </title>
-    <style>
-        @media print{
-            body{
-                page-break-after: always;
-                padding: 0 30px 0 30px;
-            }
-            .btn-cetak{
-                display: none;
-            }
-            .header_tr{
-                background-color:#cccccc;
-            }
-        }
-
-
-        body {
-            -webkit-print-color-adjust:exact !important;
-            print-color-adjust:exact !important;
-            font-family: 'Times New Roman';
-            font-size: 12px
-        }
-        span, p {
-            font-size: 12pt !important;
-        }
-
-        h3, p { margin:0pt }
-        li { margin-top:0pt; margin-bottom:0pt }
-        h3 { text-align:center; page-break-inside:auto; page-break-after:avoid; font-family:'Times New Roman'; font-size:10pt; font-weight:bold; color:#000000 }
-        .BalloonText { font-family:Tahoma; font-size:8pt }
-        .Footer { font-size:12pt }
-        .Header { font-size:12pt }
-        span.BalloonTextChar { font-family:Tahoma; font-size:8pt }
-        span.FooterChar { font-size:12pt }
-        span.HeaderChar { font-size:12pt }
-        span.Hyperlink { text-decoration:underline; color:#0000ff }
-
-    </style>
 </head>
 <body>
 <div>
