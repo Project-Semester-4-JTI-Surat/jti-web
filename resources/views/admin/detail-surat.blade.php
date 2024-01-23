@@ -16,56 +16,57 @@
                                 <label class="col-sm-2 col-form-label" for="dosen_id">Dosen</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="dosen_id" readonly
-                                        value="{{ $surat->dosen->nama }}">
+                                           value="{{ $surat->dosen->nama }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="koordinator_id">koordinator</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="koordinator_id" readonly
-                                        value="{{ $surat->koordinator->nama }}">
+                                           value="{{ $surat->koordinator->nama }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="nama_mitra">Nama Mitra</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="nama_mitra" readonly
-                                        value="{{ $surat->nama_mitra }}">
+                                           value="{{ $surat->nama_mitra }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="nama_mitra">Alamat Mitra</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="alamat_mitra" readonly
-                                        value="{{ $surat->alamat_mitra }}">
+                                           value="{{ $surat->alamat_mitra }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="tanggal_dibuat">Tanggal Dibuat</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="tanggal_dibuat" readonly
-                                        value="{{ $surat->tanggal_dibuat }}">
+                                           value="{{ $surat->tanggal_dibuat }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="tanggal_pelaksanaan">Tanggal pelaksanaan</label>
+                                <label class="col-sm-2 col-form-label" for="tanggal_pelaksanaan">Tanggal
+                                    pelaksanaan</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="tanggal_pelaksanaan" readonly
-                                        value="{{ $surat->tanggal_pelaksanaan }}">
+                                           value="{{ $surat->tanggal_pelaksanaan }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="tanggal_selesai">Tanggal selesai</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="tanggal_selesai" readonly
-                                        value="{{ $surat->tanggal_selesai }}">
+                                           value="{{ $surat->tanggal_selesai }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="kebutuhan">Kebutuhan</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="kebutuhan" readonly
-                                        value="{{ $surat->kebutuhan }}">
+                                           value="{{ $surat->kebutuhan }}">
                                 </div>
                             </div>
 
@@ -84,14 +85,15 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                                 <div class="col-sm-10">
-                                    <textarea id="keterangan" class="form-control" readonly aria-describedby="basic-icon-default-message2">{{ $surat->keterangan }}</textarea>
+                                    <textarea id="keterangan" class="form-control" readonly
+                                              aria-describedby="basic-icon-default-message2">{{ $surat->keterangan }}</textarea>
                                 </div>
                             </div>
                             @if ($surat->status_id == 1)
                                 <div class="row justify-content-end">
                                     <div class="col-sm-10">
                                         <a href="{{ route('admin.surat.proses_surat', ['id' => $surat->uuid]) }}"
-                                            class="btn btn-primary">Proses Surat</a>
+                                           class="btn btn-primary">Proses Surat</a>
                                     </div>
                                 </div>
                             @endif
@@ -100,19 +102,19 @@
                                 <div class="row justify-content-end">
                                     <div class="col-sm-10">
                                         <a href="{{ route('admin.surat.dapat_diambil', ['id' => $surat->uuid]) }}"
-                                            class="btn btn-primary">Dapat diambil </a>
+                                           class="btn btn-primary">Dapat diambil </a>
                                         <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi
-                                             dapat diambil
+                                            dapat diambil
                                         </div>
                                     </div>
                                 </div>
                             @endif
 
                             @if($surat->status_id == 2)
-                                 <div class="row justify-content-end">
+                                <div class="row justify-content-end">
                                     <div class="col-sm-10">
                                         <a href="{{ route('admin.surat.surat_selesai', ['id' => $surat->uuid]) }}"
-                                            class="btn btn-success">Selesai </a>
+                                           class="btn btn-success">Selesai </a>
                                         <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi
                                             selesai
                                         </div>
@@ -136,14 +138,14 @@
                                     $count = 0;
                                 @endphp
                                 <div class="row mb-3">
-                                @if($value->ketua == 'true')
-                                     <div class="alert alert-primary" role="alert">Ketua Kelompok</div>
-                                @endif
+                                    @if($value->ketua == 'true')
+                                        <div class="alert alert-primary" role="alert">Ketua Kelompok</div>
+                                    @endif
                                     <label class="col-sm-2 col-form-label" for="">Nama Anggota
                                         {{ $key + 1 }}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="nama" readonly
-                                            value="{{ $value->nama }}">
+                                               value="{{ $value->nama }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -151,7 +153,7 @@
                                         {{ $key + 1 }}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="nim" readonly
-                                            value="{{ $value->nim }}">
+                                               value="{{ $value->nim }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -159,7 +161,7 @@
                                         {{ $key + 1 }}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="prodi_id" readonly
-                                            value="{{ $value->prodi->keterangan }}">
+                                               value="{{ $value->prodi->keterangan }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -167,10 +169,10 @@
                                         {{ $key + 1 }}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="no_hp" readonly
-                                            value="{{ $value->no_hp }}">
+                                               value="{{ $value->no_hp }}">
                                     </div>
                                 </div>
-                                <hr class="hr" />
+                                <hr class="hr"/>
                             @endforeach
 
 
@@ -179,75 +181,97 @@
                 </div>
             </div>
         </div>
-        @if ($surat->status_id != 1)
+        @if ($surat->status_id == 2)
             <div class="card mb-4">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">Upload softfile</h5>
+                    <h5 class="mb-0">Preview Dokumen</h5>
                 </div>
                 <div class="card-body">
-                    <form method="post"
-                        action="{{ route('admin.surat.softfile_save', ['id' => $surat->uuid]) }}">
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="softfile">File <span
-                                    class='text-danger'>*</span></label>
-                            <div class="col-sm-10">
-                                {{ csrf_field() }}
-                                <input name="softfile" id="softfile" type="file">
-                            </div>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                {{-- <div class="form-text">Dengan menekan tombol diatas, surat akan masuk ke bagian surat
-                                    ditolak
-                                </div> --}}
-                            </div>
-                        </div>
-                    </form>
+                    <div id="editor">
+                        {!! $preview_surat !!}
+                    </div>
                 </div>
             </div>
+            {{--    </div>--}}
         @endif
-        @if ($surat->status_id == 1)
-            <div class="card mb-4">
-                <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">Tolak Pengajuan</h5>
-                </div>
-                <div class="card-body">
-                    <form id="tolakSurat" method="post"
-                        action="{{ route('admin.surat.tolak_surat', ['id' => $surat->uuid]) }}">
-                        <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="keterangan">Keterangan <span
-                                    class='text-danger'>*</span></label>
-                            <div class="col-sm-10">
-                                {{ csrf_field() }}
-                                <textarea id="alasan_penolakan" required class="form-control" name="alasan_penolakan"></textarea>
-                            </div>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-danger">
-                                    Surat</button>
-                                <div class="form-text">Dengan menekan tombol diatas, surat akan masuk ke bagian surat
-                                    ditolak
+        @if($surat->status_id != 4)
+
+            @if ($surat->status_id != 1)
+                <div class="card mb-4">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Upload softfile</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post"
+                              action="{{ route('admin.surat.softfile_save', ['id' => $surat->uuid]) }}">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="softfile">File <span
+                                        class='text-danger'>*</span></label>
+                                <div class="col-sm-10">
+                                    {{ csrf_field() }}
+                                    <input name="softfile" id="softfile" type="file">
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                            <div class="row justify-content-end">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    {{-- <div class="form-text">Dengan menekan tombol diatas, surat akan masuk ke bagian surat
+                                        ditolak
+                                    </div> --}}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        @endif
+            @endif
 
-
-        <!--/ Card layout -->
+            @if ($surat->status_id == 1)
+                <div class="card mb-4">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Tolak Pengajuan</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="tolakSurat" method="post"
+                              action="{{ route('admin.surat.tolak_surat', ['id' => $surat->uuid]) }}">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="keterangan">Keterangan <span
+                                        class='text-danger'>*</span></label>
+                                <div class="col-sm-10">
+                                    {{ csrf_field() }}
+                                    <textarea id="alasan_penolakan" required class="form-control"
+                                              name="alasan_penolakan"></textarea>
+                                </div>
+                            </div>
+                            <div class="row justify-content-end">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-danger">
+                                        Tolak Surat
+                                    </button>
+                                    <div class="form-text">Dengan menekan tombol diatas, surat akan masuk ke bagian
+                                        surat
+                                        ditolak
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
     </div>
+    @endif
+
+    @endif
 @endsection
 @section('script')
+    <script src="{{ asset('vendor/libs/tinymce/tinymce.min.js') }}"></script>
     <script>
-        $(function() {
+        $(function () {
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'X-CSRF-TOKEN': $('input[name="_token"]').val(),
                 },
+                // headers: {
+                //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                // },
             });
             FilePond.registerPlugin(
                 FilePondPluginFileValidateType,
@@ -280,7 +304,44 @@
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
                     }
                 }
-            }, );
+            },);
+            var url = "{{route('editorSave',':id')}}";
+            tinymce.init({
+                selector: 'div#editor',
+                height: 500,
+                plugins: [
+                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                    'insertdatetime', 'media', 'table', 'help', 'wordcount', 'save'
+                ],
+                toolbar: 'undo redo | blocks | ' +
+                    'bold italic backcolor | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                    'removeformat | help' +
+                    'save',
+                // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+                content_css: '{{asset('css/surat/style.css')}}',
+                // plugin_preview_height : "1056",
+                plugin_preview_width: "50%", //This do the trick
+                {{--setup: (editor) => {--}}
+                {{--    editor.on('change', (e) => {--}}
+                {{--        $.ajax({--}}
+                {{--            type: 'POST',--}}
+                {{--            url: url.replace(':id','{{$surat->uuid}}'),--}}
+
+                {{--            data: {--}}
+                {{--                editor: tinymce.get('editor').getContent()--}}
+                {{--            },--}}
+                {{--            success: function(data){--}}
+                {{--                $('#editor').val('');--}}
+                {{--                console.log(data)--}}
+                {{--            }--}}
+                {{--        })--}}
+                {{--    })--}}
+                {{--},--}}
+            });
+
+
         })
 
         function tolakSurat(id) {
@@ -304,7 +365,8 @@
                 })
             }
         }
-        $('#tolakSurat').submit(function(e) {
+
+        $('#tolakSurat').submit(function (e) {
             var form = this;
             e.preventDefault();
             if ($('#alasan_penolakan').val() == '') {

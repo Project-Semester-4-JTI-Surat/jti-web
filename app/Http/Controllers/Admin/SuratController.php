@@ -8,16 +8,19 @@ use App\Mail\TolakPengajuan;
 use App\Models\Anggota;
 use App\Models\JenisSurat;
 use App\Models\Mahasiswa;
+use App\Models\Prodi;
 use App\Models\Surat;
 use App\Traits\PrintKodeSurat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Response;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SuratController extends Controller
 {
@@ -68,6 +71,7 @@ class SuratController extends Controller
          */
         //Cek Jika role Admin adalah super admin
         // dd($user->role_id);
+
         if ($user->role_id == '2') {
             $surat = Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id)->get();
             // dd($surat);
@@ -81,7 +85,16 @@ class SuratController extends Controller
             return DataTables::of($surat)
                 ->addIndexColumn()
                 ->addColumn('softfile', function ($row) {
-                    return $row->softfile_scan != null ? '<a href="' .Storage::url( $row->softfile_scan). '"> File Scan </a>' : '-';
+                    $prodi = Prodi::find($row->prodi_id);
+                    if (str_contains($prodi->keterangan, "TIF")) {
+                        $prodi = 'TIF';
+                    } elseif (str_contains($prodi->keterangan, "MIF")) {
+                        $prodi = 'MIF';
+                    } else {
+                        $prodi = 'TKK';
+
+                    }
+                    return $row->softfile_scan != null ? '<a href="' . route('downloadSoftfile', ['prodi' => $prodi, 'file' => $row->softfile_scan]) . '"> File Scan </a>' : '-';
                     // return '<a href="' . env('APP_URL') . '/assets/softfile/' . $row->softfile_scan . '"> File Scan </a>';
                 })
                 ->addColumn('status', function ($row) {
@@ -128,9 +141,14 @@ class SuratController extends Controller
 
     public function detail(Request $request, $id)
     {
-        $surat = Surat::with(['dosen', 'koordinator'])->where('uuid', '=', $id)->first();
+        $surat = Surat::with(['dosen', 'koordinator', 'dosen'])->where('uuid', '=', $id)->first();
         $anggota = Anggota::with('prodi')->where('surat_id', '=', $id)->get();
-        return view('admin.detail-surat', compact('surat', 'anggota'));
+        $preview_anggota = Anggota::where('surat_id', '=', $id)->get();
+        if ($surat->kode_surat == 'TA') {
+            $preview_anggota = Anggota::where('surat_id', '=', $id)->first();
+        }
+        $preview_surat = view('surat-preview.' . $surat->kebutuhan . '.' . $surat->kode_surat, compact('surat', 'preview_anggota'))->render();
+        return view('admin.detail-surat', compact('surat', 'anggota', 'preview_surat'));
     }
 
     public function proses_surat($id)
@@ -198,7 +216,8 @@ class SuratController extends Controller
 
         }
 //        dd($softfile);
-        $surat->softfile_scan = $prodi . '/' . $filename;
+//        $surat->softfile_scan = $prodi . '/' . $filename;
+        $surat->softfile_scan = $filename;
         $surat->status_id = 4;
         $surat->update();
         return redirect()->route('admin.surat.index', ['status' => 4]);
@@ -224,5 +243,97 @@ class SuratController extends Controller
         $surat = Surat::find($id);
         $anggota = Anggota::where('surat_id', '=', $id)->first();
         return view('detail-surat', compact('surat', 'anggota'));
+    }
+
+    public function downloadSoftfile($prodi_id, $filename)
+    {
+        $folder_name = $prodi_id;
+        $path = 'public/' . $folder_name . '/' . $filename;
+//        dd($path);
+//        $path = $filename;
+        if (!Storage::exists($path)) {
+            abort(404);
+        }
+        return Storage::response($path);
+    }
+
+    function editorSave(Request $request, $id)
+    {
+        $editor = $request->get('editor');
+//        $editor = trim(preg_replace('/\s+/', ' ', $editor));
+        $editor = "<!DOCTYPE html>
+                    <html lang='en'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                        <title>Document</title>
+                    </head>
+                    <style>
+                        @page  {
+                            size: letter;
+                            margin:0!important; padding:0!important
+                        }
+
+
+                        body {
+                            margin:0!important; padding:0!important;
+                            -webkit-print-color-adjust: exact !important;
+                            print-color-adjust: exact !important;
+                            font-family: 'Times New Roman';
+                            page-break-after: always;
+                            padding: 0 30px 0 30px;
+                        }
+
+                        .header_tr {
+                            background-color: #cccccc;
+                        }
+                        span, p {
+                            font-size: 12pt !important;
+                        }
+
+                        h3, p {
+                            margin: 0pt
+                        }
+
+                        li {
+                            margin-top: 0pt;
+                            margin-bottom: 0pt
+                        }
+
+                        h3 {
+                            text-align: center;
+                            page-break-inside: auto;
+                            page-break-after: avoid;
+                            font-family: 'Times New Roman';
+                            font-size: 10pt;
+                            font-weight: bold;
+                            color: #000000
+                        }
+                    </style>
+                    <body>
+                    ".$editor."
+                    </body>
+                    </html>";
+//        dd(trim(preg_replace('/\s+/', ' ', $editor)));
+//        dd($editor);
+        $now = Carbon::now()->format('d-m-Y');
+        $surat = Surat::find($id);
+        $pengaju = Anggota::where('surat_id', '=', $id)->first();
+        $filename = $surat->kode_surat . '_' . $now . '_' . $pengaju->nim . '.pdf';
+        $pdf = Pdf::loadHTML($editor);
+//        dd($filename);
+        if (str_contains($surat->prodi->keterangan, "TIF")) {
+            $prodi = 'TIF';
+            $pdf->save("storage/TIF/" . $filename);
+
+        } elseif (str_contains($surat->prodi->keterangan, "MIF")) {
+            $prodi = 'MIF';
+
+            $pdf->save("storage/MIF/" . $filename);
+        } else {
+            $prodi = 'TKK';
+            $pdf->save("storage/TKK/" . $filename);
+
+        }
     }
 }

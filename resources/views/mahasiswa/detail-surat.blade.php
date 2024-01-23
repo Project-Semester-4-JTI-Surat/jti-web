@@ -92,7 +92,7 @@
                         <label for="confirm_password"
                             class="block mb-2 text-sm font-medium text-gray-900 ">File Scan</label>
 
-                        <a href="{{env('APP_URL') .'/storage/'.$surat->softfile_scan}}"
+                        <a href="{{route('downloadSoftfile',['prodi'=>$prodi,'file'=>$surat->softfile_scan]) }}"
                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md">Download Scan
                             <span class="bx bx-chevron-right"></span>
                         </a>

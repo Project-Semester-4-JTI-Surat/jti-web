@@ -30,7 +30,7 @@
                             <th>File Scan</th>
                             <th>Tanggal dibuat</th>
                             <th>Kebutuhan</th>
-
+                            <th>Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -90,16 +90,16 @@
                     },
 
                     {
-                        data: 'softfile_scan',
-                        name: 'softfile_scan',
+                        data: 'file_scan',
+                        name: 'file_scan',
                         // visible: row.softfile_scan =='null' ? 'true' : 'false',
-                        hideIfEmpty: true,
-                        render: function(data, type, row) {
-                            return row.softfile_scan == '' || row.softfile_scan == null || row.softfile_scan == null ?
-                                '-'
-                                :
-                                '<a target="_blank" href=<?php echo e(env('APP_URL')); ?>/storage/'+row.softfile_scan+' class="btn  btn-icon me-2 btn-primary"> <i class="fa-solid fa-file"></i> </a>'
-                        }
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     },
                     {
                         data: 'tanggal_dibuat',
@@ -109,10 +109,10 @@
                         data: 'kebutuhan',
                         name: 'kebutuhan',
                     },
-                    // {
-                    //     data: 'detail',
-                    //     name: 'detail',
-                    // },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                    },
                 ],
             });
         }

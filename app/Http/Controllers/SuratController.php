@@ -174,7 +174,19 @@ class SuratController extends Controller
     public function detail_surat($id)
     {
         $surat = Surat::with(['dosen', 'koordinator', 'prodi','jenis_surat'])->where('uuid', '=', $id)->first();
-        return view('mahasiswa.detail-surat',compact('surat'));
+        $prodi = Prodi::find($surat->prodi_id);
+//        dd($surat->prodi_id);
+        if (str_contains($prodi->keterangan, "TIF")) {
+            $prodi = 'TIF';
+        } elseif (str_contains($prodi->keterangan, "MIF")) {
+            $prodi = 'MIF';
+        } else {
+            $prodi = 'TKK';
+
+        }
+//        return $row->softfile_scan != null ? '<a href="' .route('downloadSoftfile',['prodi'=>$prodi,'file'=>$row->softfile_scan]) . '"> File Scan </a>' : '-';
+
+        return view('mahasiswa.detail-surat',compact('surat','prodi'));
     }
 
     public function apiSuratInsert(Request $request)
