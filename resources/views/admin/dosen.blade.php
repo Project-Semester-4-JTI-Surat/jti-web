@@ -5,40 +5,6 @@
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span>Dosen </h4>
         <!-- Content -->
         <!-- Large Modal -->
-        <div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel3">Edit Tarif</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" id="updateForm">
-                            <div class="row">
-                                <div class="col mb-3">
-                                    <label for="priceBefore" class="form-label">Harga Semula</label>
-                                    <input type="text" id="priceBefore" name="priceBefore" class="form-control" readonly
-                                        disabled />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col mb-3">
-                                    <label for="price" class="form-label">Harga</label>
-                                    <input type="text" id="price" name="price" class="form-control" />
-                                </div>
-                            </div>
-{{--                            </div>--}}
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                    Close
-                                </button>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                            </div>
-                        </form>
-                </div>
-            </div>
-        </div>
-
         <div class="modal fade" id="tambahData" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -47,39 +13,44 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
                         <form method="POST" id="formTambahData">
-                            {{ csrf_field() }}
+                            @csrf
                             <div class="row">
-                                <div class="col mb-3 control-group">
+                                <div class="col mb-3">
                                     <label for="nip" class="form-label">NIP</label>
-                                    <input type="text" id="nip" name="nip" class="form-control" required />
+                                    <input type="text" id="nip" name="nip" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="no_hp" class="form-label">No HP</label>
+                                    <input type="text" id="no_hp" name="no_hp" class="form-control" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="nama" class="form-label">Nama</label>
-                                    <input type="text" id="nama" name="nama" class="form-control" required />
+                                    <input type="text" id="nama" name="nama" class="form-control" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-3">
-                                    <label for="prodi_id" class="form-label">Prodi</label>
-                                    <select class="form-select" name="prodi_id" required>
-                                        @foreach ($prodi as $key => $value)
-                                            <option value="{{ $value->id }}">{{ $value->keterangan }}</option>
+                                    <label for="price" class="form-label">Prodi</label>
+                                    <select class="form-select" name="prodi_id">
+                                        @foreach ($prodi as $item)
+                                            <option value="{{$item->id}}">{{$item->keterangan}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -106,6 +77,7 @@
                                 <th>UUID</th>
                                 <th>NIP</th>
                                 <th>Nama</th>
+                                <th>No Hp</th>
                                 <th>Prodi</th>
                             </tr>
                         </thead>
@@ -140,10 +112,10 @@
             $('#formTambahData').validate({
                 // wrapper: "#form-input",
                 rules: {
-                    email: {
-                        required: true,
-                        email: true,
-                    },
+                    // email: {
+                    //     required: true,
+                    //     email: true,
+                    // },
                     nama: {
                         required: true,
                         checkAlphaSym: true,
@@ -153,6 +125,9 @@
                         number: true,
                         maxlength: 20,
                     },
+                    no_hp:{
+                        required: true
+                    }
 
 
                 },
@@ -211,6 +186,10 @@
                     {
                         data: 'nama',
                         name: 'nama'
+                    },
+                    {
+                        data: 'no_hp',
+                        name: 'no_hp',
                     },
                     {
                         data: 'prodi.keterangan',

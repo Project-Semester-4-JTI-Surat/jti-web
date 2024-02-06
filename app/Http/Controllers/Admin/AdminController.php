@@ -23,7 +23,7 @@ class AdminController extends Controller
             return DataTables::of($admin)
             ->addIndexColumn()
             ->addColumn('jk',function($row){
-                return $row->jk == 'L' ? '<span class="badge bg-label-primary rounded-pill">Laki-Laki</span>' : '<span class="badge bg-label-danger rounded-pill">Perempuan</span>';
+                return $row->jk == 'L' ? '<span class="badge bg-label-primary rounded-pill"><i class="fa-solid fa-person fa-lg"></i></span>' : '<span class="badge bg-label-danger rounded-pill"><i class="fa-solid fa-person-dress fa-lg"></i></span>';
             })
             ->addColumn('aksi',function($row){
                 return '<button onclick="edit(`'.$row->uuid.'`)" class="btn btn-icon me-2 btn-primary"><span class="tf-icons bx bx-pencil"></span></button>';
