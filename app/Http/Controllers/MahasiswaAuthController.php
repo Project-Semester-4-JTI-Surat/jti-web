@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MahasiswaLoginRequest;
 use App\Http\Requests\MahasiswaRegisterRequest;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Mail\ResetPassword;
 use App\Models\Anggota;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
+use Carbon\Carbon;
+use DB;
 use Exception;
 use Illuminate\Foundation\Auth\AuthenticateUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mail;
+use Str;
 
 class MahasiswaAuthController extends Controller
 {
@@ -122,6 +127,32 @@ class MahasiswaAuthController extends Controller
         $auth = Auth::guard('mahasiswa')->user();
         // dd($auth->uuid);
         Mahasiswa::find($auth->uuid)->update($request->validated());
+        return redirect()->route('mahasiswa.login');
+    }
+
+    function forgot_password() {
+        return view('mahasiswa.uiv2.forgot_password');
+    }
+
+    function reset_password(Request $request) {
+        $token = Str::uuid();
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]);
+        Mail::to($request->email)->send(new ResetPassword($request->email, $token));
+        return 'Reset password berhasil';
+    }
+    
+    function show_reset_password($id) {
+        $pr =  DB::table('password_resets')->where('token','=',$id)->first();
+        Mahasiswa::where('email','=',$pr->email)->update(
+            [
+                'password'=>bcrypt('jtipolije'),
+            ]
+        );
+        DB::table('password_resets')->where('token','=',$id)->delete();
         return redirect()->route('mahasiswa.login');
     }
 }
