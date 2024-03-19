@@ -19,6 +19,7 @@ class AdminProdi extends Model
 {
     use HasFactory;
     protected $table = 'admin_prodi';
+    protected $guarded = [];
 
     public function admin()
     {

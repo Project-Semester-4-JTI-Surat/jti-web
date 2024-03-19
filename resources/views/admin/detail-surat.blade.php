@@ -16,35 +16,44 @@
                                 <label class="col-sm-2 col-form-label" for="dosen_id">Dosen</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="dosen_id" readonly
-                                           value="{{ $surat->dosen->nama }}">
+                                        value="{{ $surat->dosen->nama }}">
                                 </div>
                             </div>
+                            @if ($surat->mata_kuliah)
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="mata_kuliah">Mata Kuliah</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="mata_kuliah" readonly
+                                            value="{{ $surat->mata_kuliah }}">
+                                    </div>
+                                </div>
+                            @endif
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="koordinator_id">koordinator</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="koordinator_id" readonly
-                                           value="{{ $surat->koordinator->nama }}">
+                                        value="{{ $surat->koordinator->nama }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="nama_mitra">Nama Mitra</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="nama_mitra" readonly
-                                           value="{{ $surat->nama_mitra }}">
+                                        value="{{ $surat->nama_mitra }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="nama_mitra">Alamat Mitra</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="alamat_mitra" readonly
-                                           value="{{ $surat->alamat_mitra }}">
+                                        value="{{ $surat->alamat_mitra }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="tanggal_dibuat">Tanggal Dibuat</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="tanggal_dibuat" readonly
-                                           value="{{ $surat->tanggal_dibuat }}">
+                                        value="{{ $surat->tanggal_dibuat }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -52,23 +61,24 @@
                                     pelaksanaan</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="tanggal_pelaksanaan" readonly
-                                           value="{{ $surat->tanggal_pelaksanaan }}">
+                                        value="{{ $surat->tanggal_pelaksanaan }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="tanggal_selesai">Tanggal selesai</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="tanggal_selesai" readonly
-                                           value="{{ $surat->tanggal_selesai }}">
+                                        value="{{ $surat->tanggal_selesai }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="kebutuhan">Kebutuhan</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="kebutuhan" readonly
-                                           value="{{ $surat->kebutuhan }}">
+                                        value="{{ $surat->kebutuhan }}">
                                 </div>
                             </div>
+                            
 
                             {{-- <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-email">Email</label>
@@ -85,15 +95,14 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="keterangan">Keterangan</label>
                                 <div class="col-sm-10">
-                                    <textarea id="keterangan" class="form-control" readonly
-                                              aria-describedby="basic-icon-default-message2">{{ $surat->keterangan }}</textarea>
+                                    <textarea id="keterangan" class="form-control" readonly aria-describedby="basic-icon-default-message2">{{ $surat->keterangan }}</textarea>
                                 </div>
                             </div>
                             @if ($surat->status_id == 1)
                                 <div class="row justify-content-end">
                                     <div class="col-sm-10">
                                         <a href="{{ route('admin.surat.proses_surat', ['id' => $surat->uuid]) }}"
-                                           class="btn btn-primary">Proses Surat</a>
+                                            class="btn btn-primary">Proses Surat</a>
                                     </div>
                                 </div>
                             @endif
@@ -102,7 +111,7 @@
                                 <div class="row justify-content-end">
                                     <div class="col-sm-10">
                                         <a href="{{ route('admin.surat.dapat_diambil', ['id' => $surat->uuid]) }}"
-                                           class="btn btn-primary">Dapat diambil </a>
+                                            class="btn btn-primary">Dapat diambil </a>
                                         <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi
                                             dapat diambil
                                         </div>
@@ -110,11 +119,11 @@
                                 </div>
                             @endif
 
-                            @if($surat->status_id == 2)
+                            @if ($surat->status_id == 2)
                                 <div class="row justify-content-end">
                                     <div class="col-sm-10">
                                         <a href="{{ route('admin.surat.surat_selesai', ['id' => $surat->uuid]) }}"
-                                           class="btn btn-success">Selesai </a>
+                                            class="btn btn-success">Selesai </a>
                                         <div class="form-text">Dengan menekan tombol diatas. maka status surat menjadi
                                             selesai
                                         </div>
@@ -138,41 +147,41 @@
                                     $count = 0;
                                 @endphp
                                 <div class="row mb-3">
-                                    @if($value->ketua == 'true')
+                                    @if ($value->ketua == 'true')
                                         <div class="alert alert-primary" role="alert">Ketua Kelompok</div>
                                     @endif
                                     <label class="col-sm-2 col-form-label" for="">Nama Anggota
-                                        {{ $key + 1 }}</label>
+                                        {{ $key ==1 ? $key+1 : " " }}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="nama" readonly
-                                               value="{{ $value->nama }}">
+                                            value="{{ $value->nama }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">Nim Anggota
-                                        {{ $key + 1 }}</label>
+                                      {{ $key ==1 ? $key+1 : " " }}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="nim" readonly
-                                               value="{{ $value->nim }}">
+                                            value="{{ $value->nim }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">Prodi
-                                        {{ $key + 1 }}</label>
+                                      {{ $key ==1 ? $key+1 : " " }}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="prodi_id" readonly
-                                               value="{{ $value->prodi->keterangan }}">
+                                            value="{{ $value->prodi->keterangan }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="">No.Hp Anggota
-                                        {{ $key + 1 }}</label>
+                                      {{ $key ==1 ? $key+1 : " " }}</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="no_hp" readonly
-                                               value="{{ $value->no_hp }}">
+                                            value="{{ $value->no_hp }}">
                                     </div>
                                 </div>
-                                <hr class="hr"/>
+                                <hr class="hr" />
                             @endforeach
 
 
@@ -192,9 +201,9 @@
                     </div>
                 </div>
             </div>
-            {{--    </div>--}}
+            {{--    </div> --}}
         @endif
-        @if($surat->status_id != 4)
+        @if ($surat->status_id != 4)
 
             @if ($surat->status_id != 1)
                 <div class="card mb-4">
@@ -202,8 +211,7 @@
                         <h5 class="mb-0">Upload softfile</h5>
                     </div>
                     <div class="card-body">
-                        <form method="post"
-                              action="{{ route('admin.surat.softfile_save', ['id' => $surat->uuid]) }}">
+                        <form method="post" action="{{ route('admin.surat.softfile_save', ['id' => $surat->uuid]) }}">
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="softfile">File <span
                                         class='text-danger'>*</span></label>
@@ -232,14 +240,13 @@
                     </div>
                     <div class="card-body">
                         <form id="tolakSurat" method="post"
-                              action="{{ route('admin.surat.tolak_surat', ['id' => $surat->uuid]) }}">
+                            action="{{ route('admin.surat.tolak_surat', ['id' => $surat->uuid]) }}">
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="keterangan">Keterangan <span
                                         class='text-danger'>*</span></label>
                                 <div class="col-sm-10">
                                     {{ csrf_field() }}
-                                    <textarea id="alasan_penolakan" required class="form-control"
-                                              name="alasan_penolakan"></textarea>
+                                    <textarea id="alasan_penolakan" required class="form-control" name="alasan_penolakan"></textarea>
                                 </div>
                             </div>
                             <div class="row justify-content-end">
@@ -264,7 +271,7 @@
 @section('script')
     <script src="{{ asset('vendor/libs/tinymce/tinymce.min.js') }}"></script>
     <script>
-        $(function () {
+        $(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').val(),
@@ -281,7 +288,10 @@
                 allowPdfPreview: true,
                 pdfPreviewHeight: 320,
                 pdfComponentExtraParams: 'toolbar=0&view=fit&page=1',
-                acceptedFileTypes: ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword'],
+                acceptedFileTypes: ['application/pdf',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    'application/msword'
+                ],
                 credits: false,
                 fileValidateTypeDetectType: [],
                 fileValidateTypeLabelExpectedTypes: 'File harus berekstensi .pdf/.doc atau .docx',
@@ -304,8 +314,8 @@
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
                     }
                 }
-            },);
-            var url = "{{route('editorSave',':id')}}";
+            }, );
+            var url = "{{ route('editorSave', ':id') }}";
             tinymce.init({
                 selector: 'div#editor',
                 height: 500,
@@ -320,25 +330,25 @@
                     'removeformat | help' +
                     'save',
                 // content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
-                content_css: '{{asset('css/surat/style.css')}}',
+                content_css: '{{ asset('css/surat/style.css') }}',
                 // plugin_preview_height : "1056",
                 plugin_preview_width: "50%", //This do the trick
-                {{--setup: (editor) => {--}}
-                {{--    editor.on('change', (e) => {--}}
-                {{--        $.ajax({--}}
-                {{--            type: 'POST',--}}
-                {{--            url: url.replace(':id','{{$surat->uuid}}'),--}}
+                {{-- setup: (editor) => { --}}
+                {{--    editor.on('change', (e) => { --}}
+                {{--        $.ajax({ --}}
+                {{--            type: 'POST', --}}
+                {{--            url: url.replace(':id','{{$surat->uuid}}'), --}}
 
-                {{--            data: {--}}
-                {{--                editor: tinymce.get('editor').getContent()--}}
-                {{--            },--}}
-                {{--            success: function(data){--}}
-                {{--                $('#editor').val('');--}}
-                {{--                console.log(data)--}}
-                {{--            }--}}
-                {{--        })--}}
-                {{--    })--}}
-                {{--},--}}
+                {{--            data: { --}}
+                {{--                editor: tinymce.get('editor').getContent() --}}
+                {{--            }, --}}
+                {{--            success: function(data){ --}}
+                {{--                $('#editor').val(''); --}}
+                {{--                console.log(data) --}}
+                {{--            } --}}
+                {{--        }) --}}
+                {{--    }) --}}
+                {{-- }, --}}
             });
 
 
@@ -366,7 +376,7 @@
             }
         }
 
-        $('#tolakSurat').submit(function (e) {
+        $('#tolakSurat').submit(function(e) {
             var form = this;
             e.preventDefault();
             if ($('#alasan_penolakan').val() == '') {

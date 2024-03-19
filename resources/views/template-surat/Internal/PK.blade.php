@@ -95,7 +95,14 @@
         <p style="text-align:justify">
             Sehubungan dengan hal tersebut, mohon dapatnya Bapak/Ibu berkenan mengijinkan beberapa&#xa0; mahasiswa kami dari&#xa0;
             Jurusan Teknologi Informasi <strong>Program Studi {{ $surat->prodi->note }} </strong>guna melaksanakan Magang di
-            perusahaan yang Bapak/Ibu Pimpin dari tanggal <strong>{{ \Carbon\Carbon::createFromFormat('Y-m-d',  $surat->tanggal_pelaksanaan)->translatedFormat('d F Y')  }} sampai {{ \Carbon\Carbon::createFromFormat('Y-m-d',  $surat->tanggal_selesai)->translatedFormat('d F Y')  }}</strong> dengan &#xa0;materi
+            perusahaan yang Bapak/Ibu Pimpin dari tanggal <strong>
+                @if (\Carbon\Carbon::createFromFormat('Y-m-d',  $surat->tanggal_pelaksanaan)->translatedFormat('Y') == \Carbon\Carbon::createFromFormat('Y-m-d',  $surat->tanggal_selesai)->translatedFormat('Y'))
+                {{ \Carbon\Carbon::createFromFormat('Y-m-d',  $surat->tanggal_pelaksanaan)->translatedFormat('d F')  }} sampai {{ \Carbon\Carbon::createFromFormat('Y-m-d',  $surat->tanggal_selesai)->translatedFormat('d F Y')  }}</strong> dengan &#xa0;materi
+
+                @else
+                {{ \Carbon\Carbon::createFromFormat('Y-m-d',  $surat->tanggal_pelaksanaan)->translatedFormat('d F Y')  }} sampai {{ \Carbon\Carbon::createFromFormat('Y-m-d',  $surat->tanggal_selesai)->translatedFormat('d F Y')  }}</strong> dengan &#xa0;materi
+
+                @endif
             yang akan dipelajari sesuai disiplin ilmu diperoleh (sesuai dengan <em>Curriculum Vitae</em>).
         </p>
         <p style="text-align:justify; font-size:5pt">
@@ -122,6 +129,9 @@
                 <td style="width: 202.95pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;padding: 0cm 5.4pt;vertical-align: top; background-color:#cccccc">
                     <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style='font-family:"Times New Roman",serif;'>NIM</span></strong></p>
                 </td>
+                <td style="width: 202.95pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;padding: 0cm 5.4pt;vertical-align: top; background-color:#cccccc">
+                    <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><strong><span style='font-family:"Times New Roman",serif;'>No. Hp</span></strong></p>
+                </td>
             </tr>
 
             @foreach($anggota as $key => $value)
@@ -134,6 +144,9 @@
                     </td>
                     <td style="width: 202.95pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
                         <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-family:"Times New Roman",serif;'>{{ $value->nim }}</span></p>
+                    </td>
+                    <td style="width: 202.95pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+                        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-family:"Times New Roman",serif;'>{{ $value->no_hp }}</span></p>
                     </td>
                 </tr>
             @endforeach
@@ -185,7 +198,7 @@
         &#xa0;
     </p>
     <p style="text-align:justify">
-        <span style="width:279pt; display:inline-block">&#xa0;</span>a.n Ketua
+        <span style="width:279pt; display:inline-block">&#xa0;</span>Ketua
     </p>
     <p style="text-indent:279pt; text-align:justify">
         Jurusan Teknologi Informasi,

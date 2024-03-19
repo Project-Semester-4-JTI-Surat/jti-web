@@ -58,7 +58,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
 
     Route::group(['prefix' => 'koordinator', 'as' => 'koordinator.'], function () {
         Route::get('/', [KoordinatorController::class, 'index'])->name('index');
+        Route::get('edit/{id}',[KoordinatorController::class, 'edit'])->name('edit');
         Route::post('insert',[KoordinatorController::class, 'insert'])->name('insert');
+        Route::post('update/{id}',[KoordinatorController::class,'update'])->name('update');
     });
 
     Route::group(['prefix'=>'surat','as'=>'surat.'],function(){
@@ -97,6 +99,9 @@ Route::group(['prefix'=>'mahasiswa','as'=>'mahasiswa.'],function(){
     Route::get('register',[MahasiswaAuthController::class, 'register'])->name('register');
     Route::post('register_process',[MahasiswaAuthController::class, 'register_process'])->name('register_process');
     Route::post('login_process',[MahasiswaAuthController::class, 'login_process'])->name('login_process');
+    Route::get('forgot_password',[MahasiswaAuthController::class,'forgot_password'])->name('forgot_password');
+    Route::post('reset_password',[MahasiswaAuthController::class,'reset_password'])->name('reset_password');
+    Route::get('reset_password/{token}',[MahasiswaAuthController::class,'show_reset_password'])->name('show_reset_password');
 
     Route::group(['middleware'=>MahasiswaAuth::class],function(){
         Route::get('dashboard/',[MahasiswaAuthController::class, 'dashboard'])->name('dashboard');
@@ -110,7 +115,7 @@ Route::group(['prefix'=>'mahasiswa','as'=>'mahasiswa.'],function(){
     });
 });
 
-// Route::resource('user', ManagementUserController::class); //otomatis mengambil nama function dan menyesuaikan http requestnya
+
 Route::get('home', function () {
     return view('admin.dashboard');
 });

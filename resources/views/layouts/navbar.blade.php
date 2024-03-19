@@ -19,8 +19,8 @@
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <li class="nav-item navbar-dropdown dropdown pr-2">
-                <a class="nav-link nav-icon iconClass dropdown-toggle hide-arrow" id="notif-icon" href="javascript:void(0);"
-                    data-bs-toggle="dropdown">
+                <a class="nav-link nav-icon iconClass dropdown-toggle hide-arrow" id="notif-icon"
+                    href="javascript:void(0);" data-bs-toggle="dropdown">
                     <i class="bx bx-bell bx-sm"></i>
                     <span data-count="0" id="notification-count" class="badge bg-primary badge-number"></span>
                 </a>
@@ -35,7 +35,8 @@
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                    <img src="{{ Auth::guard('admin')->user()->jk == 'L' ? asset('img/avatars/man.png') : asset('img/avatars/woman.png') }}" alt class="w-px-40 h-auto rounded-circle" />
+                    <img src="{{ Auth::guard('admin')->user()->jk == 'L' ? asset('img/avatars/man.png') : asset('img/avatars/woman.png') }}"
+                        alt class="w-px-40 h-auto rounded-circle" />
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -44,12 +45,31 @@
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar avatar-online">
-                                    <img src="{{ Auth::guard('admin')->user()->jk == 'L' ? asset('img/avatars/man.png') : asset('img/avatars/woman.png') }}" alt class="w-px-40 h-auto rounded-circle" />
+                                    <img src="{{ Auth::guard('admin')->user()->jk == 'L' ? asset('img/avatars/man.png') : asset('img/avatars/woman.png') }}"
+                                        alt class="w-px-40 h-auto rounded-circle" />
                                 </div>
                             </div>
                             <div class="flex-grow-1">
                                 <span class="fw-semibold d-block">{{ Auth::guard('admin')->user()->nama }}</span>
-                                <small class="text-muted">{{ Auth::guard('admin')->user()->role->keterangan }} - {{ Auth::guard('admin')->user()->prodi->keterangan }}</small>
+                                @php
+                                    $auth = Auth::guard('admin')->user();
+                                    $admin_prodi = App\Models\AdminProdi::with(['prodi'])
+                                        ->where('admin_id', '=', $auth->uuid)
+                                        ->get();
+                                    $count = count($admin_prodi);
+                                    $index = 0;
+
+                                @endphp
+                                <small class="text-muted">{{ Auth::guard('admin')->user()->role->keterangan }} -
+                                    @foreach ($admin_prodi as $item)
+                                    @php
+                                        $index++;
+                                    @endphp
+                                    {{ $item->prodi->keterangan }} {{$index != $count ? ', ' : ' ' }}
+                                        
+                                    @endforeach
+                                    
+                                </small>
                             </div>
                         </div>
                     </a>

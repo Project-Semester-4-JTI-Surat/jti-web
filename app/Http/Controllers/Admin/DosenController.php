@@ -28,7 +28,7 @@ class DosenController extends Controller
 
     public function insert(Request $request)
     {
-        $input = $request->only(['nama','nip','prodi_id']);
+        $input = $request->only(['nama','nip','prodi_id','no_hp']);
         Dosen::create($input);
         return response()->json(['message'=>'success']);
     }

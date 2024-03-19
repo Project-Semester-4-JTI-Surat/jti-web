@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Str;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -58,6 +59,13 @@ class Mahasiswa extends Authenticatable implements JWTSubject
     public function prodi()
     {
         return $this->belongsTo(Prodi::class);
+    }
+
+    protected function email(): Attribute {
+        $email = Str::lower($this->nama);
+        return Attribute::make(
+            set: fn($value) => "$email@polije.ac.id",
+        );
     }
 
     // Otomatis enkripsi password sebelum disimpan di database
