@@ -119,7 +119,7 @@
         &#xa0;
     </p>
     <p style="text-align:justify">
-        <span style="width:279pt; display:inline-block">&#xa0;</span>a.n Ketua
+        <span style="width:279pt; display:inline-block">&#xa0;</span>Ketua
     </p>
     <p style="text-indent:279pt; text-align:justify">
         Jurusan Teknologi Informasi,

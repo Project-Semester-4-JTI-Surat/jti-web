@@ -14,17 +14,46 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST" id="updateForm">
+                            {{ csrf_field() }}
                             <div class="row">
-                                <div class="col mb-3">
-                                    <label for="priceBefore" class="form-label">Harga Semula</label>
-                                    <input type="text" id="priceBefore" name="priceBefore" class="form-control" readonly
-                                        disabled />
+                                <div class="col mb-3 control-group">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" id="email" name="email" class="form-control" required />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-3">
-                                    <label for="price" class="form-label">Harga</label>
-                                    <input type="text" id="price" name="price" class="form-control" />
+                                    <label for="nama" class="form-label">Nama Koordinator</label>
+                                    <input type="text" id="nama" name="nama" class="form-control" required />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="no_hp" class="form-label">Nomor HP</label>
+                                    <input type="number" id="no_hp" name="no_hp" class="form-control" required />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="kode_surat" class="form-label">Jenis</label>
+                                    <select class="form-select" id="jenis_surat" name="kode_surat" required>
+                                        @foreach ($jsurat as $key => $value)
+                                            <option value="{{ $value->kode }}">{{ $value->keterangan }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="prodi_id" class="form-label">Prodi</label>
+                                    <select class="form-select" id="prodi_id" name="prodi" required>
+                                        <option value="TIF">TIF(Teknik Informatika)</option>
+                                        <option value="TKK">TKK(Teknik Komputer)</option>
+                                        <option value="MIF">MIF(Manajemen Informatika)</option>
+                                        <option value="BD">BD(Bisnis Digital)</option>
+                                        <option value="PLJ">PLJTIF</option>
+                                       
+                                    </select>
                                 </div>
                             </div>
                     </div>
@@ -64,7 +93,7 @@
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="no_hp" class="form-label">Nomor HP</label>
-                                    <input type="text" id="no_hp" name="no_hp" class="form-control" required />
+                                    <input type="number" id="no_hp" name="no_hp" class="form-control" required />
                                 </div>
                             </div>
                             <div class="row">
@@ -80,10 +109,13 @@
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="prodi_id" class="form-label">Prodi</label>
-                                    <select class="form-select" name="prodi_id" required>
-                                        @foreach ($prodi as $key => $value)
-                                            <option value="{{ $value->id }}">{{ $value->keterangan }}</option>
-                                        @endforeach
+                                    <select class="form-select" name="prodi" required>
+                                        <option value="TIF">TIF(Teknik Informatika)</option>
+                                        <option value="TKK">TKK(Teknik Komputer)</option>
+                                        <option value="MIF">MIF(Manajemen Informatika)</option>
+                                        <option value="BD">BD(Bisnis Digital)</option>
+                                        <option value="PLJ">PLJTIF</option>
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -101,7 +133,7 @@
         <div class="card">
             <h5 class="card-header">Data Koordinator</h5>
              <div class="col-md-5" style="padding-left: 2rem; padding-bottom: 2rem">
-             @if(Auth::guard('admin')->user()->role_id == 1)
+             @if(Auth::guard('admin')->user()->role_id == 2)
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahData">
                     Tambah Data
                 </button>
@@ -121,6 +153,7 @@
                                 <th>Prodi</th>
                                 <th>No HP</th>
                                 <th>Jenis</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -137,6 +170,11 @@
 @endsection
 
 @section('script')
+@if (Session::has('updateSuccess'))
+        <script>
+            swal("Success", "Data berhasil diubah", "success");
+        </script>
+    @endif
     <script>
         $(function() {
             $.ajaxSetup({
@@ -177,13 +215,6 @@
                     error.addClass("invalid-feedback");
                     // error.appendTo("#form-input");
                     error.insertAfter(element);
-                    // Add the `help-block` class to the error element
-
-                    // if (element.prop("type") === "checkbox") {
-                    //     error.insertAfter(element.parent("label"));
-                    // } else {
-                    //     error.insertAfter(element);
-                    // }
                 },
             });
             loadTable();
@@ -222,8 +253,8 @@
                         name: 'email'
                     },
                     {
-                        data: 'prodi.keterangan',
-                        name: 'prodi.keterangan'
+                        data: 'prodi',
+                        name: 'prodi'
                     },
                     {
                         data: 'no_hp',
@@ -233,6 +264,10 @@
                         data: 'jenis_surat.keterangan',
                         name: 'jenis_surat.keterangan'
                     },
+                    {
+                        data: 'aksi',
+                        name: 'aksi'
+                    }
                 ],
             });
         }
@@ -266,5 +301,32 @@
             }
 
         })
+
+        function edit(id) {
+            var updateUrl = "{{ route('admin.koordinator.update', ':id') }}"
+            var url = "{{ route('admin.koordinator.edit', ':id') }}"
+            $.ajax({
+                url: url.replace(':id', id),
+                success: function(res) {
+                    console.log(res.data);
+                    $('#email').val(res.data.email);
+                    $('#nama').val(res.data.nama);
+                    $('#no_hp').val(res.data.no_hp);
+
+                    $('#jenis_surat').val(res.data.kode_surat);
+                    $('#prodi_id').val(res.data.prodi);
+
+                    // $("#jenis_surat option:contains(" + res.data.kode_surat + ")").attr('selected', true);
+                    // $('#username_update').val(res.data.username);
+                    // $('#nama_update').val(res.data.nama);
+                    // $('#no_hp_update').val(res.data.no_hp);
+                    $('#updateForm').attr('action', updateUrl.replace(':id', id));
+                    $('#updateModal').modal('show')
+
+                },
+                dataType: 'json',
+            });
+
+        }
     </script>
 @endsection

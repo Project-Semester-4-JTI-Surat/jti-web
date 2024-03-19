@@ -45,7 +45,8 @@
         <!-- fieldsets -->
         <fieldset class="hidden" id="kebutuhan_surat">
             <h2 class="fs-title">Kebutuhan Surat </h2>
-            <h3 class="fs-subtitle"></h3>
+
+            <h3 class="fs-subtitle">Jika memilih opsi internal, alur akan menuju admin jurusan. ketika sebaliknya, alur akan menuju admin prodi</h3>
             <div class="form-label">
                 <label for="">Jenis Surat</label>
             </div>
@@ -119,7 +120,7 @@
 
         <fieldset id="data_instansi">
             <h2 class="fs-title">Data Instansi</h2>
-            <h3 class="fs-subtitle">Mohon isi kolom dibawah ini dengan benar</h3>
+            <h3 class="fs-subtitle">Mohon isi kolom dibawah ini dengan benar, Dimohon untuk mengisi alamat mitra secara lengkap</h3>
             <div class="form-label">
                 <label for="">Nama Mitra</label>
             </div>

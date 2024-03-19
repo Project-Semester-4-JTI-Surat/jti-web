@@ -58,7 +58,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
 
     Route::group(['prefix' => 'koordinator', 'as' => 'koordinator.'], function () {
         Route::get('/', [KoordinatorController::class, 'index'])->name('index');
+        Route::get('edit/{id}',[KoordinatorController::class, 'edit'])->name('edit');
         Route::post('insert',[KoordinatorController::class, 'insert'])->name('insert');
+        Route::post('update/{id}',[KoordinatorController::class,'update'])->name('update');
     });
 
     Route::group(['prefix'=>'surat','as'=>'surat.'],function(){
@@ -113,7 +115,7 @@ Route::group(['prefix'=>'mahasiswa','as'=>'mahasiswa.'],function(){
     });
 });
 
-// Route::resource('user', ManagementUserController::class); //otomatis mengambil nama function dan menyesuaikan http requestnya
+
 Route::get('home', function () {
     return view('admin.dashboard');
 });

@@ -166,7 +166,7 @@ class SuratController extends Controller
         $auth = Auth::guard('mahasiswa')->user();
         $jsurat = JenisSurat::where('kode','!=','DASH')->get();
         $dosen = Dosen::where('nama','!=','-')->where('prodi_id','=',$auth->prodi_id)->get();
-        $koordinator = Koordinator::where('nama','!=','-')->get();
+        $koordinator = Koordinator::where('nama','!=','-')->where('prodi','=',$auth->prodi->level_1)->get();
         $prodi = Prodi::where('id','!=','2')->get();
         return view('mahasiswa.pengajuan-surat',compact('jsurat','dosen','koordinator','prodi'));
     }

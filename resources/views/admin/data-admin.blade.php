@@ -32,7 +32,7 @@
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="no_hp" class="form-label">Nomor HP</label>
-                                    <input type="text" id="no_hp_update" name="no_hp" class="form-control" readonly />
+                                    <input type="number" id="no_hp_update" name="no_hp" class="form-control" />
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -50,16 +50,10 @@
                                         class="form-control" />
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col mb-3">
-                                    <label for="prodi" class="form-label">Prodi</label>
-                                    <select id="prodi_id" class="form-select" name="prodi_id" required>
-                                        @foreach ($prodi as $key => $value)
-                                            <option value="{{ $value->id }}">{{ $value->keterangan }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                            <div id="prodi_field" style="margin-bottom: 1.2rem">
+
                             </div>
+                            <button type="button" id="add_field" class="btn btn-primary">Tambah Kolom</button>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -79,7 +73,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
+ 
                         <form method="POST" id="formTambahData">
                             {{ csrf_field() }}
                             <div class="row">
@@ -97,22 +91,22 @@
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="no_hp" class="form-label">Nomor HP</label>
-                                    <input type="text" id="no_hp" name="no_hp" class="form-control" required />
+                                    <input type="number" id="no_hp" name="no_hp" class="form-control" required />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-3">
                                     <label for="" class="form-label">Jenis Kelamin</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jk"
-                                            id="" value="L" checked>
+                                        <input class="form-check-input" type="radio" name="jk" id=""
+                                            value="L" checked>
                                         <label class="form-check-label" for="">
                                             Pria
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="jk"
-                                            id="" value="P">
+                                        <input class="form-check-input" type="radio" name="jk" id=""
+                                            value="P">
                                         <label class="form-check-label" for="">
                                             Wanita
                                         </label>
@@ -129,8 +123,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col mb-3">
+                            {{-- <div class="row">
+                                <div class="col-md-8">
                                     <label for="prodi" class="form-label">Prodi</label>
                                     <select class="form-select" name="prodi_id" required>
                                         @foreach ($prodi as $key => $value)
@@ -138,7 +132,16 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col" style="margin-top: 1.9rem">
+                                    <button type="button" id="hapusField" class="btn btn-icon me-2 btn-danger">
+                                        <span class="tf-icons bx bx-trash"></span>
+                                    </button>
+                                </div>
+                            </div> --}}
+                            <div id="prodi_field_addForm" style="margin-bottom: 1.2rem">
+
                             </div>
+                            <button type="button" id="add_field" class="btn btn-primary addForm">Tambah Kolom</button>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -272,8 +275,8 @@
                         name: 'nama'
                     },
                     {
-                        data: 'prodi.keterangan',
-                        name: 'prodi.keterangan'
+                        data: 'admin_prodi',
+                        name: 'admin_prodi'
                     },
                     {
                         data: 'username',
@@ -336,19 +339,52 @@
             $.ajax({
                 url: url.replace(':id', id),
                 success: function(res) {
-                    $("#prodi_id option:contains(" + res.data.prodi.keterangan + ")").attr('selected', true);
+                    let count = 0;
+                    let data = res.data.admin_prodi;
+                    let field = ` <div class="row">
+                                <div class="col-md-8">
+                                    <label for="prodi" class="form-label">Prodi</label>
+                                    <select class="form-select" name="prodi_id[]'" required id="prodi_id_:id">
+                                        @foreach ($prodi as $key => $value)
+                                            <option value="{{ $value->id }}">{{ $value->keterangan }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col" style="margin-top: 1.9rem">
+                                    <button type="button" id="hapusField" aria-describedby='hapusField' class="btn btn-icon me-2 btn-danger">
+                                        <span class="tf-icons bx bx-trash"></span>
+                                    </button>
+                                </div>
+                            </div>`
+                    console.log(data);
+                    data.forEach(element => {
+                        count++
+                        $('#prodi_field').append(field.replace(':id',count))
+                        console.log(element.prodi.keterangan );
+                        $("#prodi_id_"+count).val(element.prodi_id)
+                        console.log($("#prodi_id_"+count).find(":selected").val());
+                        // $("#prodi_id_"+count+":contains(" + element.prodi.keterangan + ")").attr('selected', true);
+                    });
+                    console.log(count);
+                    // $("#prodi_id option:contains(" + res.data.prodi.keterangan + ")").attr('selected', true);
                     $('#username_update').val(res.data.username);
                     $('#nama_update').val(res.data.nama);
                     $('#no_hp_update').val(res.data.no_hp);
                     $('#updateForm').attr('action', updateUrl.replace(':id', id));
                     $('#editData').modal('show');
+
                 },
                 dataType: 'json',
             });
-
+            $(document).on("click", "#hapusField", (e) => {
+                if ($('#prodi_field div').length != 3) {
+                    $(e.target).parent("div").parent("div").remove();
+                }
+            })
         }
         $('#editData').on('hidden.bs.modal', function() {
             $('#prodi_id option:selected').removeAttr('selected');
+            $('#prodi_field').children().remove()
         })
         $('#passwordSwitch').change(function() {
             if ($(this).is(':checked')) {
@@ -357,5 +393,97 @@
                 $('#password').prop('readonly', true);
             }
         })
+        $(document).on("click","#add_field", (e)=>{
+            let className = e.target.classList['value'];
+            console.log(className);
+            if (className == "btn btn-primary addForm") {
+                let field = `<div class="row mb-2">
+                                <div class="col-md-8">
+                                    <label for="prodi" class="form-label">Prodi</label>
+                                    <select class="form-select" name="prodi_id[]" required>
+                                        <option value="-">---- Pilih Prodi -----</option>
+                                        @foreach ($prodi as $key => $value)
+                                            <option value="{{ $value->id }}">{{ $value->keterangan }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col" style="margin-top: 1.9rem">
+                                    <button type="button" id="hapusField" class="btn btn-icon me-2 btn-danger">
+                                        <span class="tf-icons bx bx-trash"></span>
+                                    </button>
+                                </div>
+                            </div>`;
+            $('#prodi_field_addForm').append(field)
+            } else {
+                let field = `<div class="row mb-2">
+                                <div class="col-md-8">
+                                    <label for="prodi" class="form-label">Prodi</label>
+                                    <select class="form-select" name="prodi_id[]" required>
+                                        <option value="-">---- Pilih Prodi -----</option>
+                                        @foreach ($prodi as $key => $value)
+                                            <option value="{{ $value->id }}">{{ $value->keterangan }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col" style="margin-top: 1.9rem">
+                                    <button type="button" id="hapusField" class="btn btn-icon me-2 btn-danger">
+                                        <span class="tf-icons bx bx-trash"></span>
+                                    </button>
+                                </div>
+                            </div>`;
+            $('#prodi_field').append(field)
+            }
+            // let field = `<div class="row mb-2">
+            //                     <div class="col-md-8">
+            //                         <label for="prodi" class="form-label">Prodi</label>
+            //                         <select class="form-select" name="prodi_id[]" required>
+            //                             <option value="-">---- Pilih Prodi -----</option>
+            //                             @foreach ($prodi as $key => $value)
+            //                                 <option value="{{ $value->id }}">{{ $value->keterangan }}</option>
+            //                             @endforeach
+            //                         </select>
+            //                     </div>
+            //                     <div class="col" style="margin-top: 1.9rem">
+            //                         <button type="button" id="hapusField" class="btn btn-icon me-2 btn-danger">
+            //                             <span class="tf-icons bx bx-trash"></span>
+            //                         </button>
+            //                     </div>
+            //                 </div>`;
+            // $('#prodi_field').append(field)
+            // $(document).on("click", "#hapusField", (e) => {
+            //     if ($('#prodi_field div#row').length != 1) {
+            //         $(e.target).parent("div").parent("div").remove();
+            //     }
+            // })
+        })
+        // $('#add_field').click(function () {
+        //     console.log('add field');
+        //     let field = `<div class="row mb-2">
+        //                         <div class="col-md-8">
+        //                             <label for="prodi" class="form-label">Prodi</label>
+        //                             <select class="form-select" name="prodi_id[]" required>
+        //                                 <option value="-">---- Pilih Prodi -----</option>
+        //                                 @foreach ($prodi as $key => $value)
+        //                                     <option value="{{ $value->id }}">{{ $value->keterangan }}</option>
+        //                                 @endforeach
+        //                             </select>
+        //                         </div>
+        //                         <div class="col" style="margin-top: 1.9rem">
+        //                             <button type="button" id="hapusField" class="btn btn-icon me-2 btn-danger">
+        //                                 <span class="tf-icons bx bx-trash"></span>
+        //                             </button>
+        //                         </div>
+        //                     </div>`;
+        //     $('#prodi_field').append(field)
+        //     $(document).on("click", "#hapusField", (e) => {
+        //         if ($('#prodi_field div#row').length != 1) {
+        //             $(e.target).parent("div").parent("div").remove();
+        //         }
+        //     })
+        // })
+        // $('#hapusField').on("click", function() {
+        //     console.log("remove");
+        //     $(this).parent("div").remove();
+        // })
     </script>
 @endsection
