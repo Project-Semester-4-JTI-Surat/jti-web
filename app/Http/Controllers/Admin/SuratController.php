@@ -60,11 +60,14 @@ class SuratController extends Controller
 
     public function getSurat(Request $request)
     {
+        
         $id = $request->get('status');
         //id =  2
         //ambil surat sesuai dengan admin prodi..
         $user = Auth::guard('admin')->user();
+        $prodi = $user->admin_prodi;
         $surat = '';
+        // dd($user->admin_prodi);
         /**
          * Experimental Features
          * Masih ada bug yg belum terselesaikan..
@@ -72,14 +75,16 @@ class SuratController extends Controller
         //Cek Jika role Admin adalah super admin
         // dd($user->role_id);
 
-        if ($user->role_id == '2') {
-            $surat = Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id)->get();
-            // dd($surat);
-
-        } else {
-            //Cek jika admin prodi mengampu 2 prodi
-            $surat = Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id)->where('prodi_id', '=', $user->prodi_id)->get();
+        // if ($user->role_id == 2) {
+        $surat = Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id);
+        foreach ($prodi as $item => $value) {
+            // echo $item .'\n';
+            $surat->orWhere('prodi_id', '=', $item);
         }
+        $surat->get();
+        // dd($surat);
+
+        // }
         if ($request->ajax()) {
             // $surat = $surat->get();
             return DataTables::of($surat)
@@ -92,7 +97,6 @@ class SuratController extends Controller
                         $prodi = 'MIF';
                     } else {
                         $prodi = 'TKK';
-
                     }
                     return $row->softfile_scan != null ? '<a href="' . route('downloadSoftfile', ['prodi' => $prodi, 'file' => $row->softfile_scan]) . '"> File Scan </a>' : '-';
                     // return '<a href="' . env('APP_URL') . '/assets/softfile/' . $row->softfile_scan . '"> File Scan </a>';
@@ -200,23 +204,22 @@ class SuratController extends Controller
         $softfile = $request->get('softfile');
         $tempExt = pathinfo(storage_path('public/') . $softfile, PATHINFO_EXTENSION);
         $filename = $surat->kode_surat . '_' . $now . '_' . $pengaju->nim . '.' . $tempExt;
-//        dd($filename);
+        //        dd($filename);
         if (str_contains($surat->prodi->keterangan, "TIF")) {
             $prodi = 'TIF';
             Storage::move("public/" . $softfile, "public/TIF/" . $filename);
-//            rename(storage_path('public/'). $softfile, storage_path('public/TIF/') . $filename);
+            //            rename(storage_path('public/'). $softfile, storage_path('public/TIF/') . $filename);
         } elseif (str_contains($surat->prodi->keterangan, "MIF")) {
             $prodi = 'MIF';
-//            rename(storage_path('public/'). $softfile, storage_path('public/MIF/') . $filename);
+            //            rename(storage_path('public/'). $softfile, storage_path('public/MIF/') . $filename);
             Storage::move("public/" . $softfile, "public/MIF/" . $filename);
         } else {
             $prodi = 'TKK';
-//            rename(storage_path('public/'). $softfile, storage_path('public/TKK/') . $filename);
+            //            rename(storage_path('public/'). $softfile, storage_path('public/TKK/') . $filename);
             Storage::move("public/" . $softfile, "public/TKK/" . $filename);
-
         }
-//        dd($softfile);
-//        $surat->softfile_scan = $prodi . '/' . $filename;
+        //        dd($softfile);
+        //        $surat->softfile_scan = $prodi . '/' . $filename;
         $surat->softfile_scan = $filename;
         $surat->status_id = 4;
         $surat->update();
@@ -230,7 +233,7 @@ class SuratController extends Controller
         if ($surat->kode_surat == 'TA') {
             $anggota = Anggota::where('surat_id', '=', $id)->first();
         }
-//         dd($anggota);
+        //         dd($anggota);
         return view('template-surat.' . $surat->kebutuhan . '.' . $surat->kode_surat, compact('surat', 'anggota'));
         // return $this->$surat->kode_surat();
         // $pdf = PDF::loadView('template-surat.'.$surat->kode_surat);
@@ -249,8 +252,8 @@ class SuratController extends Controller
     {
         $folder_name = $prodi_id;
         $path = 'public/' . $folder_name . '/' . $filename;
-//        dd($path);
-//        $path = $filename;
+        //        dd($path);
+        //        $path = $filename;
         if (!Storage::exists($path)) {
             abort(404);
         }
@@ -260,7 +263,7 @@ class SuratController extends Controller
     function editorSave(Request $request, $id)
     {
         $editor = $request->get('editor');
-//        $editor = trim(preg_replace('/\s+/', ' ', $editor));
+        //        $editor = trim(preg_replace('/\s+/', ' ', $editor));
         $editor = "<!DOCTYPE html>
                     <html lang='en'>
                     <head>
@@ -311,21 +314,20 @@ class SuratController extends Controller
                         }
                     </style>
                     <body>
-                    ".$editor."
+                    " . $editor . "
                     </body>
                     </html>";
-//        dd(trim(preg_replace('/\s+/', ' ', $editor)));
-//        dd($editor);
+        //        dd(trim(preg_replace('/\s+/', ' ', $editor)));
+        //        dd($editor);
         $now = Carbon::now()->format('d-m-Y');
         $surat = Surat::find($id);
         $pengaju = Anggota::where('surat_id', '=', $id)->first();
         $filename = $surat->kode_surat . '_' . $now . '_' . $pengaju->nim . '.pdf';
         $pdf = Pdf::loadHTML($editor);
-//        dd($filename);
+        //        dd($filename);
         if (str_contains($surat->prodi->keterangan, "TIF")) {
             $prodi = 'TIF';
             $pdf->save("storage/TIF/" . $filename);
-
         } elseif (str_contains($surat->prodi->keterangan, "MIF")) {
             $prodi = 'MIF';
 
@@ -333,7 +335,6 @@ class SuratController extends Controller
         } else {
             $prodi = 'TKK';
             $pdf->save("storage/TKK/" . $filename);
-
         }
     }
 }

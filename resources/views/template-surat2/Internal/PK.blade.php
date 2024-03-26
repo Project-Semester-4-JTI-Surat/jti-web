@@ -170,7 +170,7 @@
     </p>
     <div style="  margin:1rem 10rem 1rem 0; text-align:right; padding-right: 10%">
         <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
-        ->merge(asset('img/polije_logo.png'), .27, true)
+        ->merge('img/polije_logo.png',.27,true)
         ->size(100)->generate(route('scanQr',$surat->uuid))) !!} ">
     </div>
     <p style="text-align:justify">

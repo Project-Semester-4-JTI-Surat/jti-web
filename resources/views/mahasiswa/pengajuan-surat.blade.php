@@ -122,7 +122,7 @@
             <h2 class="fs-title">Data Instansi</h2>
             <h3 class="fs-subtitle">Mohon isi kolom dibawah ini dengan benar, Dimohon untuk mengisi alamat mitra secara lengkap</h3>
             <div class="form-label">
-                <label for="">Nama Mitra</label>
+                <label for="">Nama Mitra (Mohon cantumkan pimpinan jika pimpinan, cantumkan direktur jika direktur) </label>
             </div>
             <input type="text" value="{{old('nama_mitra')}}" name="nama_mitra" id="nama_mitra" placeholder="Kepada"/>
             <div class="form-label">
