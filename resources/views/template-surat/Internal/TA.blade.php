@@ -115,7 +115,7 @@
             </tbody>
         </table>
         <p style="margin-left:63pt; text-align:justify; font-size:5pt;">&nbsp;</p>
-        <p style="text-align:justify;">Konfirmasi kesediaan Bapak/Ibu untuk menerima ijin survey mahasiswa kami dapat disampaikan pada <strong>{{ $surat->koordinator->nama }}</strong> dengan no Hp. {{$surat->dosen->no_hp}} <span class="selectable-text">{{ $surat->koordinator->no_hp }}</span> selaku Koordinator Bidang Tugas Akhir/Skripsi Program Studi {{ $surat->prodi->note }} Politeknik Negeri Jember.</p>
+        <p style="text-align:justify;">Konfirmasi kesediaan Bapak/Ibu untuk menerima ijin survey mahasiswa kami dapat disampaikan pada <strong>{{ $surat->koordinator->nama }}</strong> dengan no Hp. {{$surat->koordinator->no_hp}} <span class="selectable-text">{{ $surat->koordinator->no_hp }}</span> selaku Koordinator Bidang Tugas Akhir/Skripsi Program Studi {{ $surat->prodi->note }} Politeknik Negeri Jember.</p>
         <p style="text-align:justify; font-size:5pt;">&nbsp;</p>
         <p style="text-align:justify;">Demikian atas kebijakan dan kerjasama yang baik dari Bapak/Ibu dalam turut serta menunjang peningkatan keterampilan anak didik kami, diucapkan terima kasih<span style="font-size:11pt;">.</span></p>
         <p style="text-align:justify">

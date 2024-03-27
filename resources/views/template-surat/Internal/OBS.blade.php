@@ -108,7 +108,7 @@
             </tbody>
         </table>
         <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>&nbsp;</span></p>
-        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>Konfirmasi ijin survey mahasiswa kami dapat disampaikan pada {{ $surat->koordinator->nama }} dengan no Hp. {{$surat->dosen->no_hp}}{{ $surat->koordinator->no_hp }} Selaku Dosen Bidang Tugas Mata Kuliah Program Studi {{ $anggota->prodi->note }} Politeknik Negeri Jember.</span></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>Konfirmasi ijin survey mahasiswa kami dapat disampaikan pada {{ $surat->koordinator->nama }} dengan no Hp. {{ $surat->koordinator->no_hp }} Selaku Dosen Bidang Tugas Mata Kuliah Program Studi {{ $anggota->prodi->note }} Politeknik Negeri Jember.</span></p>
         <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Times New Roman",serif;'>Atas perhatian dan kerjasamanya dalam ikut peningkatan keterampilan anak didik kami, diucapkan terima kasih.</span></p>
 
     </div>
