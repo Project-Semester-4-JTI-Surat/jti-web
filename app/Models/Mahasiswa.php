@@ -61,12 +61,12 @@ class Mahasiswa extends Authenticatable implements JWTSubject
         return $this->belongsTo(Prodi::class);
     }
 
-    protected function email(): Attribute {
-        $email = Str::lower($this->nim);
-        return Attribute::make(
-            set: fn($value) => "$email@polije.ac.id",
-        );
-    }
+    // protected function email(): Attribute {
+    //     $email = Str::lower($this->nim);
+    //     return Attribute::make(
+    //         set: fn($value) => "$email@polije.ac.id",
+    //     );
+    // }
 
     // Otomatis enkripsi password sebelum disimpan di database
     protected function password(): Attribute
