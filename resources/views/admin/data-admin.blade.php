@@ -351,8 +351,8 @@
                                     </select>
                                 </div>
                                 <div class="col" style="margin-top: 1.9rem">
-                                    <button type="button" id="hapusField" aria-describedby='hapusField' class="btn btn-icon me-2 btn-danger">
-                                        <span class="tf-icons bx bx-trash"></span>
+                                    <button type="button" onclick=deleteField(this) class="btn btn-danger">
+                                        Hapus
                                     </button>
                                 </div>
                             </div>`
@@ -408,8 +408,8 @@
                                     </select>
                                 </div>
                                 <div class="col" style="margin-top: 1.9rem">
-                                    <button type="button" id="hapusField" class="btn btn-icon me-2 btn-danger">
-                                        <span class="tf-icons bx bx-trash"></span>
+                                    <button type="button" onclick=deleteField(this) class="btn btn-danger">
+                                        Hapus
                                     </button>
                                 </div>
                             </div>`;
@@ -426,62 +426,30 @@
                                     </select>
                                 </div>
                                 <div class="col" style="margin-top: 1.9rem">
-                                    <button type="button" id="hapusField" class="btn btn-icon me-2 btn-danger">
-                                        <span class="tf-icons bx bx-trash"></span>
+                                    <button type="button" onclick=deleteField(this) class="btn btn-danger">
+                                        Hapus
                                     </button>
                                 </div>
                             </div>`;
             $('#prodi_field').append(field)
             }
-            // let field = `<div class="row mb-2">
-            //                     <div class="col-md-8">
-            //                         <label for="prodi" class="form-label">Prodi</label>
-            //                         <select class="form-select" name="prodi_id[]" required>
-            //                             <option value="-">---- Pilih Prodi -----</option>
-            //                             @foreach ($prodi as $key => $value)
-            //                                 <option value="{{ $value->id }}">{{ $value->keterangan }}</option>
-            //                             @endforeach
-            //                         </select>
-            //                     </div>
-            //                     <div class="col" style="margin-top: 1.9rem">
-            //                         <button type="button" id="hapusField" class="btn btn-icon me-2 btn-danger">
-            //                             <span class="tf-icons bx bx-trash"></span>
-            //                         </button>
-            //                     </div>
-            //                 </div>`;
-            // $('#prodi_field').append(field)
-            // $(document).on("click", "#hapusField", (e) => {
-            //     if ($('#prodi_field div#row').length != 1) {
-            //         $(e.target).parent("div").parent("div").remove();
-            //     }
-            // })
         })
-        // $('#add_field').click(function () {
-        //     console.log('add field');
-        //     let field = `<div class="row mb-2">
-        //                         <div class="col-md-8">
-        //                             <label for="prodi" class="form-label">Prodi</label>
-        //                             <select class="form-select" name="prodi_id[]" required>
-        //                                 <option value="-">---- Pilih Prodi -----</option>
-        //                                 @foreach ($prodi as $key => $value)
-        //                                     <option value="{{ $value->id }}">{{ $value->keterangan }}</option>
-        //                                 @endforeach
-        //                             </select>
-        //                         </div>
-        //                         <div class="col" style="margin-top: 1.9rem">
-        //                             <button type="button" id="hapusField" class="btn btn-icon me-2 btn-danger">
-        //                                 <span class="tf-icons bx bx-trash"></span>
-        //                             </button>
-        //                         </div>
-        //                     </div>`;
-        //     $('#prodi_field').append(field)
-        //     $(document).on("click", "#hapusField", (e) => {
-        //         if ($('#prodi_field div#row').length != 1) {
-        //             $(e.target).parent("div").parent("div").remove();
-        //         }
-        //     })
+        function deleteField(element) {
+            // console.log($(element).parent("div").parent("div").parent("div").children().length);
+            if ($(element).parent("div").parent("div").parent("div").children().length > 1) {
+                $(element).parent("div").parent("div").empty();
+                
+            }
+            // $(this).parent("div").remove();
+            
+        }
+        // $('#prodiHapusField').click(function(){
+        //     console.log("remove");
+        //     $(this).parent("div").remove();
+        //     $('#prodiHapusField').parent("div").parent("div").empty();
         // })
-        // $('#hapusField').on("click", function() {
+
+        // $('#prodiHapusField').on("click", function() {
         //     console.log("remove");
         //     $(this).parent("div").remove();
         // })
