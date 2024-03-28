@@ -53,7 +53,7 @@ class Admin extends Authenticatable
     protected $primaryKey = 'uuid';
     protected $guarded = [];
     protected $table = 'admin';
-    protected $with = ['role','prodi','admin_prodi'];
+    protected $with = ['role','prodi','admin_prodi.prodi'];
     protected $hidden = [
         'password',
         'created_at',
