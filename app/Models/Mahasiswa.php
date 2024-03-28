@@ -62,7 +62,7 @@ class Mahasiswa extends Authenticatable implements JWTSubject
     }
 
     protected function email(): Attribute {
-        $email = Str::lower($this->nama);
+        $email = Str::lower($this->nim);
         return Attribute::make(
             set: fn($value) => "$email@polije.ac.id",
         );
