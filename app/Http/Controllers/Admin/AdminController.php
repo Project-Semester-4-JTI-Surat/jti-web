@@ -110,10 +110,11 @@ class AdminController extends Controller
                 'admin_id' => $id
             ]);
         }
-        $request->has('password')
-            ? $input = $request->only(['password'])
-            : '';
-        Admin::find($id)->update($input);
+        // dd($request->has('password'));
+        if ($request->has('password')) {
+            $input = $request->only(['password']);
+            Admin::find($id)->update($input);
+        }
         return redirect()->back()->with('updateSuccess', 'true');
     }
 }
