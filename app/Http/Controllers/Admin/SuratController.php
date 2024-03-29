@@ -60,7 +60,7 @@ class SuratController extends Controller
 
     public function getSurat(Request $request)
     {
-        
+
         $id = $request->get('status');
         //id =  2
         //ambil surat sesuai dengan admin prodi..
@@ -78,15 +78,19 @@ class SuratController extends Controller
         // if ($user->role_id == 2) {
         $surat = Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id);
         foreach ($prodi as $item => $value) {
-            // echo $item .'\n';
-            $surat->orWhere('prodi_id', '=', $item);
+            // echo $value->prodi_id .'\n';
+            if ($item == 0) {
+                $surat->where('prodi_id', '=', $value->prodi_id);
+            } else {
+                $surat->orWhere('prodi_id', '=', $value->prodi_id);
+            }
         }
-        $surat->get();
-        // dd($surat);
+        // $surat->get();
+        // dd($surat->get());
 
         // }
         if ($request->ajax()) {
-            // $surat = $surat->get();
+            $surat = $surat->get();
             return DataTables::of($surat)
                 ->addIndexColumn()
                 ->addColumn('softfile', function ($row) {

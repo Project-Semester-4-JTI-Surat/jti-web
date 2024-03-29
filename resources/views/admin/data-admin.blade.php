@@ -202,7 +202,7 @@
     @endif
     <script>
         $(function() {
-            $('#password').prop('readonly', true);
+            $('#password').prop('disabled', true);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -388,9 +388,9 @@
         })
         $('#passwordSwitch').change(function() {
             if ($(this).is(':checked')) {
-                $('#password').prop('readonly', false);
+                $('#password').prop('disabled', false);
             } else {
-                $('#password').prop('readonly', true);
+                $('#password').prop('disabled', true);
             }
         })
         $(document).on("click","#add_field", (e)=>{
