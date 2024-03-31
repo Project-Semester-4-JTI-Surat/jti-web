@@ -1,129 +1,143 @@
 <!doctype html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{env('app_name')}} - Mahasiswa Register</title>
+    <title>{{ env('app_name') }} - Mahasiswa Register</title>
     @include('layouts.css')
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />--}}
+    {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" /> --}}
 </head>
+
 <body>
-<section class="" style="padding-top: 2rem">
-    <!-- Jumbotron -->
-    <div class="px-4 py-3 px-md-5 text-lg-start" style="background-color: hsl(0, 0%, 96%)">
-        <div class="container">
-            <div class="row gx-lg-5 align-items-center">
-                <div class="col-lg-6 mb-lg-0" id="typography">
-                    <h1 class="my-3 display-3 fw-bold ls-tight">
-                        JTI - Surat <br />
-                        <span class="text-primary">Mengajukan surat dengan penuh kemudahan</span>
-                    </h1>
-                    <p style="color: hsl(217, 10%, 50.8%)">
-                        Dengan aplikasi ini diharapkan mahasiswa tidak perlu berlama lama hanya
-                        untuk mengajukan surat kepada kepala jurusan. Mahasiswa diharapkan
-                        terbantu dengan fitur yang tersedia pada aplikasi.
-                        Anda harus mendaftar sebagai mahasiswa dan pastikan nim yang anda masukkan valid.
-                        Sudah terdaftar? <a href="{{route('mahasiswa.login')}}">Login disini</a>
-                    </p>
-                </div>
+    <section class="" style="padding-top: 2rem">
+        <!-- Jumbotron -->
+        <div class="px-4 py-3 px-md-5 text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+            <div class="container">
+                <div class="row gx-lg-5 align-items-center">
+                    <div class="col-lg-6 mb-lg-0" id="typography">
+                        <h1 class="my-3 display-3 fw-bold ls-tight">
+                            JTI - Surat <br />
+                            <span class="text-primary">Mengajukan surat dengan penuh kemudahan</span>
+                        </h1>
+                        <p style="color: hsl(217, 10%, 50.8%)">
+                            Dengan aplikasi ini diharapkan mahasiswa tidak perlu berlama lama hanya
+                            untuk mengajukan surat kepada kepala jurusan. Mahasiswa diharapkan
+                            terbantu dengan fitur yang tersedia pada aplikasi.
+                            Anda harus mendaftar sebagai mahasiswa dan pastikan nim yang anda masukkan valid.
+                            Sudah terdaftar? <a href="{{ route('mahasiswa.login') }}">Login disini</a>
+                        </p>
+                    </div>
 
-                <div class="col-lg-6 mb-lg-0" id="form">
-                    <div class="card">
-                        <div class="card-body ">
-                            <form id="form-register" action="{{ route('mahasiswa.register_process') }}" method="post">
-                                <!-- 2 column grid layout with text inputs for the first and last names -->
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-group">
-                                            <label class="form-label" for="nama">Nama</label>
-                                            <input type="text" name="nama" id="nama" required value="{{old('nama')}}" class="form-control" />
+                    <div class="col-lg-6 mb-lg-0" id="form">
+                        <div class="card">
+                            <div class="card-body ">
+                                <form id="form-register" action="{{ route('mahasiswa.register_process') }}"
+                                    method="post">
+                                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-group">
+                                                <label class="form-label" for="nama">Nama</label>
+                                                <input type="text" name="nama" id="nama" required
+                                                    value="{{ old('nama') }}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-group">
+                                                <label class="form-label" for="nim">NIM</label>
+                                                <input type="text" id="nim" name="nim"
+                                                    value="{{ old('nim') }}" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-group">
+                                                <label class="form-label" for="no_hp">Nomor HP</label>
+                                                <input type="text" id="no_hp" name="no_hp"
+                                                    value="{{ old('no_hp') }}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-group">
+                                                <label class="form-label" for="email">Email</label>
+                                                <input type="email" name="email" id="email"
+                                                    value="{{ old('email') }}" required class="form-control" />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-group">
-                                            <label class="form-label" for="nim">NIM</label>
-                                            <input type="text" id="nim" name="nim" value="{{old('nim')}}" class="form-control" />
+                                    <!-- Password input -->
+                                    <div class="form-group mb-4">
+                                        <label class="form-label" for="alamat">Alamat</label>
+                                        <input type="text" id="alamat" name="alamat" class="form-control" />
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="form-label" for="tanggal_lahir">Tanggal Lahir</label>
+                                        {{--                                    <input type="email" name="email" id="email" value="{{old('email')}}" required class="form-control" /> --}}
+                                        <input autocomplete="off" required placeholder="Masukkan tanggal lahir"
+                                            class="form-control" value="{{ old('tanggal_lahir') }}"
+                                            name="tanggal_lahir" type="date" id="tanggal_lahir"
+                                            data-date-format="yyyy-mm-dd" data-language="en"/>
+                                    </div>
+                                    <div class="col-md-12 mb-4">
+                                        <label class="form-label" for="prodi_id">Prodi</label>
+                                        @foreach ($prodi as $key => $value)
+                                            <div class="form-check">
+                                                <label class="form-check-label" for="prodi_{{ $value->id }}">
+                                                    {{ $value->keterangan }}
+                                                </label>
+                                                <input class="form-check-input" type="radio" name="prodi_id" required
+                                                    id="prodi_{{ $value->id }}" value="{{ $value->id }}">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="form-label" for="password">Password</label>
+                                        <div class="input-group flex-wrap">
+                                            <span class="input-group-text" id="basic-addon1"><i id="toogle"
+                                                    class="fa-solid fa-eye-slash"></i></span>
+                                            <input type="password" id="password" name="password"
+                                                class="form-control">
                                         </div>
                                     </div>
 
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-group">
-                                            <label class="form-label" for="no_hp">Nomor HP</label>
-                                            <input type="text" id="no_hp"  name="no_hp" value="{{old('no_hp')}}" class="form-control" />
-                                        </div>
+
+                                    <!-- Submit button -->
+                                    <div class="text-center">
+                                        <button type="submit"
+                                            style="height: 3rem; width: 7rem; font-size: medium; font-weight: bold"
+                                            class="btn m-auto btn-primary">
+                                            Daftar
+                                        </button>
                                     </div>
-                                    <div class="col-md-6 mb-4">
-                                        <div class="form-group">
-                                            <label class="form-label" for="email">Email</label>
-                                            <input type="email" name="email" id="email" value="{{old('email')}}" required class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Password input -->
-                                <div class="form-group mb-4">
-                                    <label class="form-label" for="alamat">Alamat</label>
-                                    <input type="text" id="alamat" name="alamat" class="form-control" />
-                                </div>
-                                <div class="form-group mb-4">
-                                    <label class="form-label" for="tanggal_lahir">Tanggal Lahir</label>
-{{--                                    <input type="email" name="email" id="email" value="{{old('email')}}" required class="form-control" />--}}
-                                    <input autocomplete="off" required placeholder="Masukkan tanggal lahir" class="datepicker-here form-control"
-                                           value="{{old('tanggal_lahir')}}"
-                                           name="tanggal_lahir" type="text" id="tanggal_lahir" data-date-format="yyyy-mm-dd" data-language="en"  type="text" id="tanggal_lahir"/>
-                                </div>
-                                <div class="col-md-12 mb-4">
-                                    <label class="form-label" for="prodi_id">Prodi</label>
-                                   @foreach($prodi as $key => $value)
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="prodi_{{$value->id}}">
-                                            {{$value->keterangan}}
-                                        </label>
-                                        <input class="form-check-input" type="radio" name="prodi_id" required id="prodi_{{$value->id}}" value="{{$value->id}}">
-                                    </div>
-                                   @endforeach
-                                </div>
-                                <div class="form-group mb-4">
-                                    <label class="form-label" for="password">Password</label>
-                                    <div class="input-group flex-wrap">
-                                            <span class="input-group-text" id="basic-addon1"><i id="toogle" class="fa-solid fa-eye-slash"></i></span>
-                                        <input type="password" id="password" name="password" class="form-control">
-                                    </div>
-                                </div>
 
 
-                                <!-- Submit button -->
-                                <div class="text-center">
-                                <button type="submit" style="height: 3rem; width: 7rem; font-size: medium; font-weight: bold" class="btn m-auto btn-primary">
-                                    Daftar
-                                </button>
-                                </div>
-
-
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Jumbotron -->
-</section>
+        <!-- Jumbotron -->
+    </section>
 </body>
 @include('layouts.script')
 <script src="{{ asset('js/scrollreveal.js') }}"></script>
 <script>
     (function($) {
         $.fn.inputFilter = function(callback, errMsg) {
-            return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(
+            e) {
                 if (callback(this.value)) {
                     // Accepted value
-                    if (["keydown","mousedown","focusout"].indexOf(e.type) >= 0){
+                    if (["keydown", "mousedown", "focusout"].indexOf(e.type) >= 0) {
                         $(this).removeClass("input-error");
                         this.setCustomValidity("");
                     }
@@ -145,11 +159,11 @@
         };
     }(jQuery));
 
-    $(function () {
-        $('input, select').on('focus', function () {
+    $(function() {
+        $('input, select').on('focus', function() {
             $(this).parent().find('.input-group-text').css('border-color', '#80bdff');
         });
-        $('input, select').on('blur', function () {
+        $('input, select').on('blur', function() {
             $(this).parent().find('.input-group-text').css('border-color', '#ced4da');
         });
         $.ajaxSetup({
@@ -196,7 +210,7 @@
                     required: true,
                     checkAlphaSym: true,
                 },
-                tanggal_lahir:{
+                tanggal_lahir: {
                     required: true,
                 }
             },
@@ -233,23 +247,24 @@
         });
     });
     $("#no_hp").inputFilter(function(value) {
-        return /^[+62]-?\d*$/.test(value); }, "Input hanya menerima angka");
+        return /^[+62]-?\d*$/.test(value);
+    }, "Input hanya menerima angka");
     $('#no_hp').keyup(function() {
         var prefix = '+62';
         if (this.value.substring(0, prefix.length) != prefix) {
-                this.value = prefix;
+            this.value = prefix;
         }
     });
     $('#no_hp').blur(function() {
         var prefix = '+62';
-        console.log(Number.isNaN(this.value.substring(0,prefix.length)));
+        console.log(Number.isNaN(this.value.substring(0, prefix.length)));
         if (this.value.substring(0, prefix.length) != prefix) {
-                this.value = prefix;
+            this.value = prefix;
         }
         //this.value = prefix;
         //if(!(this.value.match('^+62'))) this.value = prefix;
     })
-    $('#toogle').click(function (){
+    $('#toogle').click(function() {
         var type = $('#password').attr("type");
         var eye = $('#toogle');
         if (type === 'password') {
@@ -283,4 +298,5 @@
         interval: 200
     })
 </script>
+
 </html>
