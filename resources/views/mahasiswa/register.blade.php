@@ -35,8 +35,7 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Tanggal Lahir</span>
-                        <input type="date" class="input" id="tanggal_lahir" value="{{ old('date') }}" name="tanggal_lahir" placeholder="xxxxx@gmail.com"
-                            required>
+                        <input type="date" class="input" value="{{ old('date') }}" name="tanggal_lahir" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Phone Number</span>
