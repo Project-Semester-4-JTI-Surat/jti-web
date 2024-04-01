@@ -30,7 +30,7 @@ class KoordinatorController extends Controller
 
     public function insert(Request $request)
     {
-        $input = $request->only(['email','nama','no_hp','kode_surat','prodi_id']);
+        $input = $request->only(['email','nama','no_hp','kode_surat','prodi']);
         Koordinator::create($input);
         return response()->json(['message'=>'success']);
     }
