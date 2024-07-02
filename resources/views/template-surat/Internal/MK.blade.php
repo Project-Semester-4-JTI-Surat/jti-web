@@ -124,7 +124,9 @@
         Jurusan Teknologi Informasi,
     </p>
     <div style="  margin:1rem 10rem 1rem 0; text-align:right;">
-        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->merge('img/polije_logo.png', .27, true)->size(100)->generate(route('scanQr',$surat->uuid))) !!} ">
+        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
+        ->merge('img/polije_logo.png',.27,true)
+        ->size(100)->generate(route('scanQr',$surat->uuid))) !!} ">
     </div>
     <p style="text-align:justify">
         <span style="width:279pt; display:inline-block">&#xa0;</span><strong>Hendra Yufit Riskiawan, S.Kom, M.Cs</strong>
