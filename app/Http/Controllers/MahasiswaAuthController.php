@@ -136,13 +136,16 @@ class MahasiswaAuthController extends Controller
 
     function reset_password(Request $request) {
         $token = Str::uuid();
+        if (!preg_match("/^[A-Za-z0-9._%+-]+@student(?!polije.ac.id)[A-Za-z0-9.-]/",$request->email)) {
+            return redirect()->back()->with("reset_error","true");
+        }
         DB::table('password_resets')->insert([
             'email' => $request->email,
             'token' => $token,
             'created_at' => Carbon::now()
         ]);
         Mail::to($request->email)->send(new ResetPassword($request->email, $token));
-        return 'Reset password berhasil';
+        return redirect()->route('mahasiswa.login');
     }
     
     function show_reset_password($id) {

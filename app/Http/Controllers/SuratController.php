@@ -34,7 +34,7 @@ class SuratController extends Controller
     {
         $mahasiswa = Auth::guard('mahasiswa')->user();
         // $input = $request->all();
-        $input = $request->only(['kode_surat','metode_pengajuan','prodi_id', 'dosen_id', 'koordinator_id', 'nama_mitra', 'alamat_mitra', 'tanggal_dibuat', 'tanggal_pelaksanaan', 'tanggal_selesai', 'judul_ta', 'kebutuhan', 'keterangan']);
+        $input = $request->only(['kode_surat','metode_pengajuan','prodi_id', 'dosen_id', 'koordinator_id', 'nama_mitra', 'alamat_mitra', 'tanggal_dibuat', 'tanggal_pelaksanaan', 'tanggal_selesai', 'judul_ta', 'kebutuhan', 'keterangan','mata_kuliah']);
         // dd($input);
         $detailSurat = Anggota::where('nim','=',$mahasiswa->nim)->first();
         $now = Carbon::now()->format('Y-m-d');
@@ -76,6 +76,7 @@ class SuratController extends Controller
         if ( $request->has('koordinator_id')) $arr += array("kode_koordinator" => $input['koordinator_id'],);
         if ( $request->has('dosen_id')) $arr += array("dosen_id" => $input['dosen_id']);
         if ( $request->has('judul_ta')) $arr += array("judul_ta" => $input['judul_ta']);
+        if ( $request->has('mata_kuliah')) $arr += array("mata_kuliah" => Str::title( $input['mata_kuliah']));
 
         // dd($arr);
         $id = Surat::create($arr);

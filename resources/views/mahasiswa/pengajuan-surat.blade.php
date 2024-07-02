@@ -71,6 +71,13 @@
 
             </select>
 
+            <div id="kolom_mata_kuliah">
+                <div class="form-label">
+                    <label for="mata_kuliah">Mata Kuliah</label>
+                </div>
+                <input type="text" value="{{old('mata_kuliah')}}" name="mata_kuliah" id="mata_kuliah" placeholder="Mata Kuliah"/>
+            </div>
+
             <div class="form-label">
                 <label for="dosen">Dosen</label>
             </div>
@@ -353,9 +360,11 @@
 
     $('#jenis_surat').on('change', function () {
         if (this.value == "MK") {
+            $('#kolom_mata_kuliah').show()
             $('#koordinator').attr('disabled', true);
             $('#dosen').attr('disabled', false);
         } else {
+            $('#kolom_mata_kuliah').hide()
             $('#koordinator').attr('disabled', false);
             $('#dosen').attr('disabled', true);
         }

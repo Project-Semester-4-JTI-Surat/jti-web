@@ -65,9 +65,9 @@ class SuratController extends Controller
         //id =  2
         //ambil surat sesuai dengan admin prodi..
         $user = Auth::guard('admin')->user();
-        $prodi = $user->admin_prodi;
+        $prodi = $user->admin_prodi->toArray();
         $surat = '';
-        // dd($user->admin_prodi);
+        // dd($id);
         /**
          * Experimental Features
          * Masih ada bug yg belum terselesaikan..
@@ -76,19 +76,12 @@ class SuratController extends Controller
         // dd($user->role_id);
 
         // if ($user->role_id == 2) {
-        $surat = Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id);
-        foreach ($prodi as $item => $value) {
-            // echo $value->prodi_id .'\n';
-            if ($item == 0) {
-                $surat->where('prodi_id', '=', $value->prodi_id);
-            } else {
-                $surat->orWhere('prodi_id', '=', $value->prodi_id);
-            }
+        $list_prodi = [];
+        for ($i=0; $i < count($prodi); $i++) { 
+            $list_prodi[] .= $prodi[$i]['prodi_id'];
         }
-        // $surat->get();
-        // dd($surat->get());
-
-        // }
+        $surat = Surat::with(['dosen', 'koordinator', 'prodi'])->where('status_id', '=', $id)
+        ->whereIn('prodi_id',$list_prodi);
         if ($request->ajax()) {
             $surat = $surat->get();
             return DataTables::of($surat)

@@ -70,8 +70,13 @@
                     <div class="form-group">
                         @csrf
                         <label for="exampleInputEmail1">Masukkan email untuk me reset password</label>
-                        <input type="email" class="form-control form-control-sm mt-2" name="email"
+                        <input type="email" class="form-control form-control-sm mt-2 @if (Session::has('reset_error'))
+                            is-invalid
+                        @endif" name="email" 
                             placeholder="Masukkan email">
+                            @if (Session::has('reset_error'))
+                            <div class="invalid-feedback">Pastikan nim anda terdaftar dan menggunakan akun kampus</div>
+                        @endif
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">Kirim</button>
